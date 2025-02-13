@@ -8,13 +8,15 @@ import getPage from '@/lib/queries/pages/getPage';
 export async function generateStaticParams() {
     const pages = await getPagesUris();
 
-    const params = pages.map((page) => {
-        return {
-            uri: page.uri,
-        };
-    });
+    console.log(pages);
 
-    console.log(params);
+    const params = pages
+        .filter((p) => p.uri.at(0))
+        .map((page) => {
+            return {
+                uri: page.uri,
+            };
+        });
 
     return params;
 }
