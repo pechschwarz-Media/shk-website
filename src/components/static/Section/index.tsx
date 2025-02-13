@@ -1,0 +1,62 @@
+'use client';
+
+import { useRef } from 'react';
+import { motion } from 'framer-motion';
+import { cn } from '@/lib/utils';
+import { Settings } from '@/lib/types';
+import { cva } from 'class-variance-authority';
+
+type SectionProps = React.HTMLAttributes<HTMLElement> & {
+    dataComponent: string;
+    className?: string;
+    settings: Settings | null;
+};
+
+export const sectionVariants = cva('', {
+    variants: {
+        paddingTop: {
+            off: 'pt-0',
+            small: 'pt-8 md:pt-12',
+            medium: 'pt-8 sm:pt-12 md:pt-16 lg:pt-20',
+            large: 'pt-12 sm:pt-16 md:pt-20 lg:pt-28',
+        },
+        paddingBottom: {
+            off: 'pb-0',
+            small: 'pb-8 md:pb-12',
+            medium: 'pb-8 sm:pb-12 md:pb-16 lg:pb-20',
+            large: 'pb-12 sm:pb-16 md:pb-20 lg:pb-28',
+        },
+    },
+    defaultVariants: {
+        paddingTop: 'medium',
+        paddingBottom: 'medium',
+    },
+});
+
+export default function Section({ dataComponent, className, settings, children, ...props }: SectionProps) {
+    const element = useRef(null);
+    const preventAnimation = settings?.preventAnimation;
+
+    if (settings?.hide) {
+        return null;
+    }
+
+    return (
+        <section
+            data-component={dataComponent}
+            className={cn(sectionVariants({ paddingTop: settings?.padding?.top, paddingBottom: settings?.padding?.bottom }), className)}
+            ref={element}
+            {...props}
+        >
+            <motion.div
+                className="h-full"
+                initial={{ opacity: preventAnimation ? 1 : 0, y: preventAnimation ? 0 : 100 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5 }}
+                viewport={{ once: true, amount: 0.3 }}
+            >
+                {children}
+            </motion.div>
+        </section>
+    );
+}
