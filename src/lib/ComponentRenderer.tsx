@@ -4,6 +4,7 @@ import dynamic from 'next/dynamic';
 
 const Components = {
     header_5: dynamic(() => import('@/components/custom/Header/5')),
+    locations: dynamic(() => import('@/components/custom/Locations')),
 };
 
 export default function ComponentRenderer({ content }: { content?: any }) {

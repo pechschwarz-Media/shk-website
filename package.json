@@ -12,6 +12,7 @@
     "@relume_io/relume-tailwind": "^1.0.0",
     "@relume_io/relume-ui": "^1.0.1",
     "@tailwindcss/typography": "^0.5.16",
+    "@vis.gl/react-google-maps": "^1.5.1",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "cookies-next": "^5.1.0",
