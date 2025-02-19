@@ -42,9 +42,14 @@ const config: Config = {
         },
         extend: {
             colors: {
+                light: '#e8e8e8',
                 dark: '#171D1A',
                 gray: '#7A7A7A',
                 blue: '#0B2D44',
+                customer: '#2B94A6',
+                'customer-bg': '#F4F3EF',
+                partner: '#F47630',
+                'partner-bg': '#F7F7F7',
             },
         },
     },

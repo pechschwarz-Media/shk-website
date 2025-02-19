@@ -21,6 +21,7 @@ export type Page = {
     };
     template: string;
     acf: {
+        channel: string;
         content: any[];
     };
 };

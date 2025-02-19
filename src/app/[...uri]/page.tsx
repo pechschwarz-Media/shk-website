@@ -5,6 +5,7 @@ import getPageMeta from '@/lib/queries/pages/getPageMeta';
 import ComponentRenderer from '@/lib/ComponentRenderer';
 import getPage from '@/lib/queries/pages/getPage';
 import Header from '@/components/layout/Header';
+import { cn } from '@/lib/utils';
 
 export async function generateStaticParams() {
     const pages = await getPagesUris();
@@ -56,10 +57,10 @@ export default async function Page({ params }: { params: Promise<{ uri: string[]
             return <>Hier folgt das Blog-Template!</>;
         default:
             return (
-                <>
-                    <Header />
+                <main className={cn(page?.acf?.channel === 'customer' && 'bg-customer-bg', page?.acf?.channel === 'partner' && 'bg-partner-bg')}>
+                    <Header channel={page?.acf?.channel} />
                     <ComponentRenderer content={page?.acf?.content} />
-                </>
+                </main>
             );
     }
 }
