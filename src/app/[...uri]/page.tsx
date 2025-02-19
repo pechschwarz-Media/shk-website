@@ -4,11 +4,10 @@ import getPageId from '@/lib/queries/pages/getPageId';
 import getPageMeta from '@/lib/queries/pages/getPageMeta';
 import ComponentRenderer from '@/lib/ComponentRenderer';
 import getPage from '@/lib/queries/pages/getPage';
+import Header from '@/components/layout/Header';
 
 export async function generateStaticParams() {
     const pages = await getPagesUris();
-
-    console.log(pages);
 
     const params = pages
         .filter((p) => p.uri.at(0))
@@ -58,6 +57,7 @@ export default async function Page({ params }: { params: Promise<{ uri: string[]
         default:
             return (
                 <>
+                    <Header />
                     <ComponentRenderer content={page?.acf?.content} />
                 </>
             );

@@ -69,8 +69,8 @@ export type Blog = {
 export type Options = {};
 
 export type Settings = {
-    hide: boolean;
-    preventAnimation: boolean;
+    hide?: boolean;
+    preventAnimation?: boolean;
     padding: {
         top: VariantProps<typeof sectionVariants>['paddingTop'];
         bottom: VariantProps<typeof sectionVariants>['paddingBottom'];

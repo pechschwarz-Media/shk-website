@@ -3,7 +3,7 @@
 import dynamic from 'next/dynamic';
 
 const Components = {
-    // example: dynamic(() => import('@/components/custom/Example')),
+    header_5: dynamic(() => import('@/components/custom/Header/5')),
 };
 
 export default function ComponentRenderer({ content }: { content?: any }) {
