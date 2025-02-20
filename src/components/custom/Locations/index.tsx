@@ -6,33 +6,68 @@ import parse from 'html-react-parser';
 import { APIProvider, Map, Marker, AdvancedMarker, MapCameraChangedEvent } from '@vis.gl/react-google-maps';
 import { useCallback, useEffect, useState } from 'react';
 import Button from '@/components/static/Button';
+import { cn } from '@/lib/utils';
 
 const locations = [
     {
         name: 'Celle',
-        lat: 52.621922,
-        lng: 10.07858,
+        position: {
+            lat: 52.621922,
+            lng: 10.07858,
+        },
         category: 0,
     },
     {
         name: 'Hamburg',
-        lat: 53.551086,
-        lng: 9.993682,
+        position: {
+            lat: 53.551086,
+            lng: 9.993682,
+        },
         category: 0,
     },
     {
         name: 'Lübeck',
-        lat: 53.865467,
-        lng: 10.686559,
+        position: {
+            lat: 53.865467,
+            lng: 10.686559,
+        },
         category: 1,
     },
     {
         name: 'Kiel',
-        lat: 54.323292,
-        lng: 10.122765,
+        position: {
+            lat: 54.323292,
+            lng: 10.122765,
+        },
         category: 2,
     },
+    {
+        name: 'Schwerin',
+        position: {
+            lat: 53.635502,
+            lng: 11.40125,
+        },
+        category: 2,
+    },
+    {
+        name: 'Bremen',
+        position: {
+            lat: 53.079296,
+            lng: 8.801694,
+        },
+        category: 1,
+    },
 ];
+
+type Location = {
+    name: string;
+    position: {
+        lat: number;
+        lng: number;
+    };
+    category: number;
+    distance?: number;
+};
 
 export default function Locations() {
     const [zoom, setZoom] = useState(7);
@@ -40,6 +75,8 @@ export default function Locations() {
     const [center, setCenter] = useState({ lat: 52.621922, lng: 10.07858 });
     const [status, setStatus] = useState('');
     const [value, setValue] = useState('');
+    const [filteredLocations, setFilteredLocations] = useState<Location[]>(locations);
+    const [category, setCategory] = useState<'all' | number>('all');
 
     async function searchLocation() {
         const response = await fetch('/api/googlemaps/geocoding', {
@@ -49,21 +86,59 @@ export default function Locations() {
 
         const data = await response.json();
 
-        setStatus(data.status);
-
         if (data.status === 'OK' && data.results.length > 0) {
             setCoordinates({ lat: data.results[0].geometry.location.lat, lng: data.results[0].geometry.location.lng });
         }
 
-        console.log(data);
+        setStatus(data.status);
     }
 
     useEffect(() => {
         if (coordinates) {
             setCenter(coordinates);
             setZoom(10);
+
+            const categoryLocations = filterLocations(locations, category);
+            const sortedLocations = sortByDistance(categoryLocations, coordinates);
+            setFilteredLocations(sortedLocations);
         }
-    }, [coordinates]);
+    }, [coordinates, category]);
+
+    function filterLocations(locations: Location[], category: 'all' | number) {
+        return locations.filter((location) => {
+            return category === 'all' || category === location.category;
+        });
+    }
+
+    function sortByDistance(locations: Location[], coordinates: { lat: number; lng: number }) {
+        return locations
+            .map((location) => ({
+                ...location,
+                distance: getDistance(coordinates, location.position),
+            }))
+            .sort((a, b) => a.distance - b.distance);
+    }
+
+    function getDistance(point1: { lat: number; lng: number }, point2: { lat: number; lng: number }) {
+        const { lat: lat1, lng: lon1 } = point1;
+        const { lat: lat2, lng: lon2 } = point2;
+
+        const R = 6371;
+        const dLat = toRad(lat2 - lat1);
+        const dLon = toRad(lon2 - lon1);
+
+        const lat1Rad = toRad(lat1);
+        const lat2Rad = toRad(lat2);
+
+        const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) + Math.sin(dLon / 2) * Math.sin(dLon / 2) * Math.cos(lat1Rad) * Math.cos(lat2Rad);
+
+        const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+        return Math.round(R * c * 100) / 100;
+    }
+
+    function toRad(deg: number) {
+        return deg * (Math.PI / 180);
+    }
 
     return (
         <Section dataComponent="Header_5" settings={{ padding: { top: 'medium', bottom: 'medium' }, preventAnimation: true }}>
@@ -118,10 +193,50 @@ export default function Locations() {
                             </div>
                             <div className="mt-5">
                                 <div className="flex items-center gap-2">
-                                    <button className="bg-blue text-white h-9 rounded-full px-3">Alle Welten</button>
-                                    <button className="bg-customer-bg text-blue h-9 rounded-full px-3">Bäderwelten</button>
-                                    <button className="bg-customer-bg text-blue h-9 rounded-full px-3">Fliesenwelten</button>
-                                    <button className="bg-customer-bg text-blue h-9 rounded-full px-3">Energiesparwelten</button>
+                                    <button
+                                        className={cn(
+                                            'bg-customer-bg text-blue hover:bg-blue hover:text-white h-9 rounded-full px-3',
+                                            category === 'all' && 'bg-blue text-white'
+                                        )}
+                                        onClick={() => {
+                                            setCategory('all');
+                                        }}
+                                    >
+                                        Alle Welten
+                                    </button>
+                                    <button
+                                        className={cn(
+                                            'bg-customer-bg text-blue hover:bg-baederwelt hover:text-white h-9 rounded-full px-3',
+                                            category === 0 && 'bg-baederwelt text-white'
+                                        )}
+                                        onClick={() => {
+                                            setCategory(0);
+                                        }}
+                                    >
+                                        Bäderwelten
+                                    </button>
+                                    <button
+                                        className={cn(
+                                            'bg-customer-bg text-blue hover:bg-fliesenwelt hover:text-white h-9 rounded-full px-3',
+                                            category === 1 && 'bg-fliesenwelt text-white'
+                                        )}
+                                        onClick={() => {
+                                            setCategory(1);
+                                        }}
+                                    >
+                                        Fliesenwelten
+                                    </button>
+                                    <button
+                                        className={cn(
+                                            'bg-customer-bg text-blue hover:bg-energiesparwelt hover:text-white h-9 rounded-full px-3',
+                                            category === 2 && 'bg-energiesparwelt text-white'
+                                        )}
+                                        onClick={() => {
+                                            setCategory(2);
+                                        }}
+                                    >
+                                        Energiesparwelten
+                                    </button>
                                 </div>
                             </div>
                             <div className="mt-10">
@@ -146,6 +261,36 @@ export default function Locations() {
                                         <div>Kein Standort gefunden. Bitte ändern Sie Ihre Eingabe.</div>
                                     </div>
                                 )}
+                                {status === 'OK' && (
+                                    <div className="space-y-3">
+                                        {filteredLocations.map((location, index) => {
+                                            return (
+                                                <div className="border border-blue rounded-lg overflow-hidden" key={index}>
+                                                    <div
+                                                        className={cn(
+                                                            'border-l-4 p-4',
+                                                            location.category === 0 && 'border-baederwelt',
+                                                            location.category === 1 && 'border-fliesenwelt',
+                                                            location.category === 2 && 'border-energiesparwelt'
+                                                        )}
+                                                    >
+                                                        {typeof location?.distance !== 'undefined' && (
+                                                            <div className="text-gray text-small mb-1">
+                                                                {Math.floor(location.distance)}km entfernt
+                                                            </div>
+                                                        )}
+                                                        <div className="text-large font-headline mb-3">{location.name}</div>
+                                                        <address className="not-italic text-gray">
+                                                            Schnackenburgallee 43-45
+                                                            <br />
+                                                            22525 Hamburg Volkspark
+                                                        </address>
+                                                    </div>
+                                                </div>
+                                            );
+                                        })}
+                                    </div>
+                                )}
                             </div>
                         </div>
                         <div className="relative">
@@ -163,7 +308,16 @@ export default function Locations() {
                                         }}
                                     >
                                         {locations.map((location, index) => {
-                                            return <AdvancedMarker position={{ lat: location.lat, lng: location.lng }} key={index} />;
+                                            return (
+                                                <AdvancedMarker
+                                                    position={{ lat: location.position.lat, lng: location.position.lng }}
+                                                    onClick={() => {
+                                                        setCoordinates({ lat: location.position.lat, lng: location.position.lng });
+                                                        setStatus('OK');
+                                                    }}
+                                                    key={index}
+                                                />
+                                            );
                                         })}
                                     </Map>
                                 </APIProvider>
