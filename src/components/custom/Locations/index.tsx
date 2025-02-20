@@ -142,7 +142,7 @@ export default function Locations() {
         return deg * (Math.PI / 180);
     }
 
-    const searchParams = useSearchParams();
+    /*const searchParams = useSearchParams();
 
     const cat = searchParams.get('category');
 
@@ -151,7 +151,7 @@ export default function Locations() {
             console.log(cat);
             setCategory(parseInt(cat));
         }
-    }, [cat]);
+    }, [cat]);*/
 
     return (
         <Section dataComponent="Header_5" settings={{ padding: { top: 'medium', bottom: 'medium' }, preventAnimation: true }}>
