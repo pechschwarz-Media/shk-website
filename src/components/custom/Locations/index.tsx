@@ -7,6 +7,7 @@ import { APIProvider, Map, Marker, AdvancedMarker, MapCameraChangedEvent } from 
 import { useCallback, useEffect, useState } from 'react';
 import Button from '@/components/static/Button';
 import { cn } from '@/lib/utils';
+import { useSearchParams } from 'next/navigation';
 
 const locations = [
     {
@@ -101,6 +102,7 @@ export default function Locations() {
             const categoryLocations = filterLocations(locations, category);
             const sortedLocations = sortByDistance(categoryLocations, coordinates);
             setFilteredLocations(sortedLocations);
+            setStatus('filtered');
         }
     }, [coordinates, category]);
 
@@ -140,161 +142,24 @@ export default function Locations() {
         return deg * (Math.PI / 180);
     }
 
+    const searchParams = useSearchParams();
+
+    const cat = searchParams.get('category');
+
+    useEffect(() => {
+        if (cat) {
+            console.log(cat);
+            setCategory(parseInt(cat));
+        }
+    }, [cat]);
+
     return (
         <Section dataComponent="Header_5" settings={{ padding: { top: 'medium', bottom: 'medium' }, preventAnimation: true }}>
             <div className="pt-20">
                 <div className="container">
-                    <div className="grid grid-cols-2 gap-6">
-                        <div className="bg-white rounded-xl p-8">
-                            <div className="mb-10">
-                                <h1 className="text-h3 leading-tight font-headline mb-6">Standort finden</h1>
-                                <Text>{parse('<p>Wählen Sie einen unserer Ausstellungen aus<br />und buchen Sie Ihren Termin.</p>')}</Text>
-                            </div>
-                            <div>
-                                <label className="mb-2 block">Entdecken Sie unsere Ausstellungen in der Nähe</label>
-                                <div className="flex gap-2">
-                                    <div className="relative flex-1">
-                                        <div className="absolute left-3 top-1/2 -translate-y-1/2">
-                                            <svg
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                fill="none"
-                                                viewBox="0 0 24 24"
-                                                strokeWidth={1.5}
-                                                stroke="currentColor"
-                                                className="size-6"
-                                            >
-                                                <path
-                                                    strokeLinecap="round"
-                                                    strokeLinejoin="round"
-                                                    d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"
-                                                />
-                                            </svg>
-                                        </div>
-                                        <input
-                                            type="text"
-                                            placeholder="Standort, PLZ oder Land"
-                                            className="border border-blue bg-neutral-50 w-full h-14 rounded-lg outline-blue pl-12 pr-5"
-                                            onChange={(e) => {
-                                                setValue(e.target.value);
-                                            }}
-                                        />
-                                    </div>
-                                    <Button
-                                        as="button"
-                                        variant="blueFilled"
-                                        className="h-14 rounded-lg"
-                                        onClick={() => {
-                                            searchLocation();
-                                        }}
-                                    >
-                                        Suchen
-                                    </Button>
-                                </div>
-                            </div>
-                            <div className="mt-5">
-                                <div className="flex items-center gap-2">
-                                    <button
-                                        className={cn(
-                                            'bg-customer-bg text-blue hover:bg-blue hover:text-white h-9 rounded-full px-3',
-                                            category === 'all' && 'bg-blue text-white'
-                                        )}
-                                        onClick={() => {
-                                            setCategory('all');
-                                        }}
-                                    >
-                                        Alle Welten
-                                    </button>
-                                    <button
-                                        className={cn(
-                                            'bg-customer-bg text-blue hover:bg-baederwelt hover:text-white h-9 rounded-full px-3',
-                                            category === 0 && 'bg-baederwelt text-white'
-                                        )}
-                                        onClick={() => {
-                                            setCategory(0);
-                                        }}
-                                    >
-                                        Bäderwelten
-                                    </button>
-                                    <button
-                                        className={cn(
-                                            'bg-customer-bg text-blue hover:bg-fliesenwelt hover:text-white h-9 rounded-full px-3',
-                                            category === 1 && 'bg-fliesenwelt text-white'
-                                        )}
-                                        onClick={() => {
-                                            setCategory(1);
-                                        }}
-                                    >
-                                        Fliesenwelten
-                                    </button>
-                                    <button
-                                        className={cn(
-                                            'bg-customer-bg text-blue hover:bg-energiesparwelt hover:text-white h-9 rounded-full px-3',
-                                            category === 2 && 'bg-energiesparwelt text-white'
-                                        )}
-                                        onClick={() => {
-                                            setCategory(2);
-                                        }}
-                                    >
-                                        Energiesparwelten
-                                    </button>
-                                </div>
-                            </div>
-                            <div className="mt-10">
-                                {status === 'ZERO_RESULTS' && (
-                                    <div className="flex items-center gap-2">
-                                        <div>
-                                            <svg
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                fill="none"
-                                                viewBox="0 0 24 24"
-                                                strokeWidth={1.5}
-                                                stroke="currentColor"
-                                                className="size-8"
-                                            >
-                                                <path
-                                                    strokeLinecap="round"
-                                                    strokeLinejoin="round"
-                                                    d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 3.75h.008v.008H12v-.008Z"
-                                                />
-                                            </svg>
-                                        </div>
-                                        <div>Kein Standort gefunden. Bitte ändern Sie Ihre Eingabe.</div>
-                                    </div>
-                                )}
-                                {status === 'OK' && (
-                                    <div className="space-y-3">
-                                        {filteredLocations.map((location, index) => {
-                                            return (
-                                                <div className="border border-blue rounded-lg overflow-hidden" key={index}>
-                                                    <div
-                                                        className={cn(
-                                                            'border-l-4 p-4',
-                                                            location.category === 0 && 'border-baederwelt',
-                                                            location.category === 1 && 'border-fliesenwelt',
-                                                            location.category === 2 && 'border-energiesparwelt'
-                                                        )}
-                                                    >
-                                                        {typeof location?.distance !== 'undefined' && (
-                                                            <div className="text-gray text-small mb-1">
-                                                                {Math.floor(location.distance)}km entfernt
-                                                            </div>
-                                                        )}
-                                                        <div className="text-large font-headline mb-3">{location.name}</div>
-                                                        <address className="not-italic text-gray">
-                                                            Schnackenburgallee 43-45
-                                                            <br />
-                                                            22525 Hamburg Volkspark
-                                                        </address>
-                                                    </div>
-                                                </div>
-                                            );
-                                        })}
-                                    </div>
-                                )}
-                            </div>
-                        </div>
-                        <div className="relative">
-                            <div className="h-[800px] sticky top-24 rounded-xl overflow-hidden">
+                    <div className="grid lg:grid-cols-2 gap-6">
+                        <div className="relative lg:order-2">
+                            <div className="h-[300px] md:h-[500px] lg:h-[800px] sticky top-24 rounded-xl overflow-hidden">
                                 <div className="relative h-full">
                                     <div className="absolute top-6 left-6 z-10 flex flex-col gap-1">
                                         <button
@@ -369,6 +234,154 @@ export default function Locations() {
                                         </Map>
                                     </APIProvider>
                                 </div>
+                            </div>
+                        </div>
+                        <div className="bg-white rounded-xl p-6 md:p-8">
+                            <div className="mb-10">
+                                <h1 className="text-h3 leading-tight font-headline mb-6">Standort finden</h1>
+                                <Text>{parse('<p>Wählen Sie einen unserer Ausstellungen aus<br />und buchen Sie Ihren Termin.</p>')}</Text>
+                            </div>
+                            <div>
+                                <label className="mb-2 block">Entdecken Sie unsere Ausstellungen in der Nähe</label>
+                                <div className="flex flex-col md:flex-row gap-2">
+                                    <div className="relative flex-1">
+                                        <div className="absolute left-3 top-1/2 -translate-y-1/2">
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                fill="none"
+                                                viewBox="0 0 24 24"
+                                                strokeWidth={1.5}
+                                                stroke="currentColor"
+                                                className="size-6"
+                                            >
+                                                <path
+                                                    strokeLinecap="round"
+                                                    strokeLinejoin="round"
+                                                    d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"
+                                                />
+                                            </svg>
+                                        </div>
+                                        <input
+                                            type="text"
+                                            placeholder="Standort, PLZ oder Land"
+                                            className="border border-blue bg-neutral-50 w-full h-14 rounded-lg outline-blue pl-12 pr-5"
+                                            onChange={(e) => {
+                                                setValue(e.target.value);
+                                            }}
+                                        />
+                                    </div>
+                                    <Button
+                                        as="button"
+                                        variant="blueFilled"
+                                        className="h-14 rounded-lg"
+                                        onClick={() => {
+                                            searchLocation();
+                                        }}
+                                    >
+                                        Suchen
+                                    </Button>
+                                </div>
+                            </div>
+                            <div className="mt-5">
+                                <div className="flex flex-wrap items-center gap-2">
+                                    <button
+                                        className={cn(
+                                            'bg-customer-bg text-blue hover:bg-blue hover:text-white h-9 rounded-full px-3',
+                                            category === 'all' && 'bg-blue text-white'
+                                        )}
+                                        onClick={() => {
+                                            setCategory('all');
+                                        }}
+                                    >
+                                        Alle Welten
+                                    </button>
+                                    <button
+                                        className={cn(
+                                            'bg-customer-bg text-blue hover:bg-baederwelt hover:text-white h-9 rounded-full px-3',
+                                            category === 0 && 'bg-baederwelt text-white'
+                                        )}
+                                        onClick={() => {
+                                            setCategory(0);
+                                        }}
+                                    >
+                                        Bäderwelten
+                                    </button>
+                                    <button
+                                        className={cn(
+                                            'bg-customer-bg text-blue hover:bg-fliesenwelt hover:text-white h-9 rounded-full px-3',
+                                            category === 1 && 'bg-fliesenwelt text-white'
+                                        )}
+                                        onClick={() => {
+                                            setCategory(1);
+                                        }}
+                                    >
+                                        Fliesenwelten
+                                    </button>
+                                    <button
+                                        className={cn(
+                                            'bg-customer-bg text-blue hover:bg-energiesparwelt hover:text-white h-9 rounded-full px-3',
+                                            category === 2 && 'bg-energiesparwelt text-white'
+                                        )}
+                                        onClick={() => {
+                                            setCategory(2);
+                                        }}
+                                    >
+                                        Energiesparwelten
+                                    </button>
+                                </div>
+                            </div>
+                            <div className="mt-10">
+                                {status === 'ZERO_RESULTS' && (
+                                    <div className="flex items-center gap-2">
+                                        <div>
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                fill="none"
+                                                viewBox="0 0 24 24"
+                                                strokeWidth={1.5}
+                                                stroke="currentColor"
+                                                className="size-8"
+                                            >
+                                                <path
+                                                    strokeLinecap="round"
+                                                    strokeLinejoin="round"
+                                                    d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 3.75h.008v.008H12v-.008Z"
+                                                />
+                                            </svg>
+                                        </div>
+                                        <div>Kein Standort gefunden. Bitte ändern Sie Ihre Eingabe.</div>
+                                    </div>
+                                )}
+                                {status === 'filtered' && (
+                                    <div className="space-y-3">
+                                        {filteredLocations.map((location, index) => {
+                                            return (
+                                                <div className="border border-blue rounded-lg overflow-hidden" key={index}>
+                                                    <div
+                                                        className={cn(
+                                                            'border-l-4 p-4',
+                                                            location.category === 0 && 'border-baederwelt',
+                                                            location.category === 1 && 'border-fliesenwelt',
+                                                            location.category === 2 && 'border-energiesparwelt'
+                                                        )}
+                                                    >
+                                                        {typeof location?.distance !== 'undefined' && (
+                                                            <div className="text-gray text-small mb-1">
+                                                                {Math.floor(location.distance)}km entfernt
+                                                            </div>
+                                                        )}
+                                                        <div className="text-large font-headline mb-3">{location.name}</div>
+                                                        <address className="not-italic text-gray">
+                                                            Schnackenburgallee 43-45
+                                                            <br />
+                                                            22525 Hamburg Volkspark
+                                                        </address>
+                                                    </div>
+                                                </div>
+                                            );
+                                        })}
+                                    </div>
+                                )}
                             </div>
                         </div>
                     </div>
