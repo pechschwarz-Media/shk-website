@@ -295,32 +295,80 @@ export default function Locations() {
                         </div>
                         <div className="relative">
                             <div className="h-[800px] sticky top-24 rounded-xl overflow-hidden">
-                                <APIProvider apiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY || ''}>
-                                    <Map
-                                        style={{ width: '100%', height: '100%' }}
-                                        center={center}
-                                        zoom={zoom}
-                                        gestureHandling={'greedy'}
-                                        disableDefaultUI={true}
-                                        mapId="edeb5c34fbbda140"
-                                        onCameraChanged={(ev: MapCameraChangedEvent) => {
-                                            setCenter(ev.detail.center);
-                                        }}
-                                    >
-                                        {locations.map((location, index) => {
-                                            return (
-                                                <AdvancedMarker
-                                                    position={{ lat: location.position.lat, lng: location.position.lng }}
-                                                    onClick={() => {
-                                                        setCoordinates({ lat: location.position.lat, lng: location.position.lng });
-                                                        setStatus('OK');
-                                                    }}
-                                                    key={index}
-                                                />
-                                            );
-                                        })}
-                                    </Map>
-                                </APIProvider>
+                                <div className="relative h-full">
+                                    <div className="absolute top-6 left-6 z-10 flex flex-col gap-1">
+                                        <button
+                                            className={cn(
+                                                'bg-blue size-10 rounded-md text-white flex items-center justify-center',
+                                                zoom === 15 && 'opacity-50 pointer-events-none'
+                                            )}
+                                            onClick={() => {
+                                                if (zoom < 15) {
+                                                    setZoom(zoom + 1);
+                                                }
+                                            }}
+                                        >
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                fill="none"
+                                                viewBox="0 0 24 24"
+                                                strokeWidth={1.5}
+                                                stroke="currentColor"
+                                                className="size-6"
+                                            >
+                                                <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                                            </svg>
+                                        </button>
+                                        <button
+                                            className={cn(
+                                                'bg-blue size-10 rounded-md text-white flex items-center justify-center',
+                                                zoom === 5 && 'opacity-50 pointer-events-none'
+                                            )}
+                                            onClick={() => {
+                                                if (zoom > 5) {
+                                                    setZoom(zoom - 1);
+                                                }
+                                            }}
+                                        >
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                fill="none"
+                                                viewBox="0 0 24 24"
+                                                strokeWidth={1.5}
+                                                stroke="currentColor"
+                                                className="size-6"
+                                            >
+                                                <path strokeLinecap="round" strokeLinejoin="round" d="M5 12h14" />
+                                            </svg>
+                                        </button>
+                                    </div>
+                                    <APIProvider apiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY || ''}>
+                                        <Map
+                                            style={{ width: '100%', height: '100%' }}
+                                            center={center}
+                                            zoom={zoom}
+                                            gestureHandling={'greedy'}
+                                            disableDefaultUI={true}
+                                            mapId="edeb5c34fbbda140"
+                                            onCameraChanged={(ev: MapCameraChangedEvent) => {
+                                                setCenter(ev.detail.center);
+                                            }}
+                                        >
+                                            {locations.map((location, index) => {
+                                                return (
+                                                    <AdvancedMarker
+                                                        position={{ lat: location.position.lat, lng: location.position.lng }}
+                                                        onClick={() => {
+                                                            setCoordinates({ lat: location.position.lat, lng: location.position.lng });
+                                                            setStatus('OK');
+                                                        }}
+                                                        key={index}
+                                                    />
+                                                );
+                                            })}
+                                        </Map>
+                                    </APIProvider>
+                                </div>
                             </div>
                         </div>
                     </div>
