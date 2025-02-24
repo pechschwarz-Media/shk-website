@@ -40,7 +40,7 @@ export default function Gallery_1({ content }: { content: Content }) {
                     <div className="grid lg:grid-cols-2 gap-6">
                         {content?.tiles?.map((tile, index) => {
                             return (
-                                <div className={cn(tile?.fullwidth && 'lg:col-span-2')}>
+                                <div className={cn(tile?.fullwidth && 'lg:col-span-2')} key={index}>
                                     <Link
                                         href={tile?.link?.url}
                                         className={cn(
