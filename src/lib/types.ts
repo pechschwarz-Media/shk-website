@@ -67,7 +67,23 @@ export type Blog = {
     };
 };
 
-export type Options = {};
+export type CustomerMenu = {
+    link: AcfLink;
+    submenu: {
+        link: AcfLink;
+        image: Media;
+        description: string;
+    }[];
+}[];
+
+export type PartnerMenu = CustomerMenu;
+
+export type Options = {
+    customer: CustomerMenu;
+    partner: PartnerMenu;
+    headerLocationsLink: AcfLink;
+    headerAppointmentLink: AcfLink;
+};
 
 export type Settings = {
     hide?: boolean;

@@ -17,14 +17,14 @@ export const sectionVariants = cva('', {
         paddingTop: {
             off: 'pt-0',
             small: 'pt-8 md:pt-12',
-            medium: 'pt-8 sm:pt-12 md:pt-16 lg:pt-20',
-            large: 'pt-12 sm:pt-16 md:pt-20 lg:pt-28',
+            medium: 'pt-16 md:pt-20 lg:pt-28',
+            large: 'pt-16 md:pt-20 lg:pt-28',
         },
         paddingBottom: {
             off: 'pb-0',
             small: 'pb-8 md:pb-12',
-            medium: 'pb-8 sm:pb-12 md:pb-16 lg:pb-20',
-            large: 'pb-12 sm:pb-16 md:pb-20 lg:pb-28',
+            medium: 'pb-16 md:pb-20 lg:pb-28',
+            large: 'pb-16 md:pb-20 lg:pb-28',
         },
     },
     defaultVariants: {

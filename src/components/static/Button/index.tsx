@@ -9,6 +9,7 @@ const buttonVariants = cva(
         variants: {
             variant: {
                 blueFilled: 'bg-blue text-white h-12 rounded-full px-5',
+                whiteFilled: 'bg-white text-blue h-12 rounded-full px-5',
                 whiteOutline: 'bg-transparent border border-white text-white h-12 rounded-full px-5 backdrop-blur-md',
             },
         },

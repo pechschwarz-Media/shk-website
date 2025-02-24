@@ -5,6 +5,8 @@ import dynamic from 'next/dynamic';
 const Components = {
     header_5: dynamic(() => import('@/components/custom/Header/5')),
     locations: dynamic(() => import('@/components/custom/Locations')),
+    gallery_1: dynamic(() => import('@/components/custom/Gallery/1')),
+    cta_51: dynamic(() => import('@/components/custom/CTA/51')),
 };
 
 export default function ComponentRenderer({ content }: { content?: any }) {
