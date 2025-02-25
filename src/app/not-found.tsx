@@ -1,3 +1,6 @@
+import Error from '@/components/custom/Error';
+import Header from '@/components/layout/Header';
+
 export function generateMetadata() {
     return {
         title: '404: Seite nicht gefunden',
@@ -6,5 +9,10 @@ export function generateMetadata() {
 }
 
 export default async function NotFound() {
-    return <>404: Seite nicht gefunden</>;
+    return (
+        <>
+            <Header channel="customer" />
+            <Error />
+        </>
+    );
 }

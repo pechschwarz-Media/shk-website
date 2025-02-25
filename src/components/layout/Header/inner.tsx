@@ -7,6 +7,7 @@ import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { animate, AnimatePresence, motion, stagger } from 'motion/react';
 import { AcfLink, CustomerMenu } from '@/lib/types';
+import Logo from '@/components/static/Logo';
 
 export default function HeaderInner({
     channel,
@@ -51,7 +52,7 @@ export default function HeaderInner({
                 <div className="container h-full">
                     <div className="flex justify-between h-full items-center">
                         <Link href="/">
-                            <Image src="/logo.png" width="83" height="30" alt="SHK Logo" />
+                            <Logo className="w-24 text-blue" />
                         </Link>
                         <div className="max-h-screen hidden lg:block">
                             <nav className="container max-w-full">

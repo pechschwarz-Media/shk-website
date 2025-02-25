@@ -1,3 +1,4 @@
+import Footer from '@/components/layout/Footer';
 import './globals.css';
 import { cn } from '@/lib/utils';
 import localFont from 'next/font/local';
@@ -35,7 +36,10 @@ const panton = localFont({
 export default function RootLayout({ children }: { children: React.ReactNode }) {
     return (
         <html lang="de" className="scroll-smooth">
-            <body className={cn(hongkong.variable, panton.variable, 'text-base text-dark font-body')}>{children}</body>
+            <body className={cn(hongkong.variable, panton.variable, 'text-base text-dark font-body')}>
+                {children}
+                <Footer />
+            </body>
         </html>
     );
 }

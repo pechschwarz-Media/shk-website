@@ -45,6 +45,7 @@ const config: Config = {
                 light: '#e8e8e8',
                 dark: '#171D1A',
                 gray: '#7A7A7A',
+                'gray-medium': '#EBEAE6',
                 'gray-light': '#F5F5F3',
                 blue: '#0B2D44',
                 customer: '#2B94A6',

@@ -78,9 +78,17 @@ export type CustomerMenu = {
 
 export type PartnerMenu = CustomerMenu;
 
+export type FooterMenu = {
+    title: string;
+    menu: {
+        link: AcfLink;
+    }[];
+};
+
 export type Options = {
     customer: CustomerMenu;
     partner: PartnerMenu;
+    footer: FooterMenu[];
     headerLocationsLink: AcfLink;
     headerAppointmentLink: AcfLink;
 };
