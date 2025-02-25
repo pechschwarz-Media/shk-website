@@ -57,74 +57,86 @@ export default function HeaderInner({
                         <div className="max-h-screen hidden lg:block">
                             <nav className="container max-w-full">
                                 <ul className="flex items-center gap-10">
-                                    {menu?.map((menuItem, index) => {
-                                        return (
-                                            <li key={index}>
-                                                <Link
-                                                    href={menuItem?.link?.url}
-                                                    className="flex items-center gap-1"
-                                                    onClick={(e) => {
-                                                        if (menuItem?.submenu?.length > 0) {
-                                                            e.preventDefault();
-                                                            setCurrentMenuItem(currentMenuItem === index ? -1 : index);
-                                                        }
-                                                    }}
-                                                >
-                                                    {menuItem?.link?.title}
-                                                    {menuItem?.submenu?.length > 0 && (
-                                                        <div className={cn('transition-all', currentMenuItem === 0 && 'rotate-180')}>
-                                                            <svg
-                                                                xmlns="http://www.w3.org/2000/svg"
-                                                                fill="none"
-                                                                viewBox="0 0 24 24"
-                                                                strokeWidth={1.5}
-                                                                stroke="currentColor"
-                                                                className="size-4"
-                                                            >
-                                                                <path strokeLinecap="round" strokeLinejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
-                                                            </svg>
-                                                        </div>
-                                                    )}
-                                                </Link>
-                                                {menuItem?.submenu?.length > 0 && (
-                                                    <AnimatePresence>
-                                                        {currentMenuItem === index && (
-                                                            <motion.div
-                                                                initial={{ y: '30px', opacity: 0 }}
-                                                                animate={{ y: 0, opacity: 1 }}
-                                                                exit={{ y: '30px', opacity: 0 }}
-                                                                style={{ x: '-50%' }}
-                                                                className="absolute top-full max-w-full left-1/2 mt-4 -translate-x-1/2 bg-light/80 backdrop-blur p-6 lg:p-8 rounded-xl"
-                                                            >
-                                                                <div className="flex flex-col lg:flex-row gap-8">
-                                                                    {menuItem?.submenu?.map((subMenuItem, index) => {
-                                                                        return (
-                                                                            <Link href={subMenuItem?.link?.url} className="lg:w-56 group" key={index}>
-                                                                                <div className="aspect-[4/3] relative rounded-xl overflow-hidden mb-5">
-                                                                                    <Image
-                                                                                        src={subMenuItem?.image?.url}
-                                                                                        fill
-                                                                                        alt={subMenuItem?.image?.alt}
-                                                                                        className="group-hover:scale-110 transition-all"
-                                                                                    />
-                                                                                </div>
-                                                                                <div className="text-headline leading-tight text-h5 text-blue mb-1">
-                                                                                    {subMenuItem?.link?.title}
-                                                                                </div>
-                                                                                <div className="text-blue">
-                                                                                    <p>{subMenuItem?.description}</p>
-                                                                                </div>
-                                                                            </Link>
-                                                                        );
-                                                                    })}
+                                    {menu?.length > 0 && (
+                                        <>
+                                            {menu?.map((menuItem, index) => {
+                                                return (
+                                                    <li key={index}>
+                                                        <Link
+                                                            href={menuItem?.link?.url}
+                                                            className="flex items-center gap-1"
+                                                            onClick={(e) => {
+                                                                if (menuItem?.submenu?.length > 0) {
+                                                                    e.preventDefault();
+                                                                    setCurrentMenuItem(currentMenuItem === index ? -1 : index);
+                                                                }
+                                                            }}
+                                                        >
+                                                            {menuItem?.link?.title}
+                                                            {menuItem?.submenu?.length > 0 && (
+                                                                <div className={cn('transition-all', currentMenuItem === 0 && 'rotate-180')}>
+                                                                    <svg
+                                                                        xmlns="http://www.w3.org/2000/svg"
+                                                                        fill="none"
+                                                                        viewBox="0 0 24 24"
+                                                                        strokeWidth={1.5}
+                                                                        stroke="currentColor"
+                                                                        className="size-4"
+                                                                    >
+                                                                        <path
+                                                                            strokeLinecap="round"
+                                                                            strokeLinejoin="round"
+                                                                            d="m19.5 8.25-7.5 7.5-7.5-7.5"
+                                                                        />
+                                                                    </svg>
                                                                 </div>
-                                                            </motion.div>
+                                                            )}
+                                                        </Link>
+                                                        {menuItem?.submenu?.length > 0 && (
+                                                            <AnimatePresence>
+                                                                {currentMenuItem === index && (
+                                                                    <motion.div
+                                                                        initial={{ y: '30px', opacity: 0 }}
+                                                                        animate={{ y: 0, opacity: 1 }}
+                                                                        exit={{ y: '30px', opacity: 0 }}
+                                                                        style={{ x: '-50%' }}
+                                                                        className="absolute top-full max-w-full left-1/2 mt-4 -translate-x-1/2 bg-light/80 backdrop-blur p-6 lg:p-8 rounded-xl"
+                                                                    >
+                                                                        <div className="flex flex-col lg:flex-row gap-8">
+                                                                            {menuItem?.submenu?.map((subMenuItem, index) => {
+                                                                                return (
+                                                                                    <Link
+                                                                                        href={subMenuItem?.link?.url}
+                                                                                        className="lg:w-56 group"
+                                                                                        key={index}
+                                                                                    >
+                                                                                        <div className="aspect-[4/3] relative rounded-xl overflow-hidden mb-5">
+                                                                                            <Image
+                                                                                                src={subMenuItem?.image?.url}
+                                                                                                fill
+                                                                                                alt={subMenuItem?.image?.alt}
+                                                                                                className="group-hover:scale-110 transition-all"
+                                                                                            />
+                                                                                        </div>
+                                                                                        <div className="text-headline leading-tight text-h5 text-blue mb-1">
+                                                                                            {subMenuItem?.link?.title}
+                                                                                        </div>
+                                                                                        <div className="text-blue">
+                                                                                            <p>{subMenuItem?.description}</p>
+                                                                                        </div>
+                                                                                    </Link>
+                                                                                );
+                                                                            })}
+                                                                        </div>
+                                                                    </motion.div>
+                                                                )}
+                                                            </AnimatePresence>
                                                         )}
-                                                    </AnimatePresence>
-                                                )}
-                                            </li>
-                                        );
-                                    })}
+                                                    </li>
+                                                );
+                                            })}
+                                        </>
+                                    )}
                                 </ul>
                             </nav>
                         </div>
@@ -179,75 +191,83 @@ export default function HeaderInner({
             <div className="mobile-menu -translate-y-full bg-gray-light overflow-auto max-h-screen border-b border-b-gray/30 pt-[80px] z-10 fixed top-0 left-0 w-full">
                 <nav className="container">
                     <ul className="flex flex-col divide-y divide-gray/30">
-                        {menu?.map((menuItem, index) => {
-                            return (
-                                <li className="children" key={index}>
-                                    <Link
-                                        href={menuItem?.link?.url}
-                                        className="flex items-center gap-1 py-3"
-                                        onClick={(e) => {
-                                            if (menuItem?.submenu?.length > 0) {
-                                                e.preventDefault();
-                                                setCurrentMenuItem(currentMenuItem === index ? -1 : index);
-                                            }
-                                        }}
-                                    >
-                                        {menuItem?.link?.title}
-                                        {menuItem?.submenu?.length > 0 && (
-                                            <div className={cn('transition-all', currentMenuItem === 0 && 'rotate-180')}>
-                                                <svg
-                                                    xmlns="http://www.w3.org/2000/svg"
-                                                    fill="none"
-                                                    viewBox="0 0 24 24"
-                                                    strokeWidth={1.5}
-                                                    stroke="currentColor"
-                                                    className="size-4"
-                                                >
-                                                    <path strokeLinecap="round" strokeLinejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
-                                                </svg>
-                                            </div>
-                                        )}
-                                    </Link>
-                                    {menuItem?.submenu?.length > 0 && (
-                                        <AnimatePresence>
-                                            {currentMenuItem === 0 && (
-                                                <motion.div
-                                                    initial={{ height: 0 }}
-                                                    animate={{ height: 'auto' }}
-                                                    exit={{ height: 0 }}
-                                                    className="overflow-hidden"
-                                                >
-                                                    <motion.div
-                                                        initial={{ opacity: 0 }}
-                                                        animate={{ opacity: 1 }}
-                                                        exit={{ opacity: 0 }}
-                                                        className="max-w-full bg-light/80 lg:backdrop-blur p-6 rounded-xl mb-5"
-                                                    >
-                                                        <div className="flex flex-col lg:flex-row gap-8">
-                                                            {menuItem?.submenu?.map((subMenuItem, index) => {
-                                                                return (
-                                                                    <Link href={subMenuItem?.link?.url} key={index}>
-                                                                        <div className="aspect-[16/9] relative rounded-xl overflow-hidden mb-5">
-                                                                            <Image src={subMenuItem?.image?.url} fill alt={subMenuItem?.image?.alt} />
-                                                                        </div>
-                                                                        <div className="text-headline leading-tight text-h5 text-blue mb-1">
-                                                                            {subMenuItem?.link?.title}
-                                                                        </div>
-                                                                        <div className="text-blue">
-                                                                            <p>{subMenuItem?.description}</p>
-                                                                        </div>
-                                                                    </Link>
-                                                                );
-                                                            })}
-                                                        </div>
-                                                    </motion.div>
-                                                </motion.div>
+                        {menu?.length > 0 && (
+                            <>
+                                {menu?.map((menuItem, index) => {
+                                    return (
+                                        <li className="children" key={index}>
+                                            <Link
+                                                href={menuItem?.link?.url}
+                                                className="flex items-center gap-1 py-3"
+                                                onClick={(e) => {
+                                                    if (menuItem?.submenu?.length > 0) {
+                                                        e.preventDefault();
+                                                        setCurrentMenuItem(currentMenuItem === index ? -1 : index);
+                                                    }
+                                                }}
+                                            >
+                                                {menuItem?.link?.title}
+                                                {menuItem?.submenu?.length > 0 && (
+                                                    <div className={cn('transition-all', currentMenuItem === 0 && 'rotate-180')}>
+                                                        <svg
+                                                            xmlns="http://www.w3.org/2000/svg"
+                                                            fill="none"
+                                                            viewBox="0 0 24 24"
+                                                            strokeWidth={1.5}
+                                                            stroke="currentColor"
+                                                            className="size-4"
+                                                        >
+                                                            <path strokeLinecap="round" strokeLinejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+                                                        </svg>
+                                                    </div>
+                                                )}
+                                            </Link>
+                                            {menuItem?.submenu?.length > 0 && (
+                                                <AnimatePresence>
+                                                    {currentMenuItem === 0 && (
+                                                        <motion.div
+                                                            initial={{ height: 0 }}
+                                                            animate={{ height: 'auto' }}
+                                                            exit={{ height: 0 }}
+                                                            className="overflow-hidden"
+                                                        >
+                                                            <motion.div
+                                                                initial={{ opacity: 0 }}
+                                                                animate={{ opacity: 1 }}
+                                                                exit={{ opacity: 0 }}
+                                                                className="max-w-full bg-light/80 lg:backdrop-blur p-6 rounded-xl mb-5"
+                                                            >
+                                                                <div className="flex flex-col lg:flex-row gap-8">
+                                                                    {menuItem?.submenu?.map((subMenuItem, index) => {
+                                                                        return (
+                                                                            <Link href={subMenuItem?.link?.url} key={index}>
+                                                                                <div className="aspect-[16/9] relative rounded-xl overflow-hidden mb-5">
+                                                                                    <Image
+                                                                                        src={subMenuItem?.image?.url}
+                                                                                        fill
+                                                                                        alt={subMenuItem?.image?.alt}
+                                                                                    />
+                                                                                </div>
+                                                                                <div className="text-headline leading-tight text-h5 text-blue mb-1">
+                                                                                    {subMenuItem?.link?.title}
+                                                                                </div>
+                                                                                <div className="text-blue">
+                                                                                    <p>{subMenuItem?.description}</p>
+                                                                                </div>
+                                                                            </Link>
+                                                                        );
+                                                                    })}
+                                                                </div>
+                                                            </motion.div>
+                                                        </motion.div>
+                                                    )}
+                                                </AnimatePresence>
                                             )}
-                                        </AnimatePresence>
-                                    )}
-                                </li>
-                            );
-                        })}
+                                        </li>
+                                    );
+                                })}
+                            </>
+                        )}
                     </ul>
                 </nav>
             </div>
