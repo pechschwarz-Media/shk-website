@@ -3,13 +3,14 @@
 import Section from '@/components/static/Section';
 import Text from '@/components/static/Text';
 import parse from 'html-react-parser';
-import { APIProvider, Map, AdvancedMarker, MapCameraChangedEvent } from '@vis.gl/react-google-maps';
+import { APIProvider, Map, AdvancedMarker, MapCameraChangedEvent, Pin } from '@vis.gl/react-google-maps';
 import { useEffect, useState } from 'react';
 import Button from '@/components/static/Button';
 import { cn } from '@/lib/utils';
 import { Location, Locationcat } from '@/lib/types';
 import { Content } from './index';
 import { useSearchParams } from 'next/navigation';
+import Link from 'next/link';
 
 export default function Locations_Inner({
     content,
@@ -98,6 +99,7 @@ export default function Locations_Inner({
     useEffect(() => {
         if (cat) {
             setCategory(parseInt(cat));
+            console.log('test');
         }
     }, [cat]);
 
@@ -176,7 +178,9 @@ export default function Locations_Inner({
                                                             setStatus('OK');
                                                         }}
                                                         key={index}
-                                                    />
+                                                    >
+                                                        <Pin background={'#0B2D44'} borderColor={'#061b28'} glyphColor={'#3b5669'} />
+                                                    </AdvancedMarker>
                                                 );
                                             })}
                                         </Map>
@@ -282,27 +286,28 @@ export default function Locations_Inner({
                             )}
 
                             <div className="mt-10">
-                                {status === 'ZERO_RESULTS' && (
-                                    <div className="flex items-center gap-2">
-                                        <div>
-                                            <svg
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                fill="none"
-                                                viewBox="0 0 24 24"
-                                                strokeWidth={1.5}
-                                                stroke="currentColor"
-                                                className="size-8"
-                                            >
-                                                <path
-                                                    strokeLinecap="round"
-                                                    strokeLinejoin="round"
-                                                    d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 3.75h.008v.008H12v-.008Z"
-                                                />
-                                            </svg>
+                                {status === 'ZERO_RESULTS' ||
+                                    (filteredLocations.length === 0 && (
+                                        <div className="flex items-center gap-2">
+                                            <div>
+                                                <svg
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                    fill="none"
+                                                    viewBox="0 0 24 24"
+                                                    strokeWidth={1.5}
+                                                    stroke="currentColor"
+                                                    className="size-8"
+                                                >
+                                                    <path
+                                                        strokeLinecap="round"
+                                                        strokeLinejoin="round"
+                                                        d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 3.75h.008v.008H12v-.008Z"
+                                                    />
+                                                </svg>
+                                            </div>
+                                            <div>Kein Standort gefunden. Bitte ändern Sie Ihre Eingabe.</div>
                                         </div>
-                                        <div>Kein Standort gefunden. Bitte ändern Sie Ihre Eingabe.</div>
-                                    </div>
-                                )}
+                                    ))}
                                 {status === 'filtered' && (
                                     <div className="space-y-3">
                                         {filteredLocations.map((location, index) => {
@@ -343,6 +348,19 @@ export default function Locations_Inner({
                                                             <br />
                                                             {location?.acf?.zip} {location?.acf?.city}
                                                         </address>
+                                                        <Link href={location?.link} className="flex items-center gap-2 text-blue mt-5">
+                                                            Weitere Details
+                                                            <svg
+                                                                xmlns="http://www.w3.org/2000/svg"
+                                                                fill="none"
+                                                                viewBox="0 0 24 24"
+                                                                strokeWidth={1.5}
+                                                                stroke="currentColor"
+                                                                className="size-4"
+                                                            >
+                                                                <path strokeLinecap="round" strokeLinejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+                                                            </svg>
+                                                        </Link>
                                                     </div>
                                                 </div>
                                             );
