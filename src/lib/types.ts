@@ -101,3 +101,33 @@ export type Settings = {
         bottom: VariantProps<typeof sectionVariants>['paddingBottom'];
     };
 };
+
+export type Location = {
+    title: {
+        rendered: string;
+    };
+    link: string;
+    acf: {
+        id: string;
+        email: string;
+        fax: string;
+        lat: string;
+        lng: string;
+        zip: string;
+        city: string;
+        street: string;
+        number: string;
+        phone: string;
+        website: string;
+        bad_open: any[];
+        abhol_open: any[];
+        energie_open: any[];
+    };
+    locationcats: number[];
+    distance?: number;
+};
+
+export type Locationcat = {
+    name: string;
+    id: number;
+};
