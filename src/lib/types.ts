@@ -15,6 +15,10 @@ export type Media = {
   type: string;
 };
 
+export type Logo = {
+  acf: { logo: Media };
+};
+
 export type Page = {
   title: {
     rendered: string;
