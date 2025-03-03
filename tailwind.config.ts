@@ -56,6 +56,9 @@ const config: Config = {
         "customer-bg": "#F4F3EF",
         partner: "#F47630",
         "partner-bg": "#F7F7F7",
+        "background-gray": "#F4F5F0",
+        "tabelle-border": "#d7d6d4",
+        "tabelle-background": "#eae9e6",
       },
       borderRadius: {
         normal: "20px",

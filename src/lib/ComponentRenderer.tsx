@@ -1,6 +1,7 @@
 // @ts-nocheck
 
 import dynamic from "next/dynamic";
+import { LocationData } from "./types";
 
 const Components = {
   header_5: dynamic(() => import("@/components/custom/Header/5")),
@@ -14,13 +15,22 @@ const Components = {
   posts_3: dynamic(() => import("@/components/custom/Posts/3")),
   posts_4: dynamic(() => import("@/components/custom/Posts/4")),
   posts_5: dynamic(() => import("@/components/custom/Posts/5")),
+  posts_6: dynamic(() => import("@/components/custom/Posts/6")),
+  posts_7: dynamic(() => import("@/components/custom/Posts/7")),
+  posts_8: dynamic(() => import("@/components/custom/Posts/8")),
 };
 
-export default function ComponentRenderer({ content, title }: { content?: any; title?: string }) {
+export default function ComponentRenderer({
+  content,
+  locationData,
+}: {
+  content?: any;
+  locationData?: LocationData;
+}) {
   if (content) {
     return content?.map((component, index) => {
       const Component = Components[component?.acf_fc_layout];
-      return <Component content={component} key={index} title={title} />;
+      return <Component content={component} key={index} locationData={locationData} />;
     });
   }
 }

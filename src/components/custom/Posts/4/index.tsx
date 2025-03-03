@@ -4,12 +4,11 @@ import Image from "next/image";
 
 type Content = {
   box: { icon: Media; text: string }[];
-  settings: Settings;
 };
 
 export default async function Posts_4({ content }: { content: Content }) {
   return (
-    <Section dataComponent="Posts_4" settings={content?.settings}>
+    <Section dataComponent="Posts_4">
       <div className="container">
         <div className="grid gap-x-8 xl:gap-x-12 gap-y-10 xl:gap-y-20  grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 xl:w-5/6 xl:mx-auto">
           {content?.box?.map((box, index) => (

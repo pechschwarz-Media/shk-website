@@ -7,7 +7,6 @@ import { Settings } from "@/lib/types";
 
 type Content = {
   text: string;
-  settings: Settings;
 };
 
 export default function Posts_1({ content }: { content: Content }) {
@@ -21,12 +20,13 @@ export default function Posts_1({ content }: { content: Content }) {
   const words = content.text.split(" ");
 
   return (
-    <Section dataComponent="Posts_1" settings={content?.settings}>
+    <Section dataComponent="Posts_1">
       <div className="container h-full flex justify-center flex-col">
-        {/* <p ref={headingRef} className="text-scrolltext">
+        <p ref={headingRef} className="text-scrolltext">
           {words.map((word, index) => {
             const start = index * 0.025;
             const end = start + 0.025;
+            // eslint-disable-next-line
             const opacity = useTransform(scrollYProgress, [start, end], [0.1, 1]);
             return (
               <React.Fragment key={index}>
@@ -37,7 +37,7 @@ export default function Posts_1({ content }: { content: Content }) {
               </React.Fragment>
             );
           })}
-        </p> */}
+        </p>
       </div>
     </Section>
   );

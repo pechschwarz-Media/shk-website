@@ -61,7 +61,7 @@ export default async function Location({ params }: { params: Promise<{ slug: str
           )}
         >
           <Header channel={location?.acf?.channel} />
-          <ComponentRenderer content={location?.acf?.content} title={location?.title.rendered} />
+          <ComponentRenderer content={location?.acf?.content} locationData={location} />
         </main>
       );
   }
