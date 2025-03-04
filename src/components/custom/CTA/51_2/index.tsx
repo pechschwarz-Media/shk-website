@@ -91,6 +91,7 @@ export default function CTA_51_2({
                 title: locationData?.acf?.phone,
                 target: "_self",
               }}
+              variant="blueOutline"
               className="mt-4 mb-8"
             >
               {locationData?.acf?.phone}
