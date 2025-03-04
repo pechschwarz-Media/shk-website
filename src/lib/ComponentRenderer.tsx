@@ -1,8 +1,8 @@
 // @ts-nocheck
 
-import dynamic from "next/dynamic";
-import { LocationData } from "./types";
-import CTA_51_2 from "@/components/custom/CTA/51_2";
+import dynamic from 'next/dynamic';
+import { LocationData } from './types';
+import CTA_51_2 from '@/components/custom/CTA/51_2';
 
 const Components = {
   header_5: dynamic(() => import("@/components/custom/Header/5")),
@@ -20,19 +20,14 @@ const Components = {
   gallery_20: dynamic(() => import("@/components/custom/Gallery/20")),
   cta_51_2: dynamic(() => import("@/components/custom/CTA/51_2")),
   cta_51_3: dynamic(() => import("@/components/custom/CTA/51_3")),
+  contact_6: dynamic(() => import('@/components/custom/Contact/6')),
 };
 
-export default function ComponentRenderer({
-  content,
-  locationData,
-}: {
-  content?: any;
-  locationData?: LocationData;
-}) {
-  if (content) {
-    return content?.map((component, index) => {
-      const Component = Components[component?.acf_fc_layout];
-      return <Component content={component} key={index} locationData={locationData} />;
-    });
-  }
+export default function ComponentRenderer({ content, locationData }: { content?: any; locationData?: LocationData }) {
+    if (content) {
+        return content?.map((component, index) => {
+            const Component = Components[component?.acf_fc_layout];
+            return <Component content={component} key={index} locationData={locationData} />;
+        });
+    }
 }
