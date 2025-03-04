@@ -21,39 +21,61 @@ export default function Layout_478({ content }: { content: Content }) {
         <Section dataComponent="Layout_478" settings={content?.settings}>
             <div className="container">
                 <div className="grid md:grid-cols-12 gap-6 items-center">
-                    <div
-                        className={cn(
-                            "md:col-span-6 xl:col-span-5",
-                            content?.invert === true ? "order-2 md:col-start-8" : "order-1"
-                        )}
-                    >
-                        <Image
-                            src={content?.image?.url}
-                            alt={content?.image?.alt}
-                            width={content?.image?.width}
-                            height={content?.image?.height}
-                        />
-                    </div>
-                    <div
-                        className={cn(
-                            "md:col-span-6 ",
-                            content?.invert === true ? "order-1" : "order-2 md:col-start-7"
-                        )}
-                    >
-                        <div className="mb-4">{content?.topline}</div>
-                        <h2 className="text-h2 leading-tight font-headline mb-8 text-blue">
-                            {content?.headline}
-                        </h2>
-                        <Text className="prose-p:text-gray">{parse(content?.text)}</Text>
-                        <Button
-                            as="link"
-                            variant="blueFilled"
-                            link={content?.button}
-                            className="mt-6"
-                        >
-                            {content?.button?.title}
-                        </Button>
-                    </div>
+                    {content?.invert === true && (
+                        <>
+                            <div className="md:col-span-6 xl:col-span-5">
+                                <Image
+                                    src={content?.image?.url}
+                                    alt={content?.image?.alt}
+                                    width={content?.image?.width}
+                                    height={content?.image?.height}
+                                />
+                            </div>
+                            <div className="md:col-span-6 md:col-start-7">
+                                <div className="mb-4">{content?.topline}</div>
+                                <h2 className="text-h2 leading-tight font-headline mb-8 text-blue">
+                                    {content?.headline}
+                                </h2>
+                                <Text className="prose-p:text-gray">{parse(content?.text)}</Text>
+                                <Button
+                                    as="link"
+                                    variant="blueFilled"
+                                    link={content?.button}
+                                    className="mt-6"
+                                >
+                                    {content?.button?.title}
+                                </Button>
+                            </div>
+                        </>
+                    )}
+
+                    {content?.invert === false && (
+                        <>
+                            <div className="md:col-span-6">
+                                <div className="mb-4">{content?.topline}</div>
+                                <h2 className="text-h2 leading-tight font-headline mb-8 text-blue">
+                                    {content?.headline}
+                                </h2>
+                                <Text className="prose-p:text-gray">{parse(content?.text)}</Text>
+                                <Button
+                                    as="link"
+                                    variant="blueFilled"
+                                    link={content?.button}
+                                    className="mt-6"
+                                >
+                                    {content?.button?.title}
+                                </Button>
+                            </div>
+                            <div className="md:col-span-6 md:col-start-8">
+                                <Image
+                                    src={content?.image?.url}
+                                    alt={content?.image?.alt}
+                                    width={content?.image?.width}
+                                    height={content?.image?.height}
+                                />
+                            </div>
+                        </>
+                    )}
                 </div>
             </div>
         </Section>
