@@ -68,6 +68,8 @@ export default function CTA_51_2({
     { key: "so", label: "Sonntag" },
   ];
 
+  console.log(formatTime(openingHoursEnergie[`energie_open_do_start`]));
+
   return (
     <Section dataComponent="CTA_51_2" settings={content.setting}>
       <div className="container">
@@ -97,146 +99,157 @@ export default function CTA_51_2({
             </Button>
             <div className="flex flex-col gap-16">
               {daysBad.some(({ key }) => {
-                const start = formatTime(openingHoursBad[`abhol_open_${key}_start`]);
-                const end = formatTime(openingHoursBad[`abhol_open_${key}_end`]);
-                return start !== "Geschlossen" && end !== "Geschlossen"; // Prüft, ob mindestens eine Öffnungszeit nicht "Geschlossen" ist
+                const start = formatTime(openingHoursBad[`bad_open_${key}_start`]);
+                const end = formatTime(openingHoursBad[`bad_open_${key}_end`]);
+                return start !== "Geschlossen" || end !== "Geschlossen";
               }) && (
-                <>
-                  <div>
-                    <h4 className="text-h4">Öffungszeiten Bad</h4>
-                    <table className="w-full mt-4 lg:mt-6">
-                      <tbody className="border-2 border-tabelle-border">
-                        {daysBad.map(({ key, label }, index) => (
-                          <tr
-                            key={key}
-                            className={`border-2 border-tabelle-border ${
-                              index % 2 === 0 ? "bg-transparent" : "bg-tabelle-background"
-                            }`}
-                          >
-                            <td className="p-2 border-r-2 border-tabelle-border">{label}</td>
-                            <td className="p-2">
-                              {formatTime(openingHoursBad[`abhol_open_${key}_start`]) ===
-                                "Geschlossen" &&
-                              formatTime(openingHoursBad[`abhol_open_${key}_end`]) === "Geschlossen"
-                                ? "Geschlossen"
-                                : formatTime(openingHoursBad[`abhol_open_${key}_start`]) !==
-                                    "Geschlossen" &&
-                                  formatTime(openingHoursBad[`abhol_open_${key}_end`]) ===
-                                    "Geschlossen"
-                                ? "Geschlossen2"
-                                : formatTime(openingHoursBad[`abhol_open_${key}_start`]) !==
-                                    "Geschlossen" &&
-                                  formatTime(openingHoursBad[`abhol_open_${key}_end`]) !==
-                                    "Geschlossen"
-                                ? `${formatTime(
-                                    openingHoursBad[`abhol_open_${key}_start`]
-                                  )} - ${formatTime(openingHoursBad[`abhol_open_${key}_end`])}`
-                                : "Geschlossen"}
-                            </td>
-                          </tr>
-                        ))}
-                      </tbody>
-                    </table>
-                  </div>
-                </>
+                <div>
+                  <h4 className="text-h4">Öffungszeiten Bad</h4>
+                  <table className="w-full mt-4 lg:mt-6">
+                    <tbody className="border-2 border-tabelle-border">
+                      {daysBad.map(({ key, label }, index) => (
+                        <tr
+                          key={key}
+                          className={`border-2 border-tabelle-border ${
+                            index % 2 === 0 ? "bg-transparent" : "bg-tabelle-background"
+                          }`}
+                        >
+                          <td className="p-2 border-r-2 border-tabelle-border">{label}</td>
+                          <td className="p-2">
+                            {formatTime(openingHoursBad[`bad_open_${key}_start`]) ===
+                              "Geschlossen" &&
+                            formatTime(openingHoursBad[`bad_open_${key}_end`]) === "Geschlossen"
+                              ? "Geschlossen"
+                              : formatTime(openingHoursBad[`bad_open_${key}_start`]) !==
+                                  "Geschlossen" &&
+                                formatTime(openingHoursBad[`bad_open_${key}_end`]) === "Geschlossen"
+                              ? `${formatTime(
+                                  openingHoursBad[`bad_open_${key}_start`]
+                                )} - ${formatTime(openingHoursBad[`bad_open_${key}_end`])}`
+                              : formatTime(openingHoursBad[`bad_open_${key}_start`]) ===
+                                  "Geschlossen" &&
+                                formatTime(openingHoursBad[`bad_open_${key}_end`]) !== "Geschlossen"
+                              ? `${formatTime(
+                                  openingHoursBad[`bad_open_${key}_start`]
+                                )} - ${formatTime(openingHoursBad[`bad_open_${key}_end`])}`
+                              : formatTime(openingHoursBad[`bad_open_${key}_start`]) !==
+                                  "Geschlossen" &&
+                                formatTime(openingHoursBad[`bad_open_${key}_end`]) !== "Geschlossen"
+                              ? `${formatTime(
+                                  openingHoursBad[`bad_open_${key}_start`]
+                                )} - ${formatTime(openingHoursBad[`bad_open_${key}_end`])}`
+                              : "Geschlossen"}
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
               )}
 
               {daysAbhol.some(({ key }) => {
                 const start = formatTime(openingHoursAbhol[`abhol_open_${key}_start`]);
                 const end = formatTime(openingHoursAbhol[`abhol_open_${key}_end`]);
-                return start !== "Geschlossen" && end !== "Geschlossen"; // Prüft, ob mindestens eine Öffnungszeit nicht "Geschlossen" ist
+                return start !== "Geschlossen" || end !== "Geschlossen";
               }) && (
-                <>
-                  <div>
-                    <h4 className="text-h4">Öffnungszeiten Abholung</h4>
-                    <table className="w-full mt-4 lg:mt-6">
-                      <tbody className="border-2 border-tabelle-border">
-                        {daysAbhol.map(({ key, label }, index) => (
-                          <tr
-                            key={key}
-                            className={`border-2 border-tabelle-border ${
-                              index % 2 === 0 ? "bg-transparent" : "bg-tabelle-background"
-                            }`}
-                          >
-                            <td className="p-2 border-r-2 border-tabelle-border">{label}</td>
-                            <td className="p-2">
-                              {formatTime(openingHoursAbhol[`abhol_open_${key}_start`]) ===
-                                "Geschlossen" &&
-                              formatTime(openingHoursAbhol[`abhol_open_${key}_end`]) ===
-                                "Geschlossen"
-                                ? "Geschlossen"
-                                : formatTime(openingHoursAbhol[`abhol_open_${key}_start`]) !==
-                                    "Geschlossen" &&
-                                  formatTime(openingHoursAbhol[`abhol_open_${key}_end`]) ===
-                                    "Geschlossen"
-                                ? "Geschlossen2"
-                                : formatTime(openingHoursAbhol[`abhol_open_${key}_start`]) !==
-                                    "Geschlossen" &&
-                                  formatTime(openingHoursAbhol[`abhol_open_${key}_end`]) !==
-                                    "Geschlossen"
-                                ? `${formatTime(
-                                    openingHoursAbhol[`abhol_open_${key}_start`]
-                                  )} - ${formatTime(openingHoursAbhol[`abhol_open_${key}_end`])}`
-                                : "Geschlossen"}
-                            </td>
-                          </tr>
-                        ))}
-                      </tbody>
-                    </table>
-                  </div>
-                </>
+                <div>
+                  <h4 className="text-h4">Öffnungszeiten Abholung</h4>
+                  <table className="w-full mt-4 lg:mt-6">
+                    <tbody className="border-2 border-tabelle-border">
+                      {daysAbhol.map(({ key, label }, index) => (
+                        <tr
+                          key={key}
+                          className={`border-2 border-tabelle-border ${
+                            index % 2 === 0 ? "bg-transparent" : "bg-tabelle-background"
+                          }`}
+                        >
+                          <td className="p-2 border-r-2 border-tabelle-border">{label}</td>
+                          <td className="p-2">
+                            {formatTime(openingHoursAbhol[`abhol_open_${key}_start`]) ===
+                              "Geschlossen" &&
+                            formatTime(openingHoursAbhol[`abhol_open_${key}_end`]) === "Geschlossen"
+                              ? "Geschlossen"
+                              : formatTime(openingHoursAbhol[`abhol_open_${key}_start`]) !==
+                                  "Geschlossen" &&
+                                formatTime(openingHoursAbhol[`abhol_open_${key}_end`]) ===
+                                  "Geschlossen"
+                              ? `${formatTime(
+                                  openingHoursAbhol[`abhol_open_${key}_start`]
+                                )} - ${formatTime(openingHoursAbhol[`abhol_open_${key}_end`])}`
+                              : formatTime(openingHoursAbhol[`abhol_open_${key}_start`]) ===
+                                  "Geschlossen" &&
+                                formatTime(openingHoursAbhol[`abhol_open_${key}_end`]) !==
+                                  "Geschlossen"
+                              ? `${formatTime(
+                                  openingHoursAbhol[`abhol_open_${key}_start`]
+                                )} - ${formatTime(openingHoursAbhol[`abhol_open_${key}_end`])}`
+                              : formatTime(openingHoursAbhol[`abhol_open_${key}_start`]) !==
+                                  "Geschlossen" &&
+                                formatTime(openingHoursAbhol[`abhol_open_${key}_end`]) !==
+                                  "Geschlossen"
+                              ? `${formatTime(
+                                  openingHoursAbhol[`abhol_open_${key}_start`]
+                                )} - ${formatTime(openingHoursAbhol[`abhol_open_${key}_end`])}`
+                              : "Geschlossen"}
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
               )}
 
               {daysEnergie.some(({ key }) => {
-                const start = formatTime(openingHoursEnergie[`abhol_open_${key}_start`]);
-                const end = formatTime(openingHoursEnergie[`abhol_open_${key}_end`]);
-                return start !== "Geschlossen" && end !== "Geschlossen"; // Prüft, ob mindestens eine Öffnungszeit nicht "Geschlossen" ist
+                const start = formatTime(openingHoursEnergie[`energie_open_${key}_start`]);
+                const end = formatTime(openingHoursEnergie[`energie_open_${key}_end`]);
+                return start !== "Geschlossen" || end !== "Geschlossen";
               }) && (
-                <>
-                  <div>
-                    <h4 className="text-h4">Öffungszeiten Energie</h4>
-                    <table className="w-full mt-4 lg:mt-6">
-                      <tbody className="border-2 border-tabelle-border">
-                        {daysEnergie.map(({ key, label }, index) => (
-                          <tr
-                            key={key}
-                            className={`border-2 border-tabelle-border ${
-                              index % 2 === 0 ? "bg-transparent" : "bg-tabelle-background"
-                            }`}
-                          >
-                            <td className="p-2 border-r-2 border-tabelle-border">{label}</td>
-                            <td className="p-2">
-                              {formatTime(openingHoursEnergie[`energie_open_${key}_start`]) ===
-                                "Geschlossen" &&
-                              formatTime(openingHoursEnergie[`energie_open_${key}_end`]) ===
-                                "Geschlossen"
-                                ? "Geschlossen"
-                                : formatTime(openingHoursEnergie[`energie_open_${key}_start`]) !==
-                                    "Geschlossen" &&
-                                  formatTime(openingHoursEnergie[`energie_open_${key}_end`]) ===
-                                    "Geschlossen"
-                                ? `${formatTime(
-                                    openingHoursEnergie[`energie_open_${key}_start`]
-                                  )} - ${formatTime(
-                                    openingHoursEnergie[`energie_open_${key}_end`]
-                                  )}`
-                                : formatTime(openingHoursEnergie[`energie_open_${key}_start`]) ===
-                                    "Geschlossen" &&
-                                  formatTime(openingHoursEnergie[`energie_open_${key}_end`]) !==
-                                    "Geschlossen"
-                                ? `${formatTime(
-                                    openingHoursEnergie[`energie_open_${key}_start`]
-                                  )} - ${formatTime(
-                                    openingHoursEnergie[`energie_open_${key}_end`]
-                                  )}`
-                                : "Geschlossen"}
-                            </td>
-                          </tr>
-                        ))}
-                      </tbody>
-                    </table>
-                  </div>
-                </>
+                <div>
+                  <h4 className="text-h4">Öffungszeiten Energie</h4>
+                  <table className="w-full mt-4 lg:mt-6">
+                    <tbody className="border-2 border-tabelle-border">
+                      {daysEnergie.map(({ key, label }, index) => (
+                        <tr
+                          key={key}
+                          className={`border-2 border-tabelle-border ${
+                            index % 2 === 0 ? "bg-transparent" : "bg-tabelle-background"
+                          }`}
+                        >
+                          <td className="p-2 border-r-2 border-tabelle-border">{label}</td>
+                          <td className="p-2">
+                            {formatTime(openingHoursEnergie[`energie_open_${key}_start`]) ===
+                              "Geschlossen" &&
+                            formatTime(openingHoursEnergie[`energie_open_${key}_end`]) ===
+                              "Geschlossen"
+                              ? "Geschlossen"
+                              : formatTime(openingHoursEnergie[`energie_open_${key}_start`]) !==
+                                  "Geschlossen" &&
+                                formatTime(openingHoursEnergie[`energie_open_${key}_end`]) ===
+                                  "Geschlossen"
+                              ? `${formatTime(
+                                  openingHoursEnergie[`energie_open_${key}_start`]
+                                )} - ${formatTime(openingHoursEnergie[`energie_open_${key}_end`])}`
+                              : formatTime(openingHoursEnergie[`energie_open_${key}_start`]) ===
+                                  "Geschlossen" &&
+                                formatTime(openingHoursEnergie[`energie_open_${key}_end`]) !==
+                                  "Geschlossen"
+                              ? `${formatTime(
+                                  openingHoursEnergie[`energie_open_${key}_start`]
+                                )} - ${formatTime(openingHoursEnergie[`energie_open_${key}_end`])}`
+                              : formatTime(openingHoursEnergie[`energie_open_${key}_start`]) !==
+                                  "Geschlossen" &&
+                                formatTime(openingHoursEnergie[`energie_open_${key}_end`]) !==
+                                  "Geschlossen"
+                              ? `${formatTime(
+                                  openingHoursEnergie[`energie_open_${key}_start`]
+                                )} - ${formatTime(openingHoursEnergie[`energie_open_${key}_end`])}`
+                              : "Geschlossen"}
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
               )}
             </div>
           </div>
