@@ -1,7 +1,9 @@
+'use client';
+
 import Section from '@/components/static/Section';
-import { AcfLink, Media, Settings } from '@/lib/types';
-import Image from 'next/image';
-import Link from 'next/link';
+import { Settings } from '@/lib/types';
+import { MotionStyle, motion, useScroll, useTransform } from 'motion/react';
+import React, { useRef } from 'react';
 
 type Content = {
     text: string;
@@ -9,5 +11,35 @@ type Content = {
 };
 
 export default function Layout_36({ content }: { content: Content }) {
-    return <Section dataComponent="Layout_396" settings={content?.settings}></Section>;
+    const headingRef = useRef<HTMLHeadingElement>(null);
+
+    const { scrollYProgress } = useScroll({
+        target: headingRef,
+        offset: ['start 80%', 'end 20%'],
+    });
+
+    const words = content.text.split(' ');
+
+    return (
+        <Section dataComponent="Layout_396" settings={content?.settings}>
+            <div className="container h-full flex justify-center flex-col">
+                <p ref={headingRef} className="text-scrolltext">
+                    {words.map((word, index) => {
+                        const start = index * 0.025;
+                        const end = start + 0.025;
+                        // eslint-disable-next-line
+                        const opacity = useTransform(scrollYProgress, [start, end], [0.1, 1]);
+                        return (
+                            <React.Fragment key={index}>
+                                <motion.span className="inline-block" style={{ opacity }}>
+                                    {word}
+                                </motion.span>
+                                {index < words.length - 1 && ' '}
+                            </React.Fragment>
+                        );
+                    })}
+                </p>
+            </div>
+        </Section>
+    );
 }
