@@ -63,6 +63,19 @@ const config: Config = {
       borderRadius: {
         normal: "20px",
       },
+      animation: {
+        logos: "right-to-left 40s linear infinite",
+      },
+      keyframes: {
+        "right-to-left": {
+          "0%": {
+            transform: "translateX(20%)",
+          },
+          "100%": {
+            transform: "translateX(-50%)",
+          },
+        },
+      },
     },
   },
   plugins: [require("@tailwindcss/typography"), require("@relume_io/relume-tailwind")],

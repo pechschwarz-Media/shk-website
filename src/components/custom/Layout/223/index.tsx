@@ -9,9 +9,9 @@ type Content = {
   settings: Settings;
 };
 
-export default async function Posts_6({ content }: { content: Content }) {
+export default async function Layout_223({ content }: { content: Content }) {
   return (
-    <Section dataComponent="Posts_6" settings={content?.settings}>
+    <Section dataComponent="Layout_223" settings={content?.settings}>
       <div className="container">
         <div className="grid md:grid-cols-12 gap-6 items-center">
           <div className="md:col-span-6 xl:col-span-5">

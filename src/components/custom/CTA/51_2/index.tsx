@@ -1,10 +1,17 @@
 import Button from "@/components/static/Button";
 import Section from "@/components/static/Section";
-import { LocationData } from "@/lib/types";
+import { Settings } from "@/lib/types";
 
-export default function Posts_7({
+type Content = {
+  headline: string;
+  setting: Settings;
+};
+
+export default function CTA_51_2({
+  content,
   locationData,
 }: {
+  content: Content;
   locationData: {
     title: { rendered: string };
     acf: {
@@ -38,13 +45,13 @@ export default function Posts_7({
   ];
 
   return (
-    <Section dataComponent="Posts_7">
+    <Section dataComponent="CTA_51_2" settings={content.setting}>
       <div className="container">
-        <div className="grid grid-cols-1 lg:grid-cols-2">
-          <div>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+          <div className="w-full">
             <iframe
               src={`https://www.google.com/maps/embed/v1/place?q=${locationData?.acf?.lat},${locationData?.acf?.lng}`}
-              width="600"
+              width="100%"
               height="450"
               loading="lazy"
             ></iframe>
@@ -60,12 +67,12 @@ export default function Posts_7({
                 title: locationData?.acf?.phone,
                 target: "_self",
               }}
-              className="my-4"
+              className="mt-4 mb-8"
             >
               {locationData?.acf?.phone}
             </Button>
             <h4 className="text-h4">Öffungszeiten</h4>
-            <table className="w-full mt-4 lg:mt-8">
+            <table className="w-full mt-4 lg:mt-6">
               <tbody className="border-2 border-tabelle-border">
                 {days.map(({ key, label }, index) => (
                   <tr
@@ -76,8 +83,14 @@ export default function Posts_7({
                   >
                     <td className="p-2 border-r-2 border-tabelle-border">{label}</td>
                     <td className="p-2">
-                      {openingHours[`abhol_open_${key}_start`] &&
-                      openingHours[`abhol_open_${key}_end`]
+                      {formatTime(openingHours[`abhol_open_${key}_start`]) === "Geschlossen" &&
+                      formatTime(openingHours[`abhol_open_${key}_end`]) === "Geschlossen"
+                        ? "Geschlossen"
+                        : formatTime(openingHours[`abhol_open_${key}_start`]) !== "Geschlossen" &&
+                          formatTime(openingHours[`abhol_open_${key}_end`]) === "Geschlossen"
+                        ? "Geschlossen2"
+                        : formatTime(openingHours[`abhol_open_${key}_start`]) !== "Geschlossen" &&
+                          formatTime(openingHours[`abhol_open_${key}_end`]) !== "Geschlossen"
                         ? `${formatTime(openingHours[`abhol_open_${key}_start`])} - ${formatTime(
                             openingHours[`abhol_open_${key}_end`]
                           )}`

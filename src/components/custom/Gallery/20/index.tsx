@@ -16,21 +16,22 @@ import Dot from "@/components/icons/dot";
 type Content = {
   headline: string;
   gallery: { image: Media }[];
+  settings: Settings;
 };
 
-export default function Posts_5({ content }: { content: Content }) {
+export default function Gallery_20({ content }: { content: Content }) {
   const swiperRef = useRef<SwiperRef>(null);
 
   const [currentIndex, setCurrentIndex] = useState(0);
   return (
-    <Section dataComponent="Posts_5">
+    <Section dataComponent="Gallery_20" settings={content?.settings}>
       <div className="container relative">
         <h2 className="text-h2 mb-10 lg:mb-20">{content?.headline}</h2>
         <Swiper
           modules={[Navigation, Pagination]}
           spaceBetween={10}
           slidesPerView={1}
-          className="aspect-[2/1] mb-20"
+          className="aspect-[2/1] mb-20 rounded-normal"
           ref={swiperRef}
           onSlideChange={(swiper) => {
             setCurrentIndex(swiper.activeIndex);
@@ -89,7 +90,7 @@ export default function Posts_5({ content }: { content: Content }) {
               }}
               className={cn("text-black", currentIndex !== index && "opacity-30")}
             >
-              <Dot className="size-3 lg:size-4" />
+              <Dot className="size-3" />
             </button>
           ))}
         </div>
