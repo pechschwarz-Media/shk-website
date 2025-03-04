@@ -11,6 +11,7 @@ const Components = {
   cta_51: dynamic(() => import("@/components/custom/CTA/51")),
   layout_478: dynamic(() => import("@/components/custom/Layout/478")),
   layout_396: dynamic(() => import("@/components/custom/Layout/396")),
+  layout_396_2: dynamic(() => import("@/components/custom/Layout/396_2")),
   layout_36: dynamic(() => import("@/components/custom/Layout/36")),
   logo_3: dynamic(() => import("@/components/custom/Logo/3")),
   layout_228: dynamic(() => import("@/components/custom/Layout/228")),

@@ -16,7 +16,7 @@ export default async function Logo_3({ content }: { content: Content }) {
   return (
     <Section dataComponent="Logo_3" settings={content?.settings}>
       <div className="flex items-center overflow-hidden">
-        <div className="flex shrink-0 animate-logos w-full justify-between items-center">
+        <div className="flex shrink-0 animate-logos w-[150%] justify-between items-center">
           {Array(2)
             .fill(logos)
             .flat()

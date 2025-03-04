@@ -40,6 +40,7 @@ const config: Config = {
       h5: "1.5rem",
       h6: "1.25rem",
       scrolltext: "clamp(1.5rem, 1.1538rem + 1.9231vw, 2.5rem)",
+      boxNumber: "clamp(1.5625rem, 1.25rem + 1vw, 2rem)",
     },
     extend: {
       colors: {
@@ -69,7 +70,7 @@ const config: Config = {
       keyframes: {
         "right-to-left": {
           "0%": {
-            transform: "translateX(20%)",
+            transform: "translateX(0)",
           },
           "100%": {
             transform: "translateX(-50%)",

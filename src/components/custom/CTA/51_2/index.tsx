@@ -68,8 +68,6 @@ export default function CTA_51_2({
     { key: "so", label: "Sonntag" },
   ];
 
-  console.log(formatTime(openingHoursEnergie[`energie_open_do_start`]));
-
   return (
     <Section dataComponent="CTA_51_2" settings={content.setting}>
       <div className="container">
