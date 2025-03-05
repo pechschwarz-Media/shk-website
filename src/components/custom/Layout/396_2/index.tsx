@@ -1,9 +1,11 @@
-import Section from '@/components/static/Section';
-import { AcfLink, Media, Settings } from '@/lib/types';
-import Image from 'next/image';
-import Link from 'next/link';
+import Button from "@/components/static/Button";
+import Section from "@/components/static/Section";
+import { AcfLink, Media, Settings } from "@/lib/types";
+import Image from "next/image";
+import Link from "next/link";
 
 type Content = {
+    icon: Media;
     topline: string;
     headline: string;
     boxes: {
@@ -12,6 +14,7 @@ type Content = {
         text: string;
         button: AcfLink;
     }[];
+    button: AcfLink;
     settings: Settings;
 };
 
@@ -22,7 +25,9 @@ export default function Layout_396_2({ content }: { content: Content }) {
                 <div className="container">
                     <div className="max-w-2xl mx-auto text-center">
                         <div className="mb-4 text-blue">{content?.topline}</div>
-                        <h2 className="text-h2 leading-tight font-headline mb-8 text-blue">{content?.headline}</h2>
+                        <h2 className="text-h2 leading-tight font-headline mb-8 text-blue">
+                            {content?.headline}
+                        </h2>
                     </div>
                 </div>
             </div>
@@ -34,9 +39,21 @@ export default function Layout_396_2({ content }: { content: Content }) {
                                 <div className="bg-gray-medium p-8 rounded-xl flex flex-col w-full h-full">
                                     <div>
                                         <div className="text-boxNumber bg-blue text-white size-12 inline-flex items-center justify-center rounded-xl leading-none mb-6">
-                                            {index + 1}
+                                            {box?.icon?.url ? (
+                                                <Image
+                                                    src={box?.icon?.url}
+                                                    alt={box?.icon?.alt}
+                                                    width={box?.icon?.width}
+                                                    height={box?.icon?.height}
+                                                    className="size-full p-1"
+                                                />
+                                            ) : (
+                                                index + 1
+                                            )}
                                         </div>
-                                        <h6 className="text-h6 leading-tight font-headline text-blue mb-4 hyphens-auto">{box?.title}</h6>
+                                        <h6 className="text-h6 leading-tight font-headline text-blue mb-4 hyphens-auto">
+                                            {box?.title}
+                                        </h6>
                                     </div>
 
                                     <p className="text-gray">{box?.text}</p>
@@ -45,6 +62,13 @@ export default function Layout_396_2({ content }: { content: Content }) {
                         );
                     })}
                 </div>
+                {content?.button && (
+                    <div className="flex justify-center">
+                        <Button as="link" variant="blueFilled" link={content?.button}>
+                            {content?.button.title}
+                        </Button>
+                    </div>
+                )}
             </div>
         </Section>
     );
