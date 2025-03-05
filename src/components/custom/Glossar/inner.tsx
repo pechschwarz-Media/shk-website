@@ -8,6 +8,7 @@ import parse from 'html-react-parser';
 import { useState } from 'react';
 import { Waypoint } from 'react-waypoint';
 import { Link, Element } from 'react-scroll';
+import { InView } from 'react-intersection-observer';
 
 type Content = {
     headline: string;
@@ -70,12 +71,15 @@ export default function GlossarInner({ glossar, content }: { glossar: GlossarTyp
                         {Object.keys(entries)?.map((entry, index) => {
                             return (
                                 <Element name={`scroll-${entry}`} key={index}>
-                                    <Waypoint
-                                        onEnter={() => {
-                                            setCurrentIndex(index);
-                                        }}
-                                        bottomOffset="60%"
+                                    <InView
+                                        as="section"
                                         key={index}
+                                        threshold={1}
+                                        onChange={(inView) => {
+                                            if (inView) {
+                                                setCurrentIndex(index);
+                                            }
+                                        }}
                                     >
                                         <div className="flex flex-col md:flex-row">
                                             <div className="md:w-80 text-blue font-headline leading-none text-h1 mb-8 md:mb-0">
@@ -95,7 +99,7 @@ export default function GlossarInner({ glossar, content }: { glossar: GlossarTyp
                                                 })}
                                             </div>
                                         </div>
-                                    </Waypoint>
+                                    </InView>
                                 </Element>
                             );
                         })}

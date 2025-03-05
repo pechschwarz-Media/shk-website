@@ -38,7 +38,7 @@ export default async function Layout_223({ content }: { content: Content }) {
                         {content?.list?.map((item, index) => (
                             <div className="grid grid-cols-[2.25rem_auto] gap-x-6 gap-y-4" key={index}>
                                 <RoundCheck className="size-9 text-energiesparwelt" />
-                                <h6 key={index} className="text-h6 items-center self-center">
+                                <h6 key={index} className="text-h6 font-headline leading-tight text-blue items-center self-center">
                                     {item?.text}
                                 </h6>
                                 {item?.subText && <Text className="prose-p:text-gray w-full lg:w-1/2 col-start-2">{parse(item?.subText)}</Text>}

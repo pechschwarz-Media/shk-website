@@ -75,7 +75,7 @@ export default function CTA_51_2({
         <Section dataComponent="CTA_51_2" settings={content.setting}>
             <div className="container">
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                    <div className="h-[700px]">
+                    <div className="h-[400px] lg:h-[700px]">
                         <APIProvider apiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY || ''}>
                             <Map
                                 style={{ width: '100%', height: '100%' }}

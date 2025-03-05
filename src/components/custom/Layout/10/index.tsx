@@ -17,15 +17,15 @@ export default async function Layout_10({ content }: { content: Content }) {
     return (
         <Section dataComponent="Layout_10" settings={content?.settings}>
             <div className="container">
-                <div className="grid md:grid-cols-12 gap-8 items-center">
-                    <div className="md:col-span-6 xl:col-span-6">
-                        <div className="mb-4">{content?.topline}</div>
+                <div className="grid lg:grid-cols-12 gap-6 items-center">
+                    <div className="lg:col-span-6 xl:col-span-6">
+                        <div className="mb-4 text-blue">{content?.topline}</div>
                         <h2 className="text-h2 leading-tight font-headline mb-6 text-blue">{content?.headline}</h2>
-                        <Text className="prose-p:text-gray">{parse(content?.text)}</Text>
-                        <div className="grid grid-cols-1 lg:grid-cols-2 auto-rows-auto gap-6 mt-8">
+                        <Text className="prose-p:text-gray text-large">{parse(content?.text)}</Text>
+                        <div className="grid grid-cols-1 lg:grid-cols-2 auto-rows-auto gap-6 mt-6 lg:mt-14">
                             {content?.boxes?.map((box, index) => (
                                 <div key={index}>
-                                    <div className="size-12 bg-gray-medium p-2 rounded-xl">
+                                    <div className="size-12 bg-gray-medium p-2 rounded-xl mb-4">
                                         <Image
                                             src={box?.icon?.url}
                                             alt={box?.icon?.alt}
@@ -34,13 +34,13 @@ export default async function Layout_10({ content }: { content: Content }) {
                                             className="size-full object-cover"
                                         />
                                     </div>
-                                    <h6 className="text-h6">{box?.headline}</h6>
+                                    <h6 className="text-h6 font-headline leading-tight text-bold text-blue mb-4">{box?.headline}</h6>
                                     <Text className="prose-p:text-gray">{parse(box?.text)}</Text>
                                 </div>
                             ))}
                         </div>
                     </div>
-                    <div className="md:col-span-5 md:col-start-8 rounded-normal overflow-hidden">
+                    <div className="lg:col-span-5 lg:col-start-8 rounded-normal overflow-hidden">
                         {content?.media?.type === 'image' && (
                             <Image
                                 src={content?.media?.url}

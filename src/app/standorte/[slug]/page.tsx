@@ -43,9 +43,9 @@ export default async function Location({ params }: { params: Promise<{ slug: str
     const location = await getLocationData({ slug });
 
     return (
-        <main className={cn(location?.acf?.channel === 'customer' && 'bg-customer-bg', location?.acf?.channel === 'partner' && 'bg-partner-bg')}>
+        <main className={cn(location?.acf?.channel === 'customer' && '', location?.acf?.channel === 'partner' && 'bg-partner-bg')}>
             <Header channel="customer" />
-            <ComponentRenderer content={location?.acf?.content} locationData={location} />
+            <ComponentRenderer content={location?.acf?.content} channel={location?.acf?.channel} locationData={location} />
         </main>
     );
 }
