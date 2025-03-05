@@ -1,9 +1,4 @@
-import { notFound } from 'next/navigation';
-import getPagesUris from '@/lib/queries/pages/getPagesUris';
-import getPageId from '@/lib/queries/pages/getPageId';
-import getPageMeta from '@/lib/queries/pages/getPageMeta';
 import ComponentRenderer from '@/lib/ComponentRenderer';
-import getPage from '@/lib/queries/pages/getPage';
 import Header from '@/components/layout/Header';
 import { cn } from '@/lib/utils';
 import getLocationsSlugs from '@/lib/queries/locations/getLocationsSlugs';
