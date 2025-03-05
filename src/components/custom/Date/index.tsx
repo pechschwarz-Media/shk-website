@@ -1,0 +1,42 @@
+'use client';
+
+import Section from '@/components/static/Section';
+import Text from '@/components/static/Text';
+import { Settings } from '@/lib/types';
+import IframeResizer from '@iframe-resizer/react';
+import parse from 'html-react-parser';
+
+type Content = {
+    topline: string;
+    headline: string;
+    text: string;
+    setting: Settings;
+};
+
+export default function Date({ content }: { content: Content }) {
+    return (
+        <Section dataComponent="Date" settings={content?.setting}>
+            <div className="mb-14 pt-20">
+                <div className="container">
+                    <div className="max-w-2xl">
+                        <div className="mb-4 text-blue">{content?.topline}</div>
+                        <h1 className="text-h2 font-headline leading-tight text-blue font-light mb-4">{content?.headline}</h1>
+                        <Text className="prose-p:text-gray">{parse(content?.text)}</Text>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div className="container">
+                    <div className="bg-white rounded-2xl p-8">
+                        <IframeResizer
+                            license="1mjb12zhxy1-1ov9n7qh0ct-263od7bccj7"
+                            id="calenso-booking-widget1"
+                            className="w-full"
+                            src="https://smartwidget.calenso.com/?partner_uuid=0d6d25e4-aa2d-49e2-9a59-f42bab72afc9&widget_uuid=d7446074-507c-4806-abed-6ae5e5082925&refresh=1"
+                        />
+                    </div>
+                </div>
+            </div>
+        </Section>
+    );
+}
