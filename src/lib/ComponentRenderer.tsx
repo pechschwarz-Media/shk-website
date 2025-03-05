@@ -22,6 +22,7 @@ const Components = {
     cta_51_3: dynamic(() => import('@/components/custom/CTA/51_3')),
     contact_6: dynamic(() => import('@/components/custom/Contact/6')),
     glossar: dynamic(() => import('@/components/custom/Glossar')),
+    layout_350: dynamic(() => import('@/components/custom/Layout/350')),
 };
 
 export default function ComponentRenderer({ content, locationData }: { content?: any; locationData?: LocationData }) {

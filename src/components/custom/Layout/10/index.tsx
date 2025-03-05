@@ -22,7 +22,6 @@ export default async function Layout_10({ content }: { content: Content }) {
                         <div className="mb-4">{content?.topline}</div>
                         <h2 className="text-h2 leading-tight font-headline mb-6 text-blue">{content?.headline}</h2>
                         <Text className="prose-p:text-gray">{parse(content?.text)}</Text>
-
                         <div className="grid grid-cols-1 lg:grid-cols-2 auto-rows-auto gap-6 mt-8">
                             {content?.boxes?.map((box, index) => (
                                 <div key={index}>
