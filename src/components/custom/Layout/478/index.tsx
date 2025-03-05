@@ -23,12 +23,13 @@ export default function Layout_478({ content }: { content: Content }) {
                 <div className="grid md:grid-cols-12 gap-6 items-center">
                     {content?.invert === true && (
                         <>
-                            <div className="md:col-span-6 xl:col-span-5">
+                            <div className="md:col-span-6 xl:col-span-5 rounded-normal overflow-hidden aspect-square">
                                 <Image
                                     src={content?.image?.url}
                                     alt={content?.image?.alt}
                                     width={content?.image?.width}
                                     height={content?.image?.height}
+                                    className="size-full object-cover"
                                 />
                             </div>
                             <div className="md:col-span-6 md:col-start-7">
@@ -37,14 +38,16 @@ export default function Layout_478({ content }: { content: Content }) {
                                     {content?.headline}
                                 </h2>
                                 <Text className="prose-p:text-gray">{parse(content?.text)}</Text>
-                                <Button
-                                    as="link"
-                                    variant="blueFilled"
-                                    link={content?.button}
-                                    className="mt-6"
-                                >
-                                    {content?.button?.title}
-                                </Button>
+                                {content?.button?.title && (
+                                    <Button
+                                        as="link"
+                                        variant="blueFilled"
+                                        link={content?.button}
+                                        className="mt-6"
+                                    >
+                                        {content?.button?.title}
+                                    </Button>
+                                )}
                             </div>
                         </>
                     )}
@@ -57,21 +60,24 @@ export default function Layout_478({ content }: { content: Content }) {
                                     {content?.headline}
                                 </h2>
                                 <Text className="prose-p:text-gray">{parse(content?.text)}</Text>
-                                <Button
-                                    as="link"
-                                    variant="blueFilled"
-                                    link={content?.button}
-                                    className="mt-6"
-                                >
-                                    {content?.button?.title}
-                                </Button>
+                                {content?.button?.title && (
+                                    <Button
+                                        as="link"
+                                        variant="blueFilled"
+                                        link={content?.button}
+                                        className="mt-6"
+                                    >
+                                        {content?.button?.title}
+                                    </Button>
+                                )}
                             </div>
-                            <div className="md:col-span-6 md:col-start-8">
+                            <div className="md:col-span-6 md:col-start-8 rounded-normal overflow-hidden aspect-square">
                                 <Image
                                     src={content?.image?.url}
                                     alt={content?.image?.alt}
                                     width={content?.image?.width}
                                     height={content?.image?.height}
+                                    className="size-full object-cover"
                                 />
                             </div>
                         </>

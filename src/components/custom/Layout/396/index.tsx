@@ -1,7 +1,7 @@
-import Section from '@/components/static/Section';
-import { AcfLink, Media, Settings } from '@/lib/types';
-import Image from 'next/image';
-import Link from 'next/link';
+import Section from "@/components/static/Section";
+import { AcfLink, Media, Settings } from "@/lib/types";
+import Image from "next/image";
+import Link from "next/link";
 
 type Content = {
     topline: string;
@@ -22,7 +22,9 @@ export default function Layout_396({ content }: { content: Content }) {
                 <div className="container">
                     <div className="max-w-2xl mx-auto text-center">
                         <div className="mb-4">{content?.topline}</div>
-                        <h2 className="text-h2 leading-tight font-headline mb-8 text-blue">{content?.headline}</h2>
+                        <h2 className="text-h2 leading-tight font-headline mb-8 text-blue">
+                            {content?.headline}
+                        </h2>
                     </div>
                 </div>
             </div>
@@ -39,7 +41,9 @@ export default function Layout_396({ content }: { content: Content }) {
                                         height={box?.icon?.height}
                                         className="h-20 w-auto mb-8"
                                     />
-                                    <h4 className="text-h4 leading-tight font-headline text-blue mb-8 hyphens-auto">{box?.title}</h4>
+                                    <h4 className="text-h4 leading-tight font-headline text-blue mb-8 hyphens-auto">
+                                        {box?.title}
+                                    </h4>
                                     <p className="text-gray">{box?.text}</p>
                                     <Link
                                         href={box?.button?.url}
@@ -54,7 +58,11 @@ export default function Layout_396({ content }: { content: Content }) {
                                             stroke="currentColor"
                                             className="size-4"
                                         >
-                                            <path strokeLinecap="round" strokeLinejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+                                            <path
+                                                strokeLinecap="round"
+                                                strokeLinejoin="round"
+                                                d="m8.25 4.5 7.5 7.5-7.5 7.5"
+                                            />
                                         </svg>
                                     </Link>
                                 </div>
