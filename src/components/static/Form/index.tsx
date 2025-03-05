@@ -148,6 +148,11 @@ export function Form({ form }: FormProps) {
                     {form?.button?.text}
                 </Button>
                 {message && <div className="bg-green-200 text-green-800 p-5 rounded-lg mt-6">{message}</div>}
+                {valid === false && (
+                    <div className="bg-red-200 text-red-800 p-5 rounded-lg mt-6">
+                        Formular konnte nicht gesendet werden. Bitte probieren Sie es erneut.
+                    </div>
+                )}
             </div>
         </form>
     );
