@@ -9,7 +9,7 @@ import { useRef } from "react";
 import { motion, useScroll, useTransform } from "motion/react";
 import { useMediaQuery } from "react-responsive";
 import Text from "@/components/static/Text";
-
+import { cn } from "@/lib/utils";
 type Content = {
     topline: string;
     headline: string;
@@ -20,57 +20,45 @@ type Content = {
 };
 
 export default function Layout_421({ content }: { content: Content }) {
-    const component = useRef<HTMLDivElement>(null);
-
-    const { scrollYProgress } = useScroll({
-        target: component,
-        offset: ["start center", "center center"],
-    });
-
-    const opacity = useTransform(scrollYProgress, [0, 0.7], [1, 1]);
-    const scale = useTransform(scrollYProgress, [0, 0.7], [1, 0.95]);
-
-    const translateX1Mobile = useTransform(scrollYProgress, [0, 1], ["0%", "130%"]);
-    const translateY1Mobile = useTransform(scrollYProgress, [0, 1], ["0%", "125%"]);
-    const translateX2Mobile = useTransform(scrollYProgress, [0, 1], ["0%", "-130%"]);
-    const translateY2Mobile = useTransform(scrollYProgress, [0, 1], ["0%", "13%"]);
-    const translateX3Mobile = useTransform(scrollYProgress, [0, 1], ["0%", "130%"]);
-    const translateY3Mobile = useTransform(scrollYProgress, [0, 1], ["0%", "13%"]);
-    const translateX4Mobile = useTransform(scrollYProgress, [0, 1], ["0%", "-130%"]);
-    const translateY4Mobile = useTransform(scrollYProgress, [0, 1], ["0%", "125%"]);
-
-    const translateX1Desktop = useTransform(scrollYProgress, [0, 1], ["70%", "160%"]);
-    const translateY1Desktop = useTransform(scrollYProgress, [0, 1], ["140%", "180%"]);
-    const translateX2Desktop = useTransform(scrollYProgress, [0, 1], ["-120%", "-150%"]);
-    const translateY2Desktop = useTransform(scrollYProgress, [0, 1], ["40%", "60%"]);
-    const translateX3Desktop = useTransform(scrollYProgress, [0, 1], ["120%", "150%"]);
-    const translateY3Desktop = useTransform(scrollYProgress, [0, 1], ["40%", "60%"]);
-    const translateX4Desktop = useTransform(scrollYProgress, [0, 1], ["-70%", "-160%"]);
-    const translateY4Desktop = useTransform(scrollYProgress, [0, 1], ["140%", "180%"]);
+    const ref = useRef<HTMLDivElement>(null);
 
     const isMobile = useMediaQuery({ query: "(max-width: 768px)" });
+    const { scrollYProgress } = useScroll({ target: ref });
 
-    const imageTransforms = isMobile
-        ? [
-              {},
-              { translateX: translateX1Mobile, translateY: translateY1Mobile },
-              { translateX: translateX2Mobile, translateY: translateY2Mobile },
-              { translateX: translateX3Mobile, translateY: translateY3Mobile },
-              { translateX: translateX4Mobile, translateY: translateY4Mobile },
-          ]
-        : [
-              {},
-              { translateX: translateX1Desktop, translateY: translateY1Desktop },
-              { translateX: translateX2Desktop, translateY: translateY2Desktop },
-              { translateX: translateX3Desktop, translateY: translateY3Desktop },
-              { translateX: translateX4Desktop, translateY: translateY4Desktop },
-          ];
+    const containerMotion = {
+        opacity: useTransform(scrollYProgress, [0, 0.5], [1, 0]),
+        scale: useTransform(scrollYProgress, [0, 0.5], [1, 0.95]),
+    };
+
+    const CreateTransform = (x: string[], y: string[]) => ({
+        translateX: useTransform(scrollYProgress, [0, 1], x),
+        translateY: useTransform(scrollYProgress, [0, 1], y),
+    });
+
+    const imageTransforms = [
+        {},
+        isMobile
+            ? CreateTransform(["13%", "90%"], ["12%", "80%"])
+            : CreateTransform(["0%", "100%"], ["0%", "60%"]),
+        isMobile
+            ? CreateTransform(["-12%", "-80%"], ["-12%", "-80%"])
+            : CreateTransform(["0%", "-50%"], ["0%", "-90%"]),
+        isMobile
+            ? CreateTransform(["17.5%", "120%"], ["-6%", "-40%"])
+            : CreateTransform(["0%", "140%"], ["0%", "-40%"]),
+        isMobile
+            ? CreateTransform(["-17.5%", "-120%"], ["9%", "60%"])
+            : CreateTransform(["0%", "-140%"], ["0%", "60%"]),
+    ];
 
     return (
         <Section dataComponent="Layout_421" settings={content?.settings}>
-            <div ref={component}>
-                <motion.div className="sticky z-10 top-1/2" style={{ scale, opacity }}>
-                    <div className="container flex flex-col items-center text-center">
+            <div ref={ref}>
+                <motion.div
+                    className="sticky top-[20%] z-0 mx-auto flex min-h-0 items-center justify-center md:min-h-[auto]"
+                    style={containerMotion}
+                >
+                    <div className="container flex flex-col items-center text-center w-1/2">
                         <div className="mb-4">{content?.topline}</div>
                         <h2 className="text-h2 leading-tight font-headline mb-8 text-blue">
                             {content?.headline}
@@ -83,27 +71,31 @@ export default function Layout_421({ content }: { content: Content }) {
                         </Button>
                     </div>
                 </motion.div>
-                <div className="relative z-0 -mt-12 lg:-mt-[20rem] top-[100%] flex flex-col justify-center h-[90vh] sm:h-[80vh] md:h-[80vh] lg:h-[100vh] xl:h-[100vh] lg:justify-normal overflow-hidden">
-                    <div className="relative flex size-full items-start justify-center">
-                        {content?.images?.map((image, index) => {
-                            return (
-                                <motion.div
-                                    className="absolute w-full h-[20vw] max-w-[15vw] md:max-w-[25vw] lg:max-w-[18vw] translate-x-0 translate-y-[100%]"
-                                    style={imageTransforms[index]}
-                                    key={index}
-                                >
-                                    <Image
-                                        src={image?.image?.url || ""}
-                                        width={image?.image?.width || 500}
-                                        height={image?.image?.height || 800}
-                                        alt={image?.image?.alt || ""}
-                                        className="size-full object-cover rounded-[20px]"
-                                    />
-                                </motion.div>
-                            );
-                        })}
+
+                <div className="sticky top-0 z-10 -mt-20 flex h-[100svh] flex-col justify-center sm:mt-0 md:h-[100svh] lg:h-[120vh] lg:justify-normal">
+                    <div className="relative flex size-full items-center justify-center overflow-hidden">
+                        {content?.images?.map((image, index) => (
+                            <motion.div
+                                key={index}
+                                className={cn(
+                                    "absolute size-[500px] rounded-normal overflow-hidden",
+                                    imageTransforms[index]
+                                )}
+                                style={imageTransforms[index]}
+                            >
+                                <Image
+                                    src={image?.image?.url}
+                                    alt={image?.image?.alt}
+                                    width={image?.image?.width}
+                                    height={image?.image?.height}
+                                    className="object-cover size-full"
+                                />
+                            </motion.div>
+                        ))}
                     </div>
                 </div>
+
+                <div className="absolute inset-0 -z-10 mt-[80vh] sm:mt-[100vh]" />
             </div>
         </Section>
     );
