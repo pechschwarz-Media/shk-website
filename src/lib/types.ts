@@ -246,3 +246,12 @@ export type Form = {
         text: string;
     };
 };
+
+export type Glossar = {
+    title: {
+        rendered: string;
+    };
+    acf: {
+        description: string;
+    };
+};
