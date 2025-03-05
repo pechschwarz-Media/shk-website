@@ -1,7 +1,7 @@
-import Section from "@/components/static/Section";
-import { AcfLink, Media, Settings } from "@/lib/types";
-import Image from "next/image";
-import Link from "next/link";
+import Section from '@/components/static/Section';
+import { AcfLink, Media, Settings } from '@/lib/types';
+import Image from 'next/image';
+import Link from 'next/link';
 
 type Content = {
     topline: string;
@@ -21,10 +21,8 @@ export default function Layout_396_2({ content }: { content: Content }) {
             <div className="mb-14">
                 <div className="container">
                     <div className="max-w-2xl mx-auto text-center">
-                        <div className="mb-4">{content?.topline}</div>
-                        <h2 className="text-h2 leading-tight font-headline mb-8 text-blue">
-                            {content?.headline}
-                        </h2>
+                        <div className="mb-4 text-blue">{content?.topline}</div>
+                        <h2 className="text-h2 leading-tight font-headline mb-8 text-blue">{content?.headline}</h2>
                     </div>
                 </div>
             </div>
@@ -38,9 +36,7 @@ export default function Layout_396_2({ content }: { content: Content }) {
                                         <div className="text-boxNumber bg-blue text-white size-12 inline-flex items-center justify-center rounded-xl leading-none mb-6">
                                             {index + 1}
                                         </div>
-                                        <h6 className="text-h6 leading-tight font-headline text-blue mb-4 hyphens-auto">
-                                            {box?.title}
-                                        </h6>
+                                        <h6 className="text-h6 leading-tight font-headline text-blue mb-4 hyphens-auto">{box?.title}</h6>
                                     </div>
 
                                     <p className="text-gray">{box?.text}</p>

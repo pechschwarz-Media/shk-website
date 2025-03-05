@@ -8,6 +8,8 @@ import { useEffect, useState } from 'react';
 import { animate, AnimatePresence, motion, stagger } from 'motion/react';
 import { AcfLink, CustomerMenu } from '@/lib/types';
 import Logo from '@/components/static/Logo';
+import { setCookie } from 'cookies-next/client';
+import { useRouter } from 'next/navigation';
 
 export default function HeaderInner({
     channel,
@@ -21,6 +23,7 @@ export default function HeaderInner({
     const [currentMenuItem, setCurrentMenuItem] = useState(-1);
     const [toggle, setToggle] = useState(false);
     const [menuOpen, setMenuOpen] = useState(false);
+    const [changeChannel, setChangeChannel] = useState(false);
 
     useEffect(() => {
         if (toggle) {
@@ -38,6 +41,8 @@ export default function HeaderInner({
             }
         }
     }, [menuOpen]);
+
+    const router = useRouter();
 
     return (
         <>
@@ -140,7 +145,7 @@ export default function HeaderInner({
                                 </ul>
                             </nav>
                         </div>
-                        <div className="flex item-center gap-2">
+                        <div className="flex items-center gap-2">
                             <button
                                 className="lg:hidden size-12 rounded-full border border-blue bg-gray-light relative"
                                 onClick={() => {
@@ -184,6 +189,26 @@ export default function HeaderInner({
                             <Button as="link" link={links?.appointment} variant="blueFilled">
                                 Besichtigung
                             </Button>
+                            <button
+                                className="hidden lg:flex items-center gap-2 ml-4"
+                                onClick={() => {
+                                    setChangeChannel(true);
+                                    setCookie('channel', channel === 'customer' ? 'partner' : 'customer');
+                                    router.push(channel === 'customer' ? '/partner/' : '/kunden/');
+                                }}
+                            >
+                                <label className="text-blue cursor-pointer">{channel === 'customer' ? 'Kunde' : 'Partner'}</label>
+                                <div className={cn('block relative h-8 w-14 rounded-full', channel === 'customer' ? 'bg-[#E0FBFF]' : 'bg-[#FFF7F3]')}>
+                                    <span
+                                        className={cn(
+                                            'absolute top-1/2 -translate-y-1/2 size-6 rounded-full block transition-all',
+                                            channel === 'customer' ? 'bg-customer left-1' : 'bg-partner left-7',
+                                            changeChannel && channel === 'customer' && 'left-7',
+                                            changeChannel && channel === 'partner' && 'left-1'
+                                        )}
+                                    ></span>
+                                </div>
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -269,6 +294,29 @@ export default function HeaderInner({
                             </>
                         )}
                     </ul>
+                    <div className="mt-4 py-4 border-t border-dashed border-t-gray/30">
+                        <div className="font-bold text-small mb-2">Kanal auswählen</div>
+                        <button
+                            className="flex items-center gap-2"
+                            onClick={() => {
+                                setChangeChannel(true);
+                                setCookie('channel', channel === 'customer' ? 'partner' : 'customer');
+                                router.push(channel === 'customer' ? '/partner/' : '/kunden/');
+                            }}
+                        >
+                            <label className="cursor-pointer">{channel === 'customer' ? 'Kunde' : 'Partner'}</label>
+                            <div className={cn('block relative h-8 w-14 rounded-full', channel === 'customer' ? 'bg-[#E0FBFF]' : 'bg-[#FFF7F3]')}>
+                                <span
+                                    className={cn(
+                                        'absolute top-1/2 -translate-y-1/2 size-6 rounded-full block transition-all',
+                                        channel === 'customer' ? 'bg-customer left-1' : 'bg-partner left-7',
+                                        changeChannel && channel === 'customer' && 'left-7',
+                                        changeChannel && channel === 'partner' && 'left-1'
+                                    )}
+                                ></span>
+                            </div>
+                        </button>
+                    </div>
                 </nav>
             </div>
         </>
