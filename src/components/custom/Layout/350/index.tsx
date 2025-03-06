@@ -30,27 +30,55 @@ export default function Layout_350({ content, channel }: { content: Content; cha
             <div className="sticky top-24 bottom-0">
                 <div className="container">
                     <div className="flex justify-between items-center">
-                        <nav className="w-full md:w-auto inline-block bg-gray-medium overflow-hidden p-2 rounded-xl">
+                        <nav
+                            className={cn(
+                                'w-full md:w-auto inline-block bg-gray-medium overflow-hidden p-2 rounded-xl',
+                                content?.sections?.length > 6 && channel === 'customer' && 'bg-customer text-white',
+                                content?.sections?.length > 6 && channel === 'partner' && 'bg-partner text-white',
+                                channel === 'customer' && 'max-xl:bg-customer text-white',
+                                channel === 'partner' && 'max-xl:bg-partner text-white'
+                            )}
+                        >
                             {content?.sections?.length < 7 ? (
-                                <ul className="flex gap-x-1">
-                                    {content?.sections?.map((section, index) => {
-                                        return (
-                                            <li key={index}>
-                                                <Link
-                                                    to={`layout350-${index}`}
-                                                    offset={-180}
-                                                    className={cn(
-                                                        'flex items-center h-10 justify-center rounded-lg px-5  cursor-pointer',
-                                                        index === currentIndex && channel === 'customer' && 'bg-customer text-white',
-                                                        index === currentIndex && channel === 'partner' && 'bg-partner text-white'
-                                                    )}
-                                                >
+                                <>
+                                    <select
+                                        className="h-10 xl:hidden bg-transparent outline-none w-full md:w-80"
+                                        onChange={(e) => {
+                                            e.preventDefault();
+
+                                            scroller.scrollTo(e.target.value, {
+                                                offset: -180,
+                                            });
+                                        }}
+                                    >
+                                        {content?.sections?.map((section, index) => {
+                                            return (
+                                                <option key={index} value={`layout350-${index}`}>
                                                     {section?.title}
-                                                </Link>
-                                            </li>
-                                        );
-                                    })}
-                                </ul>
+                                                </option>
+                                            );
+                                        })}
+                                    </select>
+                                    <ul className="gap-x-1 hidden xl:flex">
+                                        {content?.sections?.map((section, index) => {
+                                            return (
+                                                <li key={index}>
+                                                    <Link
+                                                        to={`layout350-${index}`}
+                                                        offset={-180}
+                                                        className={cn(
+                                                            'flex items-center h-10 justify-center rounded-lg px-5  cursor-pointer text-black',
+                                                            index === currentIndex && channel === 'customer' && 'bg-customer text-white',
+                                                            index === currentIndex && channel === 'partner' && 'bg-partner text-white'
+                                                        )}
+                                                    >
+                                                        {section?.title}
+                                                    </Link>
+                                                </li>
+                                            );
+                                        })}
+                                    </ul>
+                                </>
                             ) : (
                                 <select
                                     className="h-10 bg-transparent outline-none w-full md:w-80"

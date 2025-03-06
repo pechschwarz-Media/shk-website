@@ -1,6 +1,7 @@
 import Logo from '@/components/static/Logo';
 import getOptions from '@/lib/queries/options/getOptions';
 import Link from 'next/link';
+import Copyright from './copyright';
 
 export default async function Footer() {
     const menus = await getOptions();
@@ -33,7 +34,7 @@ export default async function Footer() {
                         <div>
                             <Logo className="w-28 md:w-40" />
                         </div>
-                        <div className="text-small">{new Date().getFullYear()} SHK. All rights reserved.</div>
+                        <Copyright />
                     </div>
                 </div>
             </div>
