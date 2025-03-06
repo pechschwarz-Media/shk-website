@@ -2,9 +2,8 @@
 
 import Section from "@/components/static/Section";
 import Text from "@/components/static/Text";
-import { AcfLink, Media, Settings } from "@/lib/types";
+import { Media, Settings } from "@/lib/types";
 import parse from "html-react-parser";
-import Button from "@/components/static/Button";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
 import { useEffect, useRef, useState } from "react";
@@ -35,7 +34,10 @@ export default function Layout_478({ content }: { content: Content }) {
     const height = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
 
     return (
-        <Section dataComponent="Layout_478" settings={content?.settings}>
+        <Section
+            dataComponent="Layout_478"
+            settings={{ ...content.settings, preventAnimation: true }}
+        >
             <div className="mb-12 md:mb-18 lg:mb-20">
                 <div className="container">
                     <div className="mx-auto text-center">
