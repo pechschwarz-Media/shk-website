@@ -107,12 +107,12 @@ export default function HeaderInner({
                                                                         style={{ x: '-50%' }}
                                                                         className="absolute top-full max-w-full left-1/2 mt-4 -translate-x-1/2 bg-light/80 backdrop-blur p-6 lg:p-8 rounded-xl"
                                                                     >
-                                                                        <div className="flex flex-col lg:flex-row gap-8">
+                                                                        <div className="flex flex-row w-full gap-8">
                                                                             {menuItem?.submenu?.map((subMenuItem, index) => {
                                                                                 return (
                                                                                     <Link
                                                                                         href={subMenuItem?.link?.url}
-                                                                                        className="lg:w-56 group"
+                                                                                        className="lg:w-56 flex-1 group"
                                                                                         key={index}
                                                                                     >
                                                                                         <div className="aspect-[4/3] relative rounded-xl overflow-hidden mb-5">
@@ -123,10 +123,10 @@ export default function HeaderInner({
                                                                                                 className="group-hover:scale-110 transition-all"
                                                                                             />
                                                                                         </div>
-                                                                                        <div className="text-headline leading-tight text-h5 text-blue mb-1">
+                                                                                        <div className="text-headline leading-tight text-large text-blue mb-1">
                                                                                             {subMenuItem?.link?.title}
                                                                                         </div>
-                                                                                        <div className="text-blue">
+                                                                                        <div className="text-blue text-small hyphens-auto">
                                                                                             <p>{subMenuItem?.description}</p>
                                                                                         </div>
                                                                                     </Link>
@@ -262,21 +262,14 @@ export default function HeaderInner({
                                                                 exit={{ opacity: 0 }}
                                                                 className="max-w-full bg-light/80 lg:backdrop-blur p-6 rounded-xl mb-5"
                                                             >
-                                                                <div className="flex flex-col lg:flex-row gap-8">
+                                                                <div className="flex flex-col lg:flex-row gap-6">
                                                                     {menuItem?.submenu?.map((subMenuItem, index) => {
                                                                         return (
                                                                             <Link href={subMenuItem?.link?.url} key={index}>
-                                                                                <div className="aspect-[16/9] relative rounded-xl overflow-hidden mb-5">
-                                                                                    <Image
-                                                                                        src={subMenuItem?.image?.url}
-                                                                                        fill
-                                                                                        alt={subMenuItem?.image?.alt}
-                                                                                    />
-                                                                                </div>
-                                                                                <div className="text-headline leading-tight text-h5 text-blue mb-1">
+                                                                                <div className="text-headline leading-tight text-large text-blue mb-1">
                                                                                     {subMenuItem?.link?.title}
                                                                                 </div>
-                                                                                <div className="text-blue">
+                                                                                <div className="text-blue text-small">
                                                                                     <p>{subMenuItem?.description}</p>
                                                                                 </div>
                                                                             </Link>
