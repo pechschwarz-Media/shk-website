@@ -1,15 +1,15 @@
-"use client";
+'use client';
 
-import Section from "@/components/static/Section";
-import { AcfLink, Media, Settings } from "@/lib/types";
-import parse from "html-react-parser";
-import Button from "@/components/static/Button";
-import Image from "next/image";
-import { useRef } from "react";
-import { motion, useScroll, useTransform } from "motion/react";
-import { useMediaQuery } from "react-responsive";
-import Text from "@/components/static/Text";
-import { cn } from "@/lib/utils";
+import Section from '@/components/static/Section';
+import { AcfLink, Media, Settings } from '@/lib/types';
+import parse from 'html-react-parser';
+import Button from '@/components/static/Button';
+import Image from 'next/image';
+import { useRef } from 'react';
+import { motion, useScroll, useTransform } from 'motion/react';
+import { useMediaQuery } from 'react-responsive';
+import Text from '@/components/static/Text';
+import { cn } from '@/lib/utils';
 type Content = {
     topline: string;
     headline: string;
@@ -22,7 +22,7 @@ type Content = {
 export default function Layout_421({ content }: { content: Content }) {
     const ref = useRef<HTMLDivElement>(null);
 
-    const isMobile = useMediaQuery({ query: "(max-width: 768px)" });
+    const isMobile = useMediaQuery({ query: '(max-width: 768px)' });
     const { scrollYProgress } = useScroll({ target: ref });
 
     const containerMotion = {
@@ -37,35 +37,23 @@ export default function Layout_421({ content }: { content: Content }) {
 
     const imageTransforms = [
         {},
-        isMobile
-            ? CreateTransform(["13%", "90%"], ["12%", "80%"])
-            : CreateTransform(["0%", "100%"], ["0%", "60%"]),
-        isMobile
-            ? CreateTransform(["-12%", "-80%"], ["-12%", "-80%"])
-            : CreateTransform(["0%", "-50%"], ["0%", "-90%"]),
-        isMobile
-            ? CreateTransform(["17.5%", "120%"], ["-6%", "-40%"])
-            : CreateTransform(["0%", "140%"], ["0%", "-40%"]),
-        isMobile
-            ? CreateTransform(["-17.5%", "-120%"], ["9%", "60%"])
-            : CreateTransform(["0%", "-140%"], ["0%", "60%"]),
+        isMobile ? CreateTransform(['13%', '90%'], ['12%', '80%']) : CreateTransform(['0%', '100%'], ['0%', '60%']),
+        isMobile ? CreateTransform(['-12%', '-80%'], ['-12%', '-80%']) : CreateTransform(['0%', '-50%'], ['0%', '-90%']),
+        isMobile ? CreateTransform(['17.5%', '120%'], ['-6%', '-40%']) : CreateTransform(['0%', '140%'], ['0%', '-40%']),
+        isMobile ? CreateTransform(['-17.5%', '-120%'], ['9%', '60%']) : CreateTransform(['0%', '-140%'], ['0%', '60%']),
     ];
 
     return (
         <Section dataComponent="Layout_421" settings={content?.settings}>
             <div ref={ref}>
                 <motion.div
-                    className="sticky top-[20%] z-0 mx-auto flex min-h-0 items-center justify-center md:min-h-[auto]"
+                    className="sticky top-[20%] z-20 mx-auto flex min-h-0 items-center justify-center md:min-h-[auto]"
                     style={containerMotion}
                 >
                     <div className="container flex flex-col items-center text-center w-1/2">
                         <div className="mb-4">{content?.topline}</div>
-                        <h2 className="text-h2 leading-tight font-headline mb-8 text-blue">
-                            {content?.headline}
-                        </h2>
-                        <Text className="prose-p:text-gray text-center">
-                            {parse(content?.text)}
-                        </Text>
+                        <h2 className="text-h2 leading-tight font-headline mb-8 text-blue">{content?.headline}</h2>
+                        <Text className="prose-p:text-gray text-center">{parse(content?.text)}</Text>
                         <Button as="link" variant="blueFilled" link={content?.button}>
                             {content?.button?.title}
                         </Button>
@@ -77,10 +65,7 @@ export default function Layout_421({ content }: { content: Content }) {
                         {content?.images?.map((image, index) => (
                             <motion.div
                                 key={index}
-                                className={cn(
-                                    "absolute size-[500px] rounded-normal overflow-hidden",
-                                    imageTransforms[index]
-                                )}
+                                className={cn('absolute size-[500px] rounded-normal overflow-hidden', imageTransforms[index])}
                                 style={imageTransforms[index]}
                             >
                                 <Image

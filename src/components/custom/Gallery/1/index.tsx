@@ -44,7 +44,7 @@ export default function Gallery_1({ content }: { content: Content }) {
                                     <Link
                                         href={tile?.link?.url}
                                         className={cn(
-                                            'h-[300px] sm:h-[480px] md:h-[540px] lg:h-[740px] relative block overflow-hidden rounded-xl text-white p-8 md:p-12 group',
+                                            'h-[300px] sm:h-[480px] md:h-[540px] xxl:h-[740px] relative block overflow-hidden rounded-xl text-white p-8 md:p-12 group',
                                             content?.partner && '!text-dark bg-light'
                                         )}
                                         key={index}

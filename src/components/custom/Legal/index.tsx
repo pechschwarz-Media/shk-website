@@ -4,7 +4,7 @@ import parse from 'html-react-parser';
 
 export default function Legal({ text }: { text: string }) {
     return (
-        <Section dataComponent="Legal" settings={{ padding: { top: 'medium', bottom: 'medium' }, preventAnimation: false }}>
+        <Section dataComponent="Legal" settings={{ padding: { top: 'medium', bottom: 'medium' }, preventAnimation: true }}>
             <div className="container pt-20">
                 <div className="max-w-4xl mx-center">
                     <Text>{parse(text)}</Text>

@@ -191,7 +191,7 @@ export default function Locations_Inner({
                                                         }}
                                                         key={index}
                                                     >
-                                                        <Pin background={'#0B2D44'} borderColor={'#061b28'} glyphColor={'#3b5669'} />
+                                                        <Pin background={'#E8E8E6'} borderColor={'#E8E8E6'} glyphColor={'#0B2D44'} />
                                                     </AdvancedMarker>
                                                 );
                                             })}

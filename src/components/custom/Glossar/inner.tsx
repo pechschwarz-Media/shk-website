@@ -6,7 +6,6 @@ import { Glossar as GlossarType, Settings } from '@/lib/types';
 import { cn } from '@/lib/utils';
 import parse from 'html-react-parser';
 import { useState } from 'react';
-import { Waypoint } from 'react-waypoint';
 import { Link, Element } from 'react-scroll';
 import { InView } from 'react-intersection-observer';
 
@@ -75,6 +74,7 @@ export default function GlossarInner({ glossar, content }: { glossar: GlossarTyp
                                         as="section"
                                         key={index}
                                         threshold={1}
+                                        rootMargin="62% 0% -62% 0%"
                                         onChange={(inView) => {
                                             if (inView) {
                                                 setCurrentIndex(index);

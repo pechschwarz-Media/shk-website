@@ -171,6 +171,8 @@ export type Options = {
     footer: FooterMenu[];
     headerLocationsLink: AcfLink;
     headerAppointmentLink: AcfLink;
+    headerShopLink: AcfLink;
+    headerLocations2Link: AcfLink;
     generalEmail: string;
     generalPhone: string;
     generalAddress: string;

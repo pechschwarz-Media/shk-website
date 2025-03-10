@@ -14,9 +14,11 @@ import Button from '@/components/static/Button';
 type Content = {
     button: AcfLink;
     sections: {
+        anchor: string;
         topline: string;
         title: string;
         text: string;
+        button: AcfLink;
         image: Media;
     }[];
     settings: Settings;
@@ -111,6 +113,7 @@ export default function Layout_350({ content, channel }: { content: Content; cha
                     return (
                         <InView
                             as="section"
+                            id={section?.anchor ? section?.anchor : `anchor-${index}`}
                             key={index}
                             threshold={1}
                             onChange={(inView) => {
@@ -135,6 +138,11 @@ export default function Layout_350({ content, channel }: { content: Content; cha
                                             <div className="mb-4 text-blue">{section?.topline}</div>
                                             <h2 className="text-h2 leading-tight font-headline mb-6 text-blue">{section?.title}</h2>
                                             <Text className="prose-p:text-gray prose-ul:text-gray">{parse(section?.text)}</Text>
+                                            {section?.button && (
+                                                <Button as="link" variant="blueFilled" link={section?.button} className="mt-8">
+                                                    {section?.button?.title}
+                                                </Button>
+                                            )}
                                         </div>
                                     </div>
                                 </div>
