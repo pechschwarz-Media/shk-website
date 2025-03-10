@@ -126,7 +126,7 @@ export default function HeaderInner({
                                                                                         <div className="text-headline leading-tight text-large text-blue mb-1">
                                                                                             {subMenuItem?.link?.title}
                                                                                         </div>
-                                                                                        <div className="text-blue text-small hyphens-auto">
+                                                                                        <div className="text-blue text-small hyphens-auto ">
                                                                                             <p>{subMenuItem?.description}</p>
                                                                                         </div>
                                                                                     </Link>
