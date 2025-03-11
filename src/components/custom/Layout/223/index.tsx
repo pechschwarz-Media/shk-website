@@ -4,6 +4,7 @@ import Text from '@/components/static/Text';
 import { Media, Settings } from '@/lib/types';
 import Image from 'next/image';
 import parse from 'html-react-parser';
+import { cn } from '@/lib/utils';
 
 type Content = {
     media: Media;
@@ -11,7 +12,7 @@ type Content = {
     settings: Settings;
 };
 
-export default async function Layout_223({ content }: { content: Content }) {
+export default async function Layout_223({ content, channel }: { content: Content; channel: string }) {
     return (
         <Section dataComponent="Layout_223" settings={content?.settings}>
             <div className="container">
@@ -37,7 +38,16 @@ export default async function Layout_223({ content }: { content: Content }) {
                     <div className="md:col-span-6 md:col-start-7 flex flex-col gap-4 lg:gap-10">
                         {content?.list?.map((item, index) => (
                             <div className="grid grid-cols-[2.25rem_auto] gap-x-6 gap-y-4" key={index}>
-                                <RoundCheck className="size-9 text-energiesparwelt" />
+                                <RoundCheck
+                                    className={cn(
+                                        'size-9',
+                                        channel === 'customer' && 'text-customer',
+                                        channel === 'partner' && 'text-partner',
+                                        channel === 'energiesparwelten' && 'text-energiesparwelt',
+                                        channel === 'fliesenwelten' && 'text-fliesenwelt',
+                                        channel === 'baederwelten' && 'text-baederwelt'
+                                    )}
+                                />
                                 <h6 key={index} className="text-h6 font-headline leading-tight text-blue items-center self-center">
                                     {item?.text}
                                 </h6>

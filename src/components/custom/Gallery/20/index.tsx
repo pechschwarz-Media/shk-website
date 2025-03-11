@@ -44,6 +44,8 @@ export default function Gallery_20({ content }: { content: Content }) {
                                 alt={item?.image?.alt}
                                 width={item?.image?.width}
                                 height={item?.image?.height}
+                                sizes="100vw"
+                                quality={100}
                                 className="size-full object-cover"
                             />
                         </SwiperSlide>

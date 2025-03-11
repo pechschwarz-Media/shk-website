@@ -36,6 +36,7 @@ export type LocationData = {
         rendered: string;
     };
     template: string;
+    locationcats: number[];
     acf: {
         channel: string;
         email: string;

@@ -37,6 +37,9 @@ export default function Layout_350({ content, channel }: { content: Content; cha
                                 'w-full md:w-auto inline-block bg-gray-medium overflow-hidden p-2 rounded-xl',
                                 content?.sections?.length > 6 && channel === 'customer' && 'bg-customer text-white',
                                 content?.sections?.length > 6 && channel === 'partner' && 'bg-partner text-white',
+                                content?.sections?.length > 6 && channel === 'energiesparwelten' && 'bg-energiesparwelt text-white',
+                                content?.sections?.length > 6 && channel === 'fliesenwelten' && 'bg-fliesenwelt text-white',
+                                content?.sections?.length > 6 && channel === 'baederwelten' && 'bg-baederwelt text-white',
                                 channel === 'customer' && 'max-xl:bg-customer text-white',
                                 channel === 'partner' && 'max-xl:bg-partner text-white'
                             )}
@@ -71,7 +74,12 @@ export default function Layout_350({ content, channel }: { content: Content; cha
                                                         className={cn(
                                                             'flex items-center h-10 justify-center rounded-lg px-5  cursor-pointer text-black',
                                                             index === currentIndex && channel === 'customer' && 'bg-customer text-white',
-                                                            index === currentIndex && channel === 'partner' && 'bg-partner text-white'
+                                                            index === currentIndex && channel === 'partner' && 'bg-partner text-white',
+                                                            index === currentIndex &&
+                                                                channel === 'energiesparwelten' &&
+                                                                'bg-energiesparwelt text-white',
+                                                            index === currentIndex && channel === 'fliesenwelten' && 'bg-fliesenwelt text-white',
+                                                            index === currentIndex && channel === 'baederwelten' && 'bg-baederwelt text-white'
                                                         )}
                                                     >
                                                         {section?.title}

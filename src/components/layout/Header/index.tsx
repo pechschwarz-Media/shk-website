@@ -4,6 +4,26 @@ import HeaderInner from './inner';
 export default async function Header({ channel }: { channel: string }) {
     const options = await getOptions();
 
+    let menu = options?.customer;
+
+    switch (channel) {
+        case 'customer':
+            menu = options?.customer;
+            break;
+        case 'energiesparwelten':
+            menu = options?.customer;
+            break;
+        case 'fliesenwelten':
+            menu = options?.customer;
+            break;
+        case 'energiesparwelten':
+            menu = options?.customer;
+            break;
+        case 'partner':
+            menu = options?.partner;
+            break;
+    }
+
     return (
         <HeaderInner
             channel={channel}
@@ -13,7 +33,7 @@ export default async function Header({ channel }: { channel: string }) {
                 shop: options?.headerShopLink,
                 locations2: options?.headerLocations2Link,
             }}
-            menu={channel === 'customer' ? options?.customer : options?.partner}
+            menu={menu}
         />
     );
 }

@@ -42,10 +42,12 @@ export default async function Location({ params }: { params: Promise<{ slug: str
 
     const location = await getLocationData({ slug });
 
+    const channel = location?.locationcats?.length === 1 && location?.locationcats?.at(0) === 12 ? 'partner' : 'customer';
+
     return (
-        <main className={cn(location?.acf?.channel === 'customer' && '', location?.acf?.channel === 'partner' && 'bg-partner-bg')}>
-            <Header channel="customer" />
-            <ComponentRenderer content={location?.acf?.content} channel={location?.acf?.channel} locationData={location} />
+        <main className={cn(channel === 'partner' && 'bg-partner-bg')}>
+            <Header channel={channel} />
+            <ComponentRenderer content={location?.acf?.content} channel={channel} locationData={location} />
         </main>
     );
 }

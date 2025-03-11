@@ -107,7 +107,6 @@ export default function Locations_Inner({
     useEffect(() => {
         if (cat) {
             setCategory(parseInt(cat));
-            console.log('test');
         }
     }, [cat]);
 
@@ -237,6 +236,11 @@ export default function Locations_Inner({
                                             className="border border-blue bg-neutral-50 w-full h-14 rounded-lg outline-blue pl-12 pr-5"
                                             onChange={(e) => {
                                                 setValue(e.target.value);
+                                            }}
+                                            onKeyDown={(e) => {
+                                                if (e.key === 'Enter') {
+                                                    searchLocation();
+                                                }
                                             }}
                                         />
                                     </div>

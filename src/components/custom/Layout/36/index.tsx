@@ -15,18 +15,20 @@ export default function Layout_36({ content }: { content: Content }) {
 
     const { scrollYProgress } = useScroll({
         target: headingRef,
-        offset: ['start 80%', 'end 20%'],
+        offset: ['end end', 'start start'],
     });
 
     const words = content.text.split(' ');
 
     return (
-        <Section dataComponent="Layout_396" settings={content?.settings}>
-            <div className="container h-full flex justify-center flex-col">
-                <p ref={headingRef} className="text-scrolltext">
+        <Section dataComponent="Layout_36" settings={content?.settings}>
+            <div className="container h-full flex justify-center flex-col" ref={headingRef}>
+                <p className="text-scrolltext">
                     {words.map((word, index) => {
-                        const start = index * 0.025;
-                        const end = start + 0.025;
+                        const start = index * 0.015;
+                        const end = start + 0.015;
+
+                        console.log(start);
                         // eslint-disable-next-line
                         const opacity = useTransform(scrollYProgress, [start, end], [0.1, 1]);
                         return (

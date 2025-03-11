@@ -50,14 +50,17 @@ export default function HeaderInner({
                 className={cn(
                     'fixed top-0 left-0 w-full z-50 bg-light/80 h-20 border-t-8 border-b border-b-gray/30 lg:border-b-0',
                     channel === 'customer' && 'border-t-customer',
-                    channel === 'partner' && 'border-t-partner'
+                    channel === 'partner' && 'border-t-partner',
+                    channel === 'energiesparwelten' && 'border-energiesparwelt',
+                    channel === 'fliesenwelten' && 'border-fliesenwelt',
+                    channel === 'baederwelten' && 'border-baederwelt'
                 )}
             >
                 <div className="absolute top-0 left-0 size-full backdrop-blur -z-10"></div>
                 <div className="container h-full">
                     <div className="flex justify-between h-full items-center">
                         <Link href="/">
-                            <Logo className="w-24 text-blue" />
+                            <Logo className="h-10 text-blue" />
                         </Link>
                         <div className="max-h-screen hidden lg:block">
                             <nav className="container max-w-full">
@@ -166,7 +169,10 @@ export default function HeaderInner({
                                     ></span>
                                 </div>
                             </button>
-                            {channel === 'customer' && (
+                            {(channel === 'customer' ||
+                                channel === 'energiesparwelten' ||
+                                channel === 'fliesenwelten' ||
+                                channel === 'baederwelten') && (
                                 <>
                                     <Link
                                         href={links?.locations?.url}
@@ -246,16 +252,62 @@ export default function HeaderInner({
                                 className="hidden lg:flex items-center gap-2 ml-4"
                                 onClick={() => {
                                     setChangeChannel(true);
-                                    setCookie('channel', channel === 'customer' ? 'partner' : 'customer');
-                                    router.push(channel === 'customer' ? '/partner/' : '/kunden/');
+
+                                    let cookie = 'customer';
+                                    let link = '/kunden/';
+
+                                    switch (channel) {
+                                        case 'customer':
+                                            cookie = 'partner';
+                                            link = '/partner/';
+                                            break;
+                                        case 'partner':
+                                            cookie = 'customer';
+                                            link = '/kunden/';
+                                            break;
+                                        case 'energiesparwelten':
+                                            cookie = 'partner';
+                                            link = '/partner/';
+                                            break;
+                                        case 'fliesenwelten':
+                                            cookie = 'partner';
+                                            link = '/partner/';
+                                            break;
+                                        case 'baederwelten':
+                                            cookie = 'partner';
+                                            link = '/partner/';
+                                            break;
+                                    }
+
+                                    setCookie('channel', cookie);
+                                    router.push(link);
                                 }}
                             >
-                                <label className="text-blue cursor-pointer">{channel === 'customer' ? 'Kunde' : 'Partner'}</label>
-                                <div className={cn('block relative h-8 w-14 rounded-full', channel === 'customer' ? 'bg-[#E0FBFF]' : 'bg-[#FFF7F3]')}>
+                                <label className="text-blue cursor-pointer">
+                                    {channel === 'customer' && 'Kunde'}
+                                    {channel === 'partner' && 'Partner'}
+                                    {channel === 'energiesparwelten' && 'Kunde'}
+                                    {channel === 'fliesenwelten' && 'Kunde'}
+                                    {channel === 'baederwelten' && 'Kunde'}
+                                </label>
+                                <div
+                                    className={cn(
+                                        'block relative h-8 w-14 rounded-full',
+                                        channel === 'customer' && 'bg-[#E0FBFF]',
+                                        channel === 'energiesparwelten' && 'bg-[#E0FBFF]',
+                                        channel === 'fliesenwelten' && 'bg-[#E0FBFF]',
+                                        channel === 'baederwelten' && 'bg-[#E0FBFF]',
+                                        channel === 'partner' && 'bg-[#FFF7F3]'
+                                    )}
+                                >
                                     <span
                                         className={cn(
                                             'absolute top-1/2 -translate-y-1/2 size-6 rounded-full block transition-all',
-                                            channel === 'customer' ? 'bg-customer left-1' : 'bg-partner left-7',
+                                            channel === 'customer' && 'bg-customer left-1',
+                                            channel === 'energiesparwelten' && 'bg-customer left-1',
+                                            channel === 'fliesenwelten' && 'bg-customer left-1',
+                                            channel === 'baederwelten' && 'bg-customer left-1',
+                                            channel === 'partner' && 'bg-partner left-7',
                                             changeChannel && channel === 'customer' && 'left-7',
                                             changeChannel && channel === 'partner' && 'left-1'
                                         )}
@@ -343,19 +395,65 @@ export default function HeaderInner({
                     <div className="mt-4 py-4 border-t border-dashed border-t-gray/30">
                         <div className="font-bold text-small mb-2">Kanal auswählen</div>
                         <button
-                            className="flex items-center gap-2"
+                            className="hidden lg:flex items-center gap-2 ml-4"
                             onClick={() => {
                                 setChangeChannel(true);
-                                setCookie('channel', channel === 'customer' ? 'partner' : 'customer');
-                                router.push(channel === 'customer' ? '/partner/' : '/kunden/');
+
+                                let cookie = 'customer';
+                                let link = '/kunden/';
+
+                                switch (channel) {
+                                    case 'customer':
+                                        cookie = 'partner';
+                                        link = '/partner/';
+                                        break;
+                                    case 'partner':
+                                        cookie = 'customer';
+                                        link = '/kunden/';
+                                        break;
+                                    case 'energiesparwelten':
+                                        cookie = 'partner';
+                                        link = '/partner/';
+                                        break;
+                                    case 'fliesenwelten':
+                                        cookie = 'partner';
+                                        link = '/partner/';
+                                        break;
+                                    case 'baederwelten':
+                                        cookie = 'partner';
+                                        link = '/partner/';
+                                        break;
+                                }
+
+                                setCookie('channel', cookie);
+                                router.push(link);
                             }}
                         >
-                            <label className="cursor-pointer">{channel === 'customer' ? 'Kunde' : 'Partner'}</label>
-                            <div className={cn('block relative h-8 w-14 rounded-full', channel === 'customer' ? 'bg-[#E0FBFF]' : 'bg-[#FFF7F3]')}>
+                            <label className="text-blue cursor-pointer">
+                                {channel === 'customer' && 'Kunde'}
+                                {channel === 'partner' && 'Partner'}
+                                {channel === 'energiesparwelten' && 'Kunde'}
+                                {channel === 'fliesenwelten' && 'Kunde'}
+                                {channel === 'baederwelten' && 'Kunde'}
+                            </label>
+                            <div
+                                className={cn(
+                                    'block relative h-8 w-14 rounded-full',
+                                    channel === 'customer' && 'bg-[#E0FBFF]',
+                                    channel === 'energiesparwelten' && 'bg-[#E0FBFF]',
+                                    channel === 'fliesenwelten' && 'bg-[#E0FBFF]',
+                                    channel === 'baederwelten' && 'bg-[#E0FBFF]',
+                                    channel === 'partner' && 'bg-[#FFF7F3]'
+                                )}
+                            >
                                 <span
                                     className={cn(
                                         'absolute top-1/2 -translate-y-1/2 size-6 rounded-full block transition-all',
-                                        channel === 'customer' ? 'bg-customer left-1' : 'bg-partner left-7',
+                                        channel === 'customer' && 'bg-customer left-1',
+                                        channel === 'energiesparwelten' && 'bg-customer left-1',
+                                        channel === 'fliesenwelten' && 'bg-customer left-1',
+                                        channel === 'baederwelten' && 'bg-customer left-1',
+                                        channel === 'partner' && 'bg-partner left-7',
                                         changeChannel && channel === 'customer' && 'left-7',
                                         changeChannel && channel === 'partner' && 'left-1'
                                     )}
