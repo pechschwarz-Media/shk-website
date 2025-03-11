@@ -206,7 +206,7 @@ export default function HeaderInner({
                                         className="size-12 rounded-full border border-blue bg-gray-light flex items-center justify-center hover:bg-blue hover:text-white transition-all"
                                     >
                                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <g clip-path="url(#clip0_8386_22116)">
+                                            <g clipPath="url(#clip0_8386_22116)">
                                                 <path
                                                     d="M4 19C4 19.5304 4.21071 20.0391 4.58579 20.4142C4.96086 20.7893 5.46957 21 6 21C6.53043 21 7.03914 20.7893 7.41421 20.4142C7.78929 20.0391 8 19.5304 8 19C8 18.4696 7.78929 17.9609 7.41421 17.5858C7.03914 17.2107 6.53043 17 6 17C5.46957 17 4.96086 17.2107 4.58579 17.5858C4.21071 17.9609 4 18.4696 4 19Z"
                                                     stroke="currentColor"
