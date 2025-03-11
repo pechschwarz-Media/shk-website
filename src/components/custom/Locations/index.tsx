@@ -10,7 +10,7 @@ export type Content = {
     type: string;
 };
 
-export default async function Locations({ content }: { content: Content }) {
+export default async function Locations({ content, channel }: { content: Content; channel: string }) {
     const locations = await getLocations();
     const locationcats = await getLocationcats();
 
@@ -28,7 +28,7 @@ export default async function Locations({ content }: { content: Content }) {
 
     return (
         <Suspense>
-            <Locations_Inner content={content} locations={filteredLocations} locationcats={locationcats} />
+            <Locations_Inner content={content} channel={channel} locations={filteredLocations} locationcats={locationcats} />
         </Suspense>
     );
 }
