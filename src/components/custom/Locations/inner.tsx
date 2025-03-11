@@ -16,10 +16,12 @@ export default function Locations_Inner({
     content,
     locations,
     locationcats,
+    channel,
 }: {
     content: Content;
     locations: Location[];
     locationcats: Locationcat[];
+    channel: string;
 }) {
     const [zoom, setZoom] = useState(7);
     const [coordinates, setCoordinates] = useState<null | { lat: number; lng: number }>(null);
@@ -191,7 +193,11 @@ export default function Locations_Inner({
                                                         }}
                                                         key={index}
                                                     >
-                                                        <Pin background={'#E8E8E6'} borderColor={'#E8E8E6'} glyphColor={'#0B2D44'} />
+                                                        {channel === 'partner' ? (
+                                                            <Pin background={'#F47630'} borderColor={'#F47630'} glyphColor={'#FFF7F3'} />
+                                                        ) : (
+                                                            <Pin background={'#2B94A6'} borderColor={'#2B94A6'} glyphColor={'#E0FBFF'} />
+                                                        )}
                                                     </AdvancedMarker>
                                                 );
                                             })}

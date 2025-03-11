@@ -91,7 +91,7 @@ export default function CTA_51_2({
                                         lng: parseFloat(locationData?.acf.lng),
                                     }}
                                 >
-                                    <Pin background={'#E8E8E6'} borderColor={'#E8E8E6'} glyphColor={'#0B2D44'} />
+                                    <Pin background={'#2B94A6'} borderColor={'#2B94A6'} glyphColor={'#E0FBFF'} />
                                 </AdvancedMarker>
                             </Map>
                         </APIProvider>
