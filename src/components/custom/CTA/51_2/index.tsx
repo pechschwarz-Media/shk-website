@@ -111,6 +111,13 @@ export default function CTA_51_2({
                         >
                             {locationData?.acf?.phone}
                         </Button>
+                        <div>
+                            {daysBad.some(({ key }) => {
+                                const start = formatTime(openingHoursBad[`bad_open_${key}_start`]);
+                                const end = formatTime(openingHoursBad[`bad_open_${key}_end`]);
+                                return start !== 'Geschlossen' || end !== 'Geschlossen';
+                            }) && <button>Bad</button>}
+                        </div>
                         <div className="flex flex-col gap-16">
                             {daysBad.some(({ key }) => {
                                 const start = formatTime(openingHoursBad[`bad_open_${key}_start`]);
