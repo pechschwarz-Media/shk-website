@@ -3,7 +3,9 @@
 import Button from '@/components/static/Button';
 import Section from '@/components/static/Section';
 import { Settings } from '@/lib/types';
+import { cn } from '@/lib/utils';
 import { APIProvider, Map, AdvancedMarker, MapCameraChangedEvent, Pin } from '@vis.gl/react-google-maps';
+import { useState } from 'react';
 
 type Content = {
     headline: string;
@@ -71,6 +73,8 @@ export default function CTA_51_2({
         { key: 'so', label: 'Sonntag' },
     ];
 
+    const [currentIndex, setCurrentIndex] = useState(0);
+
     return (
         <Section dataComponent="CTA_51_2" settings={content.setting}>
             <div className="container">
@@ -111,6 +115,34 @@ export default function CTA_51_2({
                         >
                             {locationData?.acf?.phone}
                         </Button>
+                        <div>
+                            <h4 className="text-h4 font-headline font-light leading-tight mb-6">Öffnungszeiten</h4>
+                            <div className="w-full md:w-auto inline-block bg-gray-medium overflow-hidden p-2 rounded-xl">
+                                <ul className="gap-x-1 hidden xl:flex">
+                                    <li>
+                                        <button
+                                            className={cn('flex items-center h-10 justify-center rounded-lg px-5  cursor-pointer bg-blue text-white')}
+                                        >
+                                            Bad
+                                        </button>
+                                    </li>
+                                    <li>
+                                        <button
+                                            className={cn('flex items-center h-10 justify-center rounded-lg px-5  cursor-pointer bg-blue text-white')}
+                                        >
+                                            Abholung
+                                        </button>
+                                    </li>
+                                    <li>
+                                        <button
+                                            className={cn('flex items-center h-10 justify-center rounded-lg px-5  cursor-pointer bg-blue text-white')}
+                                        >
+                                            Energie
+                                        </button>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
                         <div className="flex flex-col gap-16">
                             {daysBad.some(({ key }) => {
                                 const start = formatTime(openingHoursBad[`bad_open_${key}_start`]);
