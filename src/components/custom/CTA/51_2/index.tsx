@@ -4,8 +4,9 @@ import Button from '@/components/static/Button';
 import Section from '@/components/static/Section';
 import { Settings } from '@/lib/types';
 import { cn } from '@/lib/utils';
-import { APIProvider, Map, AdvancedMarker, MapCameraChangedEvent, Pin } from '@vis.gl/react-google-maps';
-import { useState } from 'react';
+import { APIProvider, Map, AdvancedMarker, Pin } from '@vis.gl/react-google-maps';
+import { useEffect, useState } from 'react';
+import parse from 'html-react-parser';
 
 type Content = {
     headline: string;
@@ -34,46 +35,51 @@ export default function CTA_51_2({
     };
 }) {
     const openingHoursBad = locationData?.acf?.bad_open;
-    const openingHoursAbhol = locationData?.acf?.abhol_open;
     const openingHoursEnergie = locationData?.acf?.energie_open;
+    const openingHoursAbhol = locationData?.acf?.abhol_open;
 
-    const formatTime = (time: any) => {
-        if (!time || time.trim() === 'null') return 'Geschlossen';
-        const cleanTime = time.trim().padStart(4, '0');
-        return `${cleanTime.slice(0, 2)}:${cleanTime.slice(2)} Uhr`;
-    };
+    const [categories, setCategories] = useState<string[]>([]);
+    const [activeCategory, setActiveCategory] = useState('');
 
-    const daysBad = [
-        { key: 'mo', label: 'Montag' },
-        { key: 'di', label: 'Dienstag' },
-        { key: 'mi', label: 'Mittwoch' },
-        { key: 'do', label: 'Donnerstag' },
-        { key: 'fr', label: 'Freitag' },
-        { key: 'sa', label: 'Samstag' },
-        { key: 'so', label: 'Sonntag' },
-    ];
+    useEffect(() => {
+        const bad = Object.values(openingHoursBad).some((value: any) => {
+            const time = value.replace(/\s/g, '');
+            return time !== 'null';
+        });
 
-    const daysAbhol = [
-        { key: 'mo', label: 'Montag' },
-        { key: 'di', label: 'Dienstag' },
-        { key: 'mi', label: 'Mittwoch' },
-        { key: 'do', label: 'Donnerstag' },
-        { key: 'fr', label: 'Freitag' },
-        { key: 'sa', label: 'Samstag' },
-        { key: 'so', label: 'Sonntag' },
-    ];
+        const energie = Object.values(openingHoursEnergie).some((value: any) => {
+            const time = value.replace(/\s/g, '');
+            return time !== 'null';
+        });
 
-    const daysEnergie = [
-        { key: 'mo', label: 'Montag' },
-        { key: 'di', label: 'Dienstag' },
-        { key: 'mi', label: 'Mittwoch' },
-        { key: 'do', label: 'Donnerstag' },
-        { key: 'fr', label: 'Freitag' },
-        { key: 'sa', label: 'Samstag' },
-        { key: 'so', label: 'Sonntag' },
-    ];
+        const abholung = Object.values(openingHoursAbhol).some((value: any) => {
+            const time = value.replace(/\s/g, '');
+            return time !== 'null';
+        });
 
-    const [currentIndex, setCurrentIndex] = useState(0);
+        const categories = [];
+
+        if (bad) {
+            categories.push('Bad');
+        }
+
+        if (energie) {
+            categories.push('Energie');
+        }
+
+        if (abholung) {
+            categories.push('Abholung');
+        }
+
+        setCategories(categories);
+        setActiveCategory(categories[0]);
+    }, []);
+
+    function formatTime(value: string) {
+        const time = value.replace(/\s/g, '');
+        if (time === null || time === 'null') return 'Geschlossen';
+        return String(time).replace(/^(\d{2})(\d{2})$/, '$1:$2');
+    }
 
     return (
         <Section dataComponent="CTA_51_2" settings={content.setting}>
@@ -101,7 +107,7 @@ export default function CTA_51_2({
                         </APIProvider>
                     </div>
                     <div>
-                        <h3 className="text-h3 mb-4">{locationData?.title?.rendered}</h3>
+                        <h3 className="text-h3 mb-4">{parse(locationData?.title?.rendered)}</h3>
                         <p>{locationData?.acf?.street + locationData?.acf?.number}</p>
                         <p>{locationData?.acf?.zip + locationData?.acf?.city}</p>
                         <Button
@@ -118,130 +124,222 @@ export default function CTA_51_2({
                         <div>
                             <h4 className="text-h4 font-headline font-light leading-tight mb-6">Öffnungszeiten</h4>
                             <div className="w-full md:w-auto inline-block bg-gray-medium overflow-hidden p-2 rounded-xl">
-                                <ul className="gap-x-1 hidden xl:flex">
-                                    <li>
-                                        <button
-                                            className={cn('flex items-center h-10 justify-center rounded-lg px-5  cursor-pointer bg-blue text-white')}
-                                        >
-                                            Bad
-                                        </button>
-                                    </li>
-                                    <li>
-                                        <button
-                                            className={cn('flex items-center h-10 justify-center rounded-lg px-5  cursor-pointer bg-blue text-white')}
-                                        >
-                                            Abholung
-                                        </button>
-                                    </li>
-                                    <li>
-                                        <button
-                                            className={cn('flex items-center h-10 justify-center rounded-lg px-5  cursor-pointer bg-blue text-white')}
-                                        >
-                                            Energie
-                                        </button>
-                                    </li>
+                                <ul className="gap-x-1 flex">
+                                    {categories?.map((category, index) => {
+                                        return (
+                                            <li key={index}>
+                                                <button
+                                                    className={cn(
+                                                        'flex items-center h-10 justify-center rounded-lg px-5 cursor-pointer text-blue',
+                                                        activeCategory === category && 'bg-blue text-white'
+                                                    )}
+                                                    onClick={() => {
+                                                        setActiveCategory(category);
+                                                    }}
+                                                >
+                                                    {category}
+                                                </button>
+                                            </li>
+                                        );
+                                    })}
                                 </ul>
                             </div>
                         </div>
-                        <div className="flex flex-col gap-16">
-                            {daysBad.some(({ key }) => {
-                                const start = formatTime(openingHoursBad[`bad_open_${key}_start`]);
-                                const end = formatTime(openingHoursBad[`bad_open_${key}_end`]);
-                                return start !== 'Geschlossen' || end !== 'Geschlossen';
-                            }) && (
-                                <div>
-                                    <h4 className="text-h4">Öffungszeiten Bad</h4>
-                                    <table className="w-full mt-4 lg:mt-6">
-                                        <tbody className="border-2 border-tabelle-border">
-                                            {daysBad.map(({ key, label }, index) => (
-                                                <tr
-                                                    key={key}
-                                                    className={`border-2 border-tabelle-border ${
-                                                        index % 2 === 0 ? 'bg-transparent' : 'bg-tabelle-background'
-                                                    }`}
-                                                >
-                                                    <td className="p-2 border-r-2 border-tabelle-border">{label}</td>
-                                                    <td className="p-2">
-                                                        {formatTime(openingHoursBad[`bad_open_${key}_start`]) === 'Geschlossen' &&
-                                                        formatTime(openingHoursBad[`bad_open_${key}_end`]) === 'Geschlossen'
-                                                            ? 'Geschlossen'
-                                                            : formatTime(openingHoursBad[`bad_open_${key}_start`]) !== 'Geschlossen' &&
-                                                              formatTime(openingHoursBad[`bad_open_${key}_end`]) === 'Geschlossen'
-                                                            ? `${formatTime(openingHoursBad[`bad_open_${key}_start`])} - ${formatTime(
-                                                                  openingHoursBad[`bad_open_${key}_end`]
-                                                              )}`
-                                                            : formatTime(openingHoursBad[`bad_open_${key}_start`]) === 'Geschlossen' &&
-                                                              formatTime(openingHoursBad[`bad_open_${key}_end`]) !== 'Geschlossen'
-                                                            ? `${formatTime(openingHoursBad[`bad_open_${key}_start`])} - ${formatTime(
-                                                                  openingHoursBad[`bad_open_${key}_end`]
-                                                              )}`
-                                                            : formatTime(openingHoursBad[`bad_open_${key}_start`]) !== 'Geschlossen' &&
-                                                              formatTime(openingHoursBad[`bad_open_${key}_end`]) !== 'Geschlossen'
-                                                            ? `${formatTime(openingHoursBad[`bad_open_${key}_start`])} - ${formatTime(
-                                                                  openingHoursBad[`bad_open_${key}_end`]
-                                                              )}`
-                                                            : 'Geschlossen'}
-                                                    </td>
-                                                </tr>
-                                            ))}
-                                        </tbody>
-                                    </table>
-                                </div>
-                            )}
+                        <div className="mt-4">
+                            {categories?.map((category, index) => {
+                                let cat = 'bad';
 
-                            {daysAbhol.some(({ key }) => {
-                                const start = formatTime(openingHoursAbhol[`abhol_open_${key}_start`]);
-                                const end = formatTime(openingHoursAbhol[`abhol_open_${key}_end`]);
-                                return start !== 'Geschlossen' || end !== 'Geschlossen';
-                            }) && (
-                                <div>
-                                    <h4 className="text-h4">Öffnungszeiten Abholung</h4>
-                                    <table className="w-full mt-4 lg:mt-6">
-                                        <tbody className="border-2 border-tabelle-border">
-                                            {daysAbhol.map(({ key, label }, index) => (
-                                                <tr
-                                                    key={key}
-                                                    className={`border-2 border-tabelle-border ${
-                                                        index % 2 === 0 ? 'bg-transparent' : 'bg-tabelle-background'
-                                                    }`}
-                                                >
-                                                    <td className="p-2 border-r-2 border-tabelle-border">{label}</td>
-                                                    <td className="p-2">
-                                                        {formatTime(openingHoursAbhol[`abhol_open_${key}_start`]) === 'Geschlossen' &&
-                                                        formatTime(openingHoursAbhol[`abhol_open_${key}_end`]) === 'Geschlossen'
-                                                            ? 'Geschlossen'
-                                                            : formatTime(openingHoursAbhol[`abhol_open_${key}_start`]) !== 'Geschlossen' &&
-                                                              formatTime(openingHoursAbhol[`abhol_open_${key}_end`]) === 'Geschlossen'
-                                                            ? `${formatTime(openingHoursAbhol[`abhol_open_${key}_start`])} - ${formatTime(
-                                                                  openingHoursAbhol[`abhol_open_${key}_end`]
-                                                              )}`
-                                                            : formatTime(openingHoursAbhol[`abhol_open_${key}_start`]) === 'Geschlossen' &&
-                                                              formatTime(openingHoursAbhol[`abhol_open_${key}_end`]) !== 'Geschlossen'
-                                                            ? `${formatTime(openingHoursAbhol[`abhol_open_${key}_start`])} - ${formatTime(
-                                                                  openingHoursAbhol[`abhol_open_${key}_end`]
-                                                              )}`
-                                                            : formatTime(openingHoursAbhol[`abhol_open_${key}_start`]) !== 'Geschlossen' &&
-                                                              formatTime(openingHoursAbhol[`abhol_open_${key}_end`]) !== 'Geschlossen'
-                                                            ? `${formatTime(openingHoursAbhol[`abhol_open_${key}_start`])} - ${formatTime(
-                                                                  openingHoursAbhol[`abhol_open_${key}_end`]
-                                                              )}`
-                                                            : 'Geschlossen'}
-                                                    </td>
-                                                </tr>
-                                            ))}
-                                        </tbody>
-                                    </table>
-                                </div>
-                            )}
+                                switch (category) {
+                                    case 'Bad':
+                                        cat = 'bad';
+                                        break;
+                                    case 'Energie':
+                                        cat = 'energie';
+                                        break;
+                                    case 'Abholung':
+                                        cat = 'abhol';
+                                        break;
+                                }
 
-                            {daysEnergie.some(({ key }) => {
+                                if (category === activeCategory) {
+                                    return (
+                                        <div key={index}>
+                                            <table className="w-full">
+                                                <tbody className="border border-tabelle-border">
+                                                    <tr>
+                                                        <td className="p-2 font-bold">Montag</td>
+                                                        <td className="p-2">
+                                                            {formatTime(
+                                                                (
+                                                                    locationData.acf[`${cat}_open` as keyof typeof locationData.acf] as Record<
+                                                                        string,
+                                                                        any
+                                                                    >
+                                                                )?.[`${cat}_open_mo_start`]
+                                                            )}
+                                                        </td>
+                                                        <td className="p-2">
+                                                            {formatTime(
+                                                                (
+                                                                    locationData.acf[`${cat}_open` as keyof typeof locationData.acf] as Record<
+                                                                        string,
+                                                                        any
+                                                                    >
+                                                                )?.[`${cat}_open_mo_end`]
+                                                            )}
+                                                        </td>
+                                                    </tr>
+                                                    <tr className="bg-tabelle-border">
+                                                        <td className="p-2 font-bold">Dienstag</td>
+                                                        <td className="p-2">
+                                                            {formatTime(
+                                                                (
+                                                                    locationData.acf[`${cat}_open` as keyof typeof locationData.acf] as Record<
+                                                                        string,
+                                                                        any
+                                                                    >
+                                                                )?.[`${cat}_open_di_start`]
+                                                            )}
+                                                        </td>
+                                                        <td className="p-2">
+                                                            {formatTime(
+                                                                (
+                                                                    locationData.acf[`${cat}_open` as keyof typeof locationData.acf] as Record<
+                                                                        string,
+                                                                        any
+                                                                    >
+                                                                )?.[`${cat}_open_di_end`]
+                                                            )}
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td className="p-2 font-bold">Mittwoch</td>
+                                                        <td className="p-2">
+                                                            {formatTime(
+                                                                (
+                                                                    locationData.acf[`${cat}_open` as keyof typeof locationData.acf] as Record<
+                                                                        string,
+                                                                        any
+                                                                    >
+                                                                )?.[`${cat}_open_mi_start`]
+                                                            )}
+                                                        </td>
+                                                        <td className="p-2">
+                                                            {formatTime(
+                                                                (
+                                                                    locationData.acf[`${cat}_open` as keyof typeof locationData.acf] as Record<
+                                                                        string,
+                                                                        any
+                                                                    >
+                                                                )?.[`${cat}_open_mi_end`]
+                                                            )}
+                                                        </td>
+                                                    </tr>
+                                                    <tr className="bg-tabelle-border">
+                                                        <td className="p-2 font-bold">Donnerstag</td>
+                                                        <td className="p-2">
+                                                            {formatTime(
+                                                                (
+                                                                    locationData.acf[`${cat}_open` as keyof typeof locationData.acf] as Record<
+                                                                        string,
+                                                                        any
+                                                                    >
+                                                                )?.[`${cat}_open_do_start`]
+                                                            )}
+                                                        </td>
+                                                        <td className="p-2">
+                                                            {formatTime(
+                                                                (
+                                                                    locationData.acf[`${cat}_open` as keyof typeof locationData.acf] as Record<
+                                                                        string,
+                                                                        any
+                                                                    >
+                                                                )?.[`${cat}_open_do_end`]
+                                                            )}
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td className="p-2 font-bold">Freitag</td>
+                                                        <td className="p-2">
+                                                            {formatTime(
+                                                                (
+                                                                    locationData.acf[`${cat}_open` as keyof typeof locationData.acf] as Record<
+                                                                        string,
+                                                                        any
+                                                                    >
+                                                                )?.[`${cat}_open_fr_start`]
+                                                            )}
+                                                        </td>
+                                                        <td className="p-2">
+                                                            {formatTime(
+                                                                (
+                                                                    locationData.acf[`${cat}_open` as keyof typeof locationData.acf] as Record<
+                                                                        string,
+                                                                        any
+                                                                    >
+                                                                )?.[`${cat}_open_fr_end`]
+                                                            )}
+                                                        </td>
+                                                    </tr>
+                                                    <tr className="bg-tabelle-border">
+                                                        <td className="p-2 font-bold">Samstag</td>
+                                                        <td className="p-2">
+                                                            {formatTime(
+                                                                (
+                                                                    locationData.acf[`${cat}_open` as keyof typeof locationData.acf] as Record<
+                                                                        string,
+                                                                        any
+                                                                    >
+                                                                )?.[`${cat}_open_sa_start`]
+                                                            )}
+                                                        </td>
+                                                        <td className="p-2">
+                                                            {formatTime(
+                                                                (
+                                                                    locationData.acf[`${cat}_open` as keyof typeof locationData.acf] as Record<
+                                                                        string,
+                                                                        any
+                                                                    >
+                                                                )?.[`${cat}_open_sa_end`]
+                                                            )}
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td className="p-2 font-bold">Sonntag</td>
+                                                        <td className="p-2">
+                                                            {formatTime(
+                                                                (
+                                                                    locationData.acf[`${cat}_open` as keyof typeof locationData.acf] as Record<
+                                                                        string,
+                                                                        any
+                                                                    >
+                                                                )?.[`${cat}_open_so_start`]
+                                                            )}
+                                                        </td>
+                                                        <td className="p-2">
+                                                            {formatTime(
+                                                                (
+                                                                    locationData.acf[`${cat}_open` as keyof typeof locationData.acf] as Record<
+                                                                        string,
+                                                                        any
+                                                                    >
+                                                                )?.[`${cat}_open_so_end`]
+                                                            )}
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    );
+                                }
+                            })}
+                            {/*daysEnergie.some(({ key }) => {
                                 const start = formatTime(openingHoursEnergie[`energie_open_${key}_start`]);
                                 const end = formatTime(openingHoursEnergie[`energie_open_${key}_end`]);
                                 return start !== 'Geschlossen' || end !== 'Geschlossen';
                             }) && (
                                 <div>
-                                    <h4 className="text-h4">Öffungszeiten Energie</h4>
-                                    <table className="w-full mt-4 lg:mt-6">
+                                    <table className="w-full">
                                         <tbody className="border-2 border-tabelle-border">
                                             {daysEnergie.map(({ key, label }, index) => (
                                                 <tr
@@ -277,7 +375,7 @@ export default function CTA_51_2({
                                         </tbody>
                                     </table>
                                 </div>
-                            )}
+                                                            )*/}
                         </div>
                     </div>
                 </div>

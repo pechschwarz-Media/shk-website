@@ -58,7 +58,7 @@ export default function Layout_350({ content, channel }: { content: Content; cha
                                     >
                                         {content?.sections?.map((section, index) => {
                                             return (
-                                                <option key={index} value={`layout350-${index}`}>
+                                                <option key={index} value={`layout350-${index}`} className="text-dark">
                                                     {section?.title}
                                                 </option>
                                             );
@@ -102,7 +102,7 @@ export default function Layout_350({ content, channel }: { content: Content; cha
                                 >
                                     {content?.sections?.map((section, index) => {
                                         return (
-                                            <option key={index} value={`layout350-${index}`}>
+                                            <option key={index} value={`layout350-${index}`} className="text-dark">
                                                 {section?.title}
                                             </option>
                                         );
