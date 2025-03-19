@@ -59,7 +59,7 @@ export default function HeaderInner({
                 <div className="absolute top-0 left-0 size-full backdrop-blur -z-10"></div>
                 <div className="container h-full">
                     <div className="flex justify-between h-full items-center">
-                        <Link href="/">
+                        <Link href={channel === 'partner' ? '/partner/' : '/kunden/'}>
                             <Logo className="h-10 text-blue" />
                         </Link>
                         <div className="max-h-screen hidden lg:block">
