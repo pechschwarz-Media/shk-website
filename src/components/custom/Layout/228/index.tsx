@@ -11,10 +11,10 @@ export default async function layout_228({ content }: { content: Content }) {
     return (
         <Section dataComponent="layout_228" settings={content?.settings}>
             <div className="container">
-                <div className="grid gap-x-8 xl:gap-x-12 gap-y-10 xl:gap-y-20  grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 xl:w-5/6 xl:mx-auto">
+                <div className="grid gap-8 xl:gap-10  grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 xl:w-5/6 xl:mx-auto">
                     {content?.box?.map((box, index) => (
                         <div key={index} className="flex flex-col gap-6 items-center">
-                            <div className="size-20 xl:size-28">
+                            <div className="size-16 xl:size-20">
                                 <Image
                                     src={box?.icon?.url ?? ''}
                                     alt={box?.icon?.alt ?? ''}

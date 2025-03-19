@@ -32,7 +32,7 @@ export default function Header_5({ content }: { content: Content }) {
                 <div className="relative text-white w-full z-20">
                     <div className="container">
                         <div className="max-w-xl">
-                            <h1 className="text-h1 leading-tight font-light mb-8">{content?.headline}</h1>
+                            <h1 className="text-h1 font-headline leading-tight font-light mb-8">{content?.headline}</h1>
                             <Text className="text-large">{parse(content?.text)}</Text>
                             <div className="flex flex-col sm:flex-row sm:items-center gap-3 mt-8">
                                 <Button as="link" variant="blueFilled" link={content?.buttons?.button_1}>
