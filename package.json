@@ -10,6 +10,7 @@
     },
     "dependencies": {
         "@iframe-resizer/react": "^5.3.3",
+        "@radix-ui/react-select": "^2.1.6",
         "@relume_io/relume-tailwind": "^1.0.0",
         "@relume_io/relume-ui": "^1.0.1",
         "@tailwindcss/typography": "^0.5.16",
@@ -21,6 +22,7 @@
         "html-react-parser": "^5.2.2",
         "i": "^0.3.7",
         "install": "^0.13.0",
+        "lucide-react": "^0.483.0",
         "motion": "^12.4.7",
         "next": "15.1.4",
         "react": "^19.0.0",
@@ -31,7 +33,8 @@
         "react-scroll": "^1.9.3",
         "react-waypoint": "^10.3.0",
         "swiper": "^11.2.4",
-        "tailwind-merge": "^2.6.0"
+        "tailwind-merge": "^2.6.0",
+        "tailwindcss-animate": "^1.0.7"
     },
     "devDependencies": {
         "@eslint/eslintrc": "^3",

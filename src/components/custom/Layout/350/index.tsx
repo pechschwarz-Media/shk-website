@@ -10,6 +10,7 @@ import { Link, Element, scroller } from 'react-scroll';
 import parse from 'html-react-parser';
 import { InView } from 'react-intersection-observer';
 import Button from '@/components/static/Button';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 
 type Content = {
     button: AcfLink;
@@ -29,7 +30,7 @@ export default function Layout_350({ content, channel }: { content: Content; cha
 
     return (
         <Section dataComponent="Layout_350" settings={{ ...content?.settings, preventAnimation: true }}>
-            <div className="sticky top-24 bottom-0">
+            <div className={cn('sticky top-0 pt-24 pb-5 bottom-0 bg-white', channel === 'partner' && 'bg-partner-bg')}>
                 <div className="container">
                     <div className="flex justify-between items-center">
                         <nav
@@ -90,24 +91,56 @@ export default function Layout_350({ content, channel }: { content: Content; cha
                                     </ul>
                                 </>
                             ) : (
-                                <select
-                                    className="h-10 bg-transparent outline-none w-full md:w-80"
-                                    onChange={(e) => {
-                                        e.preventDefault();
+                                <>
+                                    <select
+                                        className="hidden h-10 bg-transparent outline-none w-full md:w-100"
+                                        onChange={(e) => {
+                                            e.preventDefault();
 
-                                        scroller.scrollTo(e.target.value, {
-                                            offset: -180,
-                                        });
-                                    }}
-                                >
-                                    {content?.sections?.map((section, index) => {
-                                        return (
-                                            <option key={index} value={`layout350-${index}`} className="text-dark">
-                                                {section?.title}
-                                            </option>
-                                        );
-                                    })}
-                                </select>
+                                            scroller.scrollTo(e.target.value, {
+                                                offset: -180,
+                                            });
+                                        }}
+                                    >
+                                        {content?.sections?.map((section, index) => {
+                                            return (
+                                                <option key={index} value={`layout350-${index}`} className="text-dark">
+                                                    {section?.title}
+                                                </option>
+                                            );
+                                        })}
+                                    </select>
+                                    <Select
+                                        onValueChange={(value) => {
+                                            scroller.scrollTo(value, {
+                                                offset: -180,
+                                            });
+                                        }}
+                                    >
+                                        <SelectTrigger className="w-full md:w-[380px] border-none !text-white !shadow-none !ring-0">
+                                            <SelectValue placeholder="Thema auswählen" className="!text-white !ring-0" />
+                                        </SelectTrigger>
+                                        <SelectContent
+                                            sideOffset={10}
+                                            className={cn(
+                                                '!w-full min-w-0 max-w-full border-none',
+                                                channel === 'customer' && 'bg-customer/25 text-white',
+                                                channel === 'partner' && 'bg-partner text-white',
+                                                channel === 'energiesparwelten' && 'bg-energiesparwelt text-white',
+                                                channel === 'fliesenwelten' && 'bg-fliesenwelt text-white',
+                                                channel === 'baederwelten' && 'bg-baederwelt text-white'
+                                            )}
+                                        >
+                                            {content?.sections?.map((section, index) => {
+                                                return (
+                                                    <SelectItem value={`layout350-${index}`} key={index}>
+                                                        {section?.title}
+                                                    </SelectItem>
+                                                );
+                                            })}
+                                        </SelectContent>
+                                    </Select>
+                                </>
                             )}
                         </nav>
                         <Button as="link" link={content?.button} variant="blueFilled" className="hidden md:flex">

@@ -5,6 +5,7 @@ import { AcfLink, Media } from '@/lib/types';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useSetCookie } from 'cookies-next/client';
+import Logo from '@/components/static/Logo';
 
 export default function Channel({
     channels,
@@ -17,7 +18,10 @@ export default function Channel({
     const setCookie = useSetCookie();
 
     return (
-        <section className="w-full h-screen flex flex-col lg:flex-row">
+        <section className="w-full relative h-screen flex flex-col lg:flex-row">
+            <div className="absolute top-0 left-0 md:left-10 z-10 bg-white p-3 md:p-4">
+                <Logo className="h-10 w-auto" />
+            </div>
             <Link
                 href={channels?.customer?.link?.url}
                 className="flex-1 h-full relative flex items-center justify-center text-white md:hover:flex-[2] transition-all duration-500"

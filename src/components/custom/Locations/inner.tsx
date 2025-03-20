@@ -50,11 +50,13 @@ export default function Locations_Inner({
     }
 
     useEffect(() => {
+        const categoryLocations = filterLocations(locations, category);
+        setFilteredLocations(categoryLocations);
+
         if (coordinates) {
             setCenter(coordinates);
             setZoom(10);
 
-            const categoryLocations = filterLocations(locations, category);
             const sortedLocations = sortByDistance(categoryLocations, coordinates);
             setFilteredLocations(sortedLocations);
             setStatus('filtered');
@@ -76,7 +78,10 @@ export default function Locations_Inner({
                     lng: parseFloat(location?.acf?.lng),
                 }),
             }))
-            .sort((a, b) => a.distance - b.distance);
+            .sort((a, b) => a.distance - b.distance)
+            .filter((location) => {
+                return location.distance <= 100;
+            });
     }
 
     function getDistance(point1: { lat: number; lng: number }, point2: { lat: number; lng: number }) {
@@ -176,7 +181,7 @@ export default function Locations_Inner({
                                                 setCenter(ev.detail.center);
                                             }}
                                         >
-                                            {locations.map((location, index) => {
+                                            {filteredLocations.map((location, index) => {
                                                 return (
                                                     <AdvancedMarker
                                                         position={{

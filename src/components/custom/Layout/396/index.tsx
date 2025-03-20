@@ -28,10 +28,10 @@ export default function Layout_396({ content }: { content: Content }) {
             </div>
             <div>
                 <div className="container">
-                    <div className="grid lg:grid-cols-3 gap-6">
+                    <div className="grid justify-center gap-6">
                         {content?.boxes?.map((box, index) => {
                             return (
-                                <div className="bg-gray-medium p-8 rounded-xl flex justify-between flex-col" key={index}>
+                                <div className="bg-gray-medium p-8 rounded-xl flex justify-between flex-col max-w-3xl" key={index}>
                                     <div>
                                         <Image
                                             src={box?.icon?.url}

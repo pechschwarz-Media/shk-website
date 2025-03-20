@@ -8,6 +8,7 @@ import { cn } from '@/lib/utils';
 
 type Content = {
     media: Media;
+    text: string;
     list: { text: string; subText: string }[];
     settings: Settings;
 };
@@ -36,6 +37,7 @@ export default async function Layout_223({ content, channel }: { content: Conten
                         </div>
                     </div>
                     <div className="md:col-span-6 md:col-start-7 flex flex-col gap-4 lg:gap-10">
+                        {content?.text && <Text className="prose-p:text-gray">{parse(content?.text)}</Text>}
                         {content?.list?.map((item, index) => (
                             <div className="grid grid-cols-[2.25rem_auto] gap-x-6 gap-y-4" key={index}>
                                 <RoundCheck

@@ -15,7 +15,7 @@ import Dot from '@/components/icons/dot';
 
 type Content = {
     headline: string;
-    gallery: { image: Media }[];
+    gallery: { image: Media; text: string }[];
     settings: Settings;
 };
 
@@ -38,7 +38,7 @@ export default function Gallery_20({ content }: { content: Content }) {
                     }}
                 >
                     {content?.gallery?.map((item, index) => (
-                        <SwiperSlide key={index} className="w-1/2 rounded-normal overflow-hidden h-full">
+                        <SwiperSlide key={index} className="w-1/2 rounded-normal overflow-hidden h-full relative">
                             <Image
                                 src={item?.image?.url}
                                 alt={item?.image?.alt}
@@ -48,6 +48,7 @@ export default function Gallery_20({ content }: { content: Content }) {
                                 quality={100}
                                 className="size-full object-cover"
                             />
+                            {item?.text && <div className="absolute bottom-0 left-0 z-10 bg-white/60 w-full px-5 py-1">{item?.text}</div>}
                         </SwiperSlide>
                     ))}
                 </Swiper>
