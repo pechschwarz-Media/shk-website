@@ -60,10 +60,8 @@ export default function PostListInner({
             <div className="pt-20 pb-16 md:pb-20 lg:pb-28">
                 <div className="container">
                     <div className="max-w-3xl mx-auto text-center">
-                        <h1 className="text-h1 leading-tight font-light font-headline text-blue mb-8">Newsroom</h1>
-                        <Text className="text-gray prose-p:text-large">
-                            {parse('<p>Dieses Glossar dient als kompakte Wissensquelle für Fachhandwerker, Planer, Architekten und Bauherren</p>')}
-                        </Text>
+                        <h1 className="text-h1 leading-tight font-light font-headline text-blue mb-8">{content?.headline}</h1>
+                        <Text className="text-gray prose-p:text-large">{parse(content?.text)}</Text>
                     </div>
                 </div>
             </div>

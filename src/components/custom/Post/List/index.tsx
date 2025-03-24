@@ -2,7 +2,10 @@ import getPosts from '@/lib/queries/posts/getPosts';
 import PostListInner from './inner';
 import getPostCategories from '@/lib/queries/posts/getPostCategories';
 
-export type Content = {};
+export type Content = {
+    headline: string;
+    text: string;
+};
 
 export default async function PostList({ content }: { content: Content }) {
     const categories = await getPostCategories();
