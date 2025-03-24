@@ -2,7 +2,6 @@
 
 import dynamic from 'next/dynamic';
 import { LocationData } from './types';
-import CTA_51_2 from '@/components/custom/CTA/51_2';
 
 const Components = {
     header_5: dynamic(() => import('@/components/custom/Header/5')),
@@ -27,6 +26,7 @@ const Components = {
     layout_421: dynamic(() => import('@/components/custom/Layout/421')),
     timeline_12: dynamic(() => import('@/components/custom/Timeline/12')),
     date: dynamic(() => import('@/components/custom/Date')),
+    postlist: dynamic(() => import('@/components/custom/Post/List')),
 };
 
 export default function ComponentRenderer({ content, locationData, channel }: { content?: any; locationData?: LocationData; channel: string }) {

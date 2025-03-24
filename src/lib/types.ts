@@ -120,7 +120,7 @@ export type PageMeta = {
     };
 };
 
-export type BlogMeta = PageMeta;
+export type PostMeta = PageMeta;
 
 export type LocationMeta = PageMeta[];
 
@@ -128,6 +128,10 @@ export type PageUris = {
     modified: string;
     link: string;
     uri: string[];
+};
+
+export type PostsSlugs = {
+    slug: string;
 };
 
 export type LocationsSlugs = {
@@ -139,13 +143,30 @@ export type BlogUris = {
     slug: string;
 };
 
-export type Blog = {
+export type Post = {
     title: {
         rendered: string;
     };
-    acf: {
-        content: any[];
+    excerpt: {
+        rendered: string;
     };
+    link: string;
+    date: string;
+    categories: number[];
+    acf: {
+        readingTime: string;
+        thumbnail: Media;
+        content: {
+            title: string;
+            content: any[];
+        }[];
+    };
+};
+
+export type Category = {
+    name: string;
+    slug: string;
+    id: number;
 };
 
 export type CustomerMenu = {
