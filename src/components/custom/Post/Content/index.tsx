@@ -28,7 +28,7 @@ export default function PostContent({ post }: Content) {
                                 <ul>
                                     {post?.acf?.content?.map((content, index) => {
                                         return (
-                                            <li>
+                                            <li key={index}>
                                                 <Link
                                                     to={`section-${index}`}
                                                     className={cn(
