@@ -34,11 +34,14 @@ export default function Oxomi({ content }: { content: Content }) {
                         oxomi.init({ portal: '3000576' });
 
                         oxomi.portalSearch({
-                        target: '#universal-search-output',
-                        input: '#universal-search-input',
-                        showDetails: true,
-                        responsiveFilterBox: '#universal-search-filter',
-                        topBrands: true,
+                            target: '#universal-search-output',
+                            input: '#universal-search-input',
+                            showDetails: true,
+                            responsiveFilterBox: '#universal-search-filter',
+                            topBrands: true,
+                            topBrandsLabel: 'Top Marken',
+                            brandsLabel: 'Marken',
+                            showDetails: true
                         });
                     }
 
