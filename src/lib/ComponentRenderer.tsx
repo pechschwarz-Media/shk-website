@@ -27,6 +27,7 @@ const Components = {
     timeline_12: dynamic(() => import('@/components/custom/Timeline/12')),
     date: dynamic(() => import('@/components/custom/Date')),
     postlist: dynamic(() => import('@/components/custom/Post/List')),
+    oxomi: dynamic(() => import('@/components/custom/Oxomi')),
 };
 
 export default function ComponentRenderer({ content, locationData, channel }: { content?: any; locationData?: LocationData; channel: string }) {
