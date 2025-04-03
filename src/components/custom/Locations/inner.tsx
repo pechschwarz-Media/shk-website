@@ -115,6 +115,29 @@ export default function Locations_Inner({
         }
     }, [cat]);
 
+    const [bg, setBg] = useState('#2B94A6');
+    const [border, setBorder] = useState('#268595');
+    const [glpyh, setGlypth] = useState('#E0FBFF');
+
+    useEffect(() => {
+        if (category) {
+            if (category === 10) {
+                setBg('#CBC5A7');
+                setBorder('#b6b196');
+                setGlypth('#dad6c1');
+            }
+            if (category === 9) {
+                setBg('#A2C62C');
+                setBorder('#91b227');
+                setGlypth('#bdd76b');
+            } else {
+                setBg('#2B94A6');
+                setBorder('#268595');
+                setGlypth('#E0FBFF');
+            }
+        }
+    }, [category]);
+
     return (
         <Section dataComponent="Locations" settings={{ padding: { top: 'medium', bottom: 'medium' }, preventAnimation: true }}>
             <div className="pt-20">
@@ -200,7 +223,7 @@ export default function Locations_Inner({
                                                         {channel === 'partner' ? (
                                                             <Pin background={'#F47630'} borderColor={'#F47630'} glyphColor={'#FFF7F3'} />
                                                         ) : (
-                                                            <Pin background={'#2B94A6'} borderColor={'#2B94A6'} glyphColor={'#E0FBFF'} />
+                                                            <Pin background={bg} borderColor={border} glyphColor={glpyh} />
                                                         )}
                                                     </AdvancedMarker>
                                                 );

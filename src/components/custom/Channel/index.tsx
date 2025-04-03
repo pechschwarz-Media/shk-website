@@ -11,8 +11,8 @@ export default function Channel({
     channels,
 }: {
     channels: {
-        customer: { topline: string; headline: string; link: AcfLink; media: Media };
-        partner: { topline: string; headline: string; link: AcfLink; media: Media };
+        customer: { topline: string; headline: string; text: string; link: AcfLink; media: Media };
+        partner: { topline: string; headline: string; text: string; link: AcfLink; media: Media };
     };
 }) {
     const setCookie = useSetCookie();
@@ -32,6 +32,7 @@ export default function Channel({
                 }}
             >
                 <div className="absolute size-full top-0 left-0">
+                    <div className="absolute bg-black opacity-30 inset-0 z-10"></div>
                     {channels?.customer?.media?.type === 'image' && (
                         <Image src={channels?.customer?.media?.url} alt={channels?.customer?.media?.alt} fill className="object-cover" />
                     )}
@@ -41,10 +42,11 @@ export default function Channel({
                         </video>
                     )}
                 </div>
-                <div className="relative text-center">
-                    <div className="font-headline font-light leading-tight mb-8">
+                <div className="relative text-center z-20">
+                    <div className="font-headline font-light leading-tight mb-8 max-w-lg">
                         <div className="text-h5">{channels?.customer?.topline}</div>
                         <div className="text-h1">{channels?.customer?.headline}</div>
+                        {channels?.customer?.text && <div className="mt-4">{channels?.customer?.text}</div>}
                     </div>
                     <Button variant="blueFilled" as="button">
                         Zur Homepage
@@ -61,6 +63,7 @@ export default function Channel({
                 }}
             >
                 <div className="absolute size-full top-0 left-0">
+                    <div className="absolute bg-black opacity-30 inset-0 z-10"></div>
                     {channels?.partner?.media?.type === 'image' && (
                         <Image src={channels?.partner?.media?.url} alt={channels?.partner?.media?.alt} fill className="object-cover" />
                     )}
@@ -70,10 +73,11 @@ export default function Channel({
                         </video>
                     )}
                 </div>
-                <div className="relative text-center">
-                    <div className="font-headline font-light leading-tight mb-8">
+                <div className="relative text-center z-20">
+                    <div className="font-headline font-light leading-tight mb-8 max-w-lg">
                         <div className="text-h5">{channels?.partner?.topline}</div>
                         <div className="text-h1">{channels?.partner?.headline}</div>
+                        {channels?.partner?.text && <div className="mt-4">{channels?.partner?.text}</div>}
                     </div>
                     <Button variant="blueFilled" as="button">
                         Zur Homepage
