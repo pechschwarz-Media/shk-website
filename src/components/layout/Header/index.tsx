@@ -10,7 +10,7 @@ export default async function Header({ channel }: { channel: string }) {
         case 'customer':
             menu = options?.customer;
             break;
-        case 'energiesparwelten':
+        case 'baederwelten':
             menu = options?.customer;
             break;
         case 'fliesenwelten':
