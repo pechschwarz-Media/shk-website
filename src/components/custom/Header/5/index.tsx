@@ -22,7 +22,9 @@ export default function Header_5({ content }: { content: Content }) {
             <div className="h-[70vh] sm:h-screen w-full relative flex items-center">
                 <div className="absolute inset-0 bg-black z-10 opacity-0" style={{ opacity: `${content.opacity}%` }}></div>
                 <div className="absolute size-full top-0 left-0">
-                    {content?.media?.type === 'image' && <Image src={content?.media?.url} alt={content?.media?.alt} fill className="object-cover" />}
+                    {content?.media?.type === 'image' && (
+                        <Image src={content?.media?.url} alt={content?.media?.alt} fill priority className="object-cover" />
+                    )}
                     {content?.media?.type === 'video' && (
                         <video autoPlay muted loop playsInline className="size-full object-cover block">
                             <source src={content?.media?.url} />

@@ -122,6 +122,7 @@ export default function HeaderInner({
                                                                                             <Image
                                                                                                 src={subMenuItem?.image?.url}
                                                                                                 fill
+                                                                                                priority
                                                                                                 alt={subMenuItem?.image?.alt}
                                                                                                 className="group-hover:scale-110 transition-all"
                                                                                             />
