@@ -28,6 +28,7 @@ const Components = {
     date: dynamic(() => import('@/components/custom/Date')),
     postlist: dynamic(() => import('@/components/custom/Post/List')),
     oxomi: dynamic(() => import('@/components/custom/Oxomi')),
+    text: dynamic(() => import('@/components/custom/TextBlock')),
 };
 
 export default function ComponentRenderer({ content, locationData, channel }: { content?: any; locationData?: LocationData; channel: string }) {
