@@ -4,6 +4,9 @@ import getLocationsSlugs from '@/lib/queries/locations/getLocationsSlugs';
 import getLocationData from '@/lib/queries/locations/getLocationData';
 import getLocationMeta from '@/lib/queries/locations/getLocationMeta';
 
+export const dynamic = 'force-static';
+export const revalidate = 3600;
+
 export async function generateStaticParams() {
     const pages = await getLocationsSlugs();
 
