@@ -8,7 +8,7 @@ import Header from '@/components/layout/Header';
 import { cn } from '@/lib/utils';
 import Legal from '@/components/custom/Legal';
 
-export const dynmic = 'force-static';
+export const dynamic = 'force-static';
 export const revalidate = 3600;
 
 export async function generateStaticParams() {
