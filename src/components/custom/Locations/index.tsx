@@ -15,10 +15,6 @@ export default async function Locations({ content, channel }: { content: Content
     const locationcats = await getLocationcats();
 
     const filteredLocations = locations.filter((location) => {
-        if (content.type === 'partner') {
-            return location.locationcats.includes(12);
-        }
-
         if (content.type === 'customers') {
             return location.locationcats.includes(9) || location.locationcats.includes(10) || location.locationcats.includes(11);
         }

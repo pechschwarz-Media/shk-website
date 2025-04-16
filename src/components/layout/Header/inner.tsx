@@ -60,7 +60,7 @@ export default function HeaderInner({
                 <div className="container h-full">
                     <div className="flex justify-between h-full items-center">
                         <Link href={channel === 'partner' ? '/partner/' : '/kunden/'}>
-                            <Logo className="h-10 text-blue" />
+                            <Logo className="h-10 lg:h-12 text-blue" />
                         </Link>
                         <div className="max-h-screen hidden lg:block">
                             <nav className="container max-w-full">

@@ -79,8 +79,12 @@ export default function CTA_51_2({
                     </div>
                     <div>
                         <h3 className="text-h3 mb-4">{parse(locationData?.title?.rendered)}</h3>
-                        <p>{locationData?.acf?.street + locationData?.acf?.number}</p>
-                        <p>{locationData?.acf?.zip + locationData?.acf?.city}</p>
+                        <p>
+                            {locationData?.acf?.street} {locationData?.acf?.number}
+                        </p>
+                        <p>
+                            {locationData?.acf?.zip} {locationData?.acf?.city}
+                        </p>
                         <Button
                             as="link"
                             link={{

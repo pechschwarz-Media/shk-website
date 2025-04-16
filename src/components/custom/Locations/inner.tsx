@@ -197,6 +197,7 @@ export default function Locations_Inner({
                                             style={{ width: '100%', height: '100%' }}
                                             center={center}
                                             zoom={zoom}
+                                            scrollwheel={false}
                                             gestureHandling={'greedy'}
                                             disableDefaultUI={true}
                                             mapId="edeb5c34fbbda140"
@@ -260,7 +261,7 @@ export default function Locations_Inner({
                                         </div>
                                         <input
                                             type="text"
-                                            placeholder="Standort, PLZ oder Land"
+                                            placeholder="Straße, PLZ oder Ort"
                                             className="border border-blue bg-neutral-50 w-full h-14 rounded-lg outline-blue pl-12 pr-5"
                                             onChange={(e) => {
                                                 setValue(e.target.value);
