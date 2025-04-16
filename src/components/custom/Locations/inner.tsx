@@ -115,29 +115,6 @@ export default function Locations_Inner({
         }
     }, [cat]);
 
-    const [bg, setBg] = useState('#2B94A6');
-    const [border, setBorder] = useState('#268595');
-    const [glpyh, setGlypth] = useState('#E0FBFF');
-
-    useEffect(() => {
-        if (category) {
-            if (category === 10) {
-                setBg('#CBC5A7');
-                setBorder('#b6b196');
-                setGlypth('#dad6c1');
-            }
-            if (category === 9) {
-                setBg('#A2C62C');
-                setBorder('#91b227');
-                setGlypth('#bdd76b');
-            } else {
-                setBg('#2B94A6');
-                setBorder('#268595');
-                setGlypth('#E0FBFF');
-            }
-        }
-    }, [category]);
-
     return (
         <Section dataComponent="Locations" settings={{ padding: { top: 'medium', bottom: 'medium' }, preventAnimation: true }}>
             <div className="pt-20">
@@ -206,6 +183,34 @@ export default function Locations_Inner({
                                             }}
                                         >
                                             {filteredLocations.map((location, index) => {
+                                                let bg = '#2B94A6';
+                                                let border = '#268595';
+                                                let glyph = '#E0FBFF';
+
+                                                switch (location.locationcats.at(0)) {
+                                                    case 10:
+                                                        bg = '#CBC5A7';
+                                                        border = '#b6b196';
+                                                        glyph = '#dad6c1';
+                                                        break;
+                                                    case 9:
+                                                        bg = '#A2C62C';
+                                                        border = '#91b227';
+                                                        glyph = '#bdd76b';
+                                                        break;
+                                                    case 11:
+                                                        bg = '#2B94A6';
+                                                        border = '#268595';
+                                                        glyph = '#E0FBFF';
+                                                        break;
+                                                    case 12:
+                                                        bg = '#F47630';
+                                                        border = '#F47630';
+                                                        glyph = '#FFF7F3';
+                                                }
+
+                                                console.log(location);
+
                                                 return (
                                                     <AdvancedMarker
                                                         position={{
@@ -221,11 +226,7 @@ export default function Locations_Inner({
                                                         }}
                                                         key={index}
                                                     >
-                                                        {channel === 'partner' ? (
-                                                            <Pin background={'#F47630'} borderColor={'#F47630'} glyphColor={'#FFF7F3'} />
-                                                        ) : (
-                                                            <Pin background={bg} borderColor={border} glyphColor={glpyh} />
-                                                        )}
+                                                        <Pin background={bg} borderColor={border} glyphColor={glyph} />
                                                     </AdvancedMarker>
                                                 );
                                             })}
