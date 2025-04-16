@@ -3,6 +3,7 @@ import { Media, Settings } from '@/lib/types';
 import Image from 'next/image';
 
 type Content = {
+    headline: string;
     box: { icon: Media; text: string }[];
     settings: Settings;
 };
@@ -11,6 +12,7 @@ export default async function layout_228({ content }: { content: Content }) {
     return (
         <Section dataComponent="layout_228" settings={content?.settings}>
             <div className="container">
+                {content?.headline && <h2 className="text-h2 text-center leading-tight font-headline mb-20 text-blue">{content?.headline}</h2>}
                 <div className="grid gap-8 xl:gap-10  grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 xl:w-5/6 xl:mx-auto">
                     {content?.box?.map((box, index) => (
                         <div key={index} className="flex flex-col gap-6 items-center">

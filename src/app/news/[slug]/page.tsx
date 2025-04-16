@@ -8,6 +8,9 @@ import Header from '@/components/layout/Header';
 import { cn } from '@/lib/utils';
 import PostContent from '@/components/custom/Post/Content';
 
+export const dynmic = 'force-static';
+export const revalidate = 3600;
+
 export async function generateStaticParams() {
     const posts = await getPostsSlugs();
 

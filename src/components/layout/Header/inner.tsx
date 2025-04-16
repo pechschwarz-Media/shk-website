@@ -127,7 +127,7 @@ export default function HeaderInner({
                                                                                                 className="group-hover:scale-110 transition-all"
                                                                                             />
                                                                                         </div>
-                                                                                        <div className="text-headline leading-tight text-large text-blue mb-1">
+                                                                                        <div className="font-headline leading-tight text-large text-blue mb-1">
                                                                                             {subMenuItem?.link?.title}
                                                                                         </div>
                                                                                         <div className="text-blue text-small hyphens-auto ">
@@ -372,7 +372,7 @@ export default function HeaderInner({
                                                                     {menuItem?.submenu?.map((subMenuItem, index) => {
                                                                         return (
                                                                             <Link href={subMenuItem?.link?.url} key={index}>
-                                                                                <div className="text-headline leading-tight text-large text-blue mb-1">
+                                                                                <div className="font-headline leading-tight text-large text-blue mb-1">
                                                                                     {subMenuItem?.link?.title}
                                                                                 </div>
                                                                                 <div className="text-blue text-small">

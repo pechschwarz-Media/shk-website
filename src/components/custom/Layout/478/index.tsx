@@ -1,10 +1,10 @@
-import Section from "@/components/static/Section";
-import Text from "@/components/static/Text";
-import { AcfLink, Media, Settings } from "@/lib/types";
-import parse from "html-react-parser";
-import Button from "@/components/static/Button";
-import Image from "next/image";
-import { cn } from "@/lib/utils";
+import Section from '@/components/static/Section';
+import Text from '@/components/static/Text';
+import { AcfLink, Media, Settings } from '@/lib/types';
+import parse from 'html-react-parser';
+import Button from '@/components/static/Button';
+import Image from 'next/image';
+import { cn } from '@/lib/utils';
 
 type Content = {
     topline: string;
@@ -33,26 +33,13 @@ export default function Layout_478({ content }: { content: Content }) {
                                 />
                             </div>
                             <div className="order-1 lg:order-2 lg:col-span-6 lg:col-start-7">
-                                {content?.topline && (
-                                    <div className="mb-4 text-blue">{content?.topline}</div>
-                                )}
+                                {content?.topline && <div className="mb-4 text-blue">{content?.topline}</div>}
 
-                                <h2 className="text-h2 leading-tight font-headline mb-8 text-blue">
-                                    {content?.headline}
-                                </h2>
-                                {content?.text && (
-                                    <Text className="prose-p:text-gray">
-                                        {parse(content?.text)}
-                                    </Text>
-                                )}
+                                <h2 className="text-h2 leading-tight font-headline mb-8 text-blue">{content?.headline}</h2>
+                                {content?.text && <Text className="prose-p:text-gray">{parse(content?.text)}</Text>}
 
                                 {content?.button?.title && (
-                                    <Button
-                                        as="link"
-                                        variant="blueFilled"
-                                        link={content?.button}
-                                        className="mt-6"
-                                    >
+                                    <Button as="link" variant="blueFilled" link={content?.button} className="mt-6">
                                         {content?.button?.title}
                                     </Button>
                                 )}
@@ -61,24 +48,11 @@ export default function Layout_478({ content }: { content: Content }) {
                     ) : (
                         <>
                             <div className="lg:col-span-6">
-                                {content?.topline && (
-                                    <div className="mb-4 text-blue">{content?.topline}</div>
-                                )}
-                                <h2 className="text-h2 leading-tight font-headline mb-8 text-blue">
-                                    {content?.headline}
-                                </h2>
-                                {content?.text && (
-                                    <Text className="prose-p:text-gray">
-                                        {parse(content?.text)}
-                                    </Text>
-                                )}
+                                {content?.topline && <div className="mb-4 text-blue">{content?.topline}</div>}
+                                <h2 className="text-h2 leading-tight font-headline mb-8 text-blue">{content?.headline}</h2>
+                                {content?.text && <Text className="prose-p:text-gray">{parse(content?.text)}</Text>}
                                 {content?.button?.title && (
-                                    <Button
-                                        as="link"
-                                        variant="blueFilled"
-                                        link={content?.button}
-                                        className="mt-6"
-                                    >
+                                    <Button as="link" variant="blueFilled" link={content?.button} className="mt-6">
                                         {content?.button?.title}
                                     </Button>
                                 )}
@@ -89,7 +63,7 @@ export default function Layout_478({ content }: { content: Content }) {
                                     alt={content?.image?.alt}
                                     width={content?.image?.width}
                                     height={content?.image?.height}
-                                    className="rounded-2xl aspect-square object-cover"
+                                    className="rounded-2xl"
                                 />
                             </div>
                         </>
