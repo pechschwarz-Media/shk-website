@@ -156,7 +156,7 @@ export default function Layout_350({ content, channel }: { content: Content; cha
                             as="section"
                             id={section?.anchor ? section?.anchor : `anchor-${index}`}
                             key={index}
-                            threshold={1}
+                            threshold={0.6}
                             onChange={(inView) => {
                                 if (inView) {
                                     setCurrentIndex(index);

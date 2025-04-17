@@ -38,7 +38,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
     const { isEnabled } = await draftMode();
     return (
         <html lang="de" className="scroll-smooth bg-background-gray">
-            <body className={cn(hongkong.variable, panton.variable, 'text-base text-dark font-body')}>
+            <body className={cn(hongkong.variable, panton.variable, 'text-base text-dark font-body pt-20')}>
                 {children}
                 <Footer />
                 {isEnabled && (

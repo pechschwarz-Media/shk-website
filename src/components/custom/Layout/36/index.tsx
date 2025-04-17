@@ -27,8 +27,6 @@ export default function Layout_36({ content }: { content: Content }) {
                     {words.map((word, index) => {
                         const start = index * 0.015;
                         const end = start + 0.015;
-
-                        console.log(start);
                         // eslint-disable-next-line
                         const opacity = useTransform(scrollYProgress, [start, end], [0.1, 1]);
                         return (

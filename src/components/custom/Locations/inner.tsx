@@ -209,8 +209,6 @@ export default function Locations_Inner({
                                                         glyph = '#FFF7F3';
                                                 }
 
-                                                console.log(location);
-
                                                 return (
                                                     <AdvancedMarker
                                                         position={{
@@ -286,57 +284,67 @@ export default function Locations_Inner({
                                     </Button>
                                 </div>
                             </div>
-                            {content?.type === 'customers' && (
-                                <div className="mt-5">
-                                    <div className="flex flex-wrap items-center gap-2">
+                            <div className="mt-5">
+                                <div className="flex flex-wrap items-center gap-2">
+                                    <button
+                                        className={cn(
+                                            'bg-customer-bg text-blue hover:bg-blue hover:text-white h-9 rounded-full !text-small px-3',
+                                            category === 'all' && 'bg-blue text-white'
+                                        )}
+                                        onClick={() => {
+                                            setCategory('all');
+                                        }}
+                                    >
+                                        Alle Welten
+                                    </button>
+                                    {content?.type === 'partner' && (
                                         <button
                                             className={cn(
-                                                'bg-customer-bg text-blue hover:bg-blue hover:text-white h-9 rounded-full px-3',
-                                                category === 'all' && 'bg-blue text-white'
+                                                'bg-customer-bg text-blue hover:bg-partner hover:text-white h-9 rounded-full !text-small px-3',
+                                                category === 12 && 'bg-partner text-white'
                                             )}
                                             onClick={() => {
-                                                setCategory('all');
+                                                setCategory(12);
                                             }}
                                         >
-                                            Alle Welten
+                                            Abholung
                                         </button>
-                                        <button
-                                            className={cn(
-                                                'bg-customer-bg text-blue hover:bg-baederwelt hover:text-white h-9 rounded-full px-3',
-                                                category === 11 && 'bg-baederwelt text-white'
-                                            )}
-                                            onClick={() => {
-                                                setCategory(11);
-                                            }}
-                                        >
-                                            Bäderwelten
-                                        </button>
-                                        <button
-                                            className={cn(
-                                                'bg-customer-bg text-blue hover:bg-fliesenwelt hover:text-white h-9 rounded-full px-3',
-                                                category === 10 && 'bg-fliesenwelt text-white'
-                                            )}
-                                            onClick={() => {
-                                                setCategory(10);
-                                            }}
-                                        >
-                                            Fliesenwelten
-                                        </button>
-                                        <button
-                                            className={cn(
-                                                'bg-customer-bg text-blue hover:bg-energiesparwelt hover:text-white h-9 rounded-full px-3',
-                                                category === 9 && 'bg-energiesparwelt text-white'
-                                            )}
-                                            onClick={() => {
-                                                setCategory(9);
-                                            }}
-                                        >
-                                            Energiesparwelten
-                                        </button>
-                                    </div>
+                                    )}
+                                    <button
+                                        className={cn(
+                                            'bg-customer-bg text-blue hover:bg-baederwelt hover:text-white h-9 rounded-full !text-small px-3',
+                                            category === 11 && 'bg-baederwelt text-white'
+                                        )}
+                                        onClick={() => {
+                                            setCategory(11);
+                                        }}
+                                    >
+                                        Bäderwelten
+                                    </button>
+                                    <button
+                                        className={cn(
+                                            'bg-customer-bg text-blue hover:bg-fliesenwelt hover:text-white h-9 rounded-full !text-small px-3',
+                                            category === 10 && 'bg-fliesenwelt text-white'
+                                        )}
+                                        onClick={() => {
+                                            setCategory(10);
+                                        }}
+                                    >
+                                        Fliesenwelten
+                                    </button>
+                                    <button
+                                        className={cn(
+                                            'bg-customer-bg text-blue hover:bg-energiesparwelt hover:text-white h-9 rounded-full !text-small px-3',
+                                            category === 9 && 'bg-energiesparwelt text-white'
+                                        )}
+                                        onClick={() => {
+                                            setCategory(9);
+                                        }}
+                                    >
+                                        Energiesparwelten
+                                    </button>
                                 </div>
-                            )}
-
+                            </div>
                             <div className="mt-10">
                                 {status === 'ZERO_RESULTS' ||
                                     (filteredLocations.length === 0 && (
@@ -385,7 +393,7 @@ export default function Locations_Inner({
                                                                             category === 11 && 'bg-baederwelt',
                                                                             category === 9 && 'bg-energiesparwelt',
                                                                             category === 10 && 'bg-fliesenwelt',
-                                                                            category === 12 && 'bg-black'
+                                                                            category === 12 && 'bg-partner'
                                                                         )}
                                                                         key={index}
                                                                     >
