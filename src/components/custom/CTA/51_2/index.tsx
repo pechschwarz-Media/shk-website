@@ -78,7 +78,7 @@ export default function CTA_51_2({
                         </APIProvider>
                     </div>
                     <div>
-                        <h3 className="text-h3 mb-4">{parse(locationData?.title?.rendered)}</h3>
+                        <h3 className="text-h3 font-headline font-light leading-tight mb-4">{parse(locationData?.title?.rendered)}</h3>
                         <p>
                             {locationData?.acf?.street} {locationData?.acf?.number}
                         </p>

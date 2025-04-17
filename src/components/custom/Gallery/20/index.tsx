@@ -26,7 +26,7 @@ export default function Gallery_20({ content }: { content: Content }) {
     return (
         <Section dataComponent="Gallery_20" settings={content?.settings}>
             <div className="container relative">
-                <h2 className="text-h2 mb-10 lg:mb-20">{content?.headline}</h2>
+                <h2 className="text-h2 font-headline leading-tight font-light mb-10 lg:mb-20">{content?.headline}</h2>
                 <Swiper
                     modules={[Navigation, Pagination]}
                     spaceBetween={10}
