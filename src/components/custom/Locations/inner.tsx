@@ -115,6 +115,41 @@ export default function Locations_Inner({
         }
     }, [cat]);
 
+    const [bg, setBg] = useState('#0B2D44');
+    const [border, setBorder] = useState('#09283d');
+    const [glyph, setGlyph] = useState('#3b5669');
+
+    useEffect(() => {
+        if (category) {
+            switch (category) {
+                case 10:
+                    setBg('#CBC5A7');
+                    setBorder('#b6b196');
+                    setGlyph('#dad6c1');
+                    break;
+                case 9:
+                    setBg('#A2C62C');
+                    setBorder('#91b227');
+                    setGlyph('#bdd76b');
+                    break;
+                case 11:
+                    setBg('#2B94A6');
+                    setBorder('#268595');
+                    setGlyph('#55a9b7');
+                    break;
+                case 12:
+                    setBg('#F47630');
+                    setBorder('#F47630');
+                    setGlyph('#FFF7F3');
+                    break;
+                default:
+                    setBg('#0B2D44');
+                    setBorder('#09283d');
+                    setGlyph('#3b5669');
+            }
+        }
+    }, [category]);
+
     return (
         <Section dataComponent="Locations" settings={{ padding: { top: 'medium', bottom: 'medium' }, preventAnimation: true }}>
             <div className="pt-20">
@@ -183,32 +218,6 @@ export default function Locations_Inner({
                                             }}
                                         >
                                             {filteredLocations.map((location, index) => {
-                                                let bg = '#2B94A6';
-                                                let border = '#268595';
-                                                let glyph = '#E0FBFF';
-
-                                                switch (location.locationcats.at(0)) {
-                                                    case 10:
-                                                        bg = '#CBC5A7';
-                                                        border = '#b6b196';
-                                                        glyph = '#dad6c1';
-                                                        break;
-                                                    case 9:
-                                                        bg = '#A2C62C';
-                                                        border = '#91b227';
-                                                        glyph = '#bdd76b';
-                                                        break;
-                                                    case 11:
-                                                        bg = '#2B94A6';
-                                                        border = '#268595';
-                                                        glyph = '#E0FBFF';
-                                                        break;
-                                                    case 12:
-                                                        bg = '#F47630';
-                                                        border = '#F47630';
-                                                        glyph = '#FFF7F3';
-                                                }
-
                                                 return (
                                                     <AdvancedMarker
                                                         position={{
