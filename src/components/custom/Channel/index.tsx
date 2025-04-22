@@ -18,7 +18,7 @@ export default function Channel({
     const setCookie = useSetCookie();
 
     return (
-        <section className="w-full relative h-screen flex flex-col lg:flex-row">
+        <section className="w-full relative h-screen flex flex-col lg:flex-row -mt-20">
             <div className="absolute top-0 left-0 md:left-10 z-10 bg-white p-3 md:p-4">
                 <Logo className="h-10 w-auto" />
             </div>
@@ -43,9 +43,9 @@ export default function Channel({
                     )}
                 </div>
                 <div className="relative text-center z-20">
-                    <div className="font-headline font-light leading-tight mb-8 max-w-lg">
-                        <div className="text-h5">{channels?.customer?.topline}</div>
-                        <div className="text-h1">{channels?.customer?.headline}</div>
+                    <div className="font-headline font-light leading-tight mb-8 max-w-2xl">
+                        <div className="text-h6 mb-2">{channels?.customer?.topline}</div>
+                        <div className="text-h2 md:text-h3 font-headline font-light leading-tight">{channels?.customer?.headline}</div>
                         {channels?.customer?.text && <div className="mt-4">{channels?.customer?.text}</div>}
                     </div>
                     <Button variant="blueFilled" as="button">
@@ -74,9 +74,9 @@ export default function Channel({
                     )}
                 </div>
                 <div className="relative text-center z-20">
-                    <div className="font-headline font-light leading-tight mb-8 max-w-lg">
-                        <div className="text-h5">{channels?.partner?.topline}</div>
-                        <div className="text-h1">{channels?.partner?.headline}</div>
+                    <div className="font-headline font-light leading-tight mb-8 max-w-2xl">
+                        <div className="text-h6 mb-2">{channels?.partner?.topline}</div>
+                        <div className="text-h2 md:text-h3 font-headline font-light leading-tight">{channels?.partner?.headline}</div>
                         {channels?.partner?.text && <div className="mt-4">{channels?.partner?.text}</div>}
                     </div>
                     <Button variant="blueFilled" as="button">
