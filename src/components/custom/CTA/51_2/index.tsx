@@ -36,14 +36,30 @@ export default function CTA_51_2({
     };
 }) {
     let cat = 'bad';
+    let bg = '#2B94A6';
+    let border = '#268595';
+    let glyph = '#55a9b7';
+
     if (channel === 'energiesparwelten') {
         cat = 'energie';
+
+        bg = '#A2C62C';
+        border = '#91b227';
+        glyph = '#bdd76b';
     }
     if (channel === 'fliesenwelten') {
         cat = 'fliesen';
+
+        bg = '#CBC5A7';
+        border = '#b6b196';
+        glyph = '#dad6c1';
     }
     if (channel === 'partner') {
         cat = 'abhol';
+
+        bg = '#F47630';
+        border = '#F47630';
+        glyph = '#FFF7F3';
     }
 
     function formatTime(value: string) {
@@ -72,7 +88,7 @@ export default function CTA_51_2({
                                         lng: parseFloat(locationData?.acf.lng),
                                     }}
                                 >
-                                    <Pin background={'#2B94A6'} borderColor={'#2B94A6'} glyphColor={'#E0FBFF'} />
+                                    <Pin background={bg} borderColor={border} glyphColor={glyph} />
                                 </AdvancedMarker>
                             </Map>
                         </APIProvider>

@@ -150,6 +150,16 @@ export default function Locations_Inner({
         }
     }, [category]);
 
+    function reset() {
+        setCategory('all');
+        setValue('');
+        setStatus('');
+        setCoordinates(null);
+        setCenter({ lat: 53.635502, lng: 11.40125 });
+        setZoom(7);
+        setFilteredLocations(locations);
+    }
+
     return (
         <Section dataComponent="Locations" settings={{ padding: { top: 'medium', bottom: 'medium' }, preventAnimation: true }}>
             <div className="pt-20">
@@ -378,63 +388,79 @@ export default function Locations_Inner({
                                         </div>
                                     ))}
                                 {status === 'filtered' && (
-                                    <div className="space-y-3">
-                                        {filteredLocations.map((location, index) => {
-                                            return (
-                                                <div className="border border-blue rounded-lg overflow-hidden" key={index}>
-                                                    <div className="p-4">
-                                                        {typeof location?.distance !== 'undefined' && (
-                                                            <div className="text-gray text-small mb-3">
-                                                                {Math.floor(location.distance)}km entfernt
+                                    <>
+                                        <div className="mb-3">
+                                            <button
+                                                className="text-small text-gray underline"
+                                                onClick={() => {
+                                                    reset();
+                                                }}
+                                            >
+                                                Auswahl zurücksetzen
+                                            </button>
+                                        </div>
+                                        <div className="space-y-3">
+                                            {filteredLocations.map((location, index) => {
+                                                return (
+                                                    <div className="border border-blue rounded-lg overflow-hidden" key={index}>
+                                                        <div className="p-4">
+                                                            {typeof location?.distance !== 'undefined' && (
+                                                                <div className="text-gray text-small mb-3">
+                                                                    {Math.floor(location.distance)}km entfernt
+                                                                </div>
+                                                            )}
+                                                            <div className="flex items-center gap-1 mb-2">
+                                                                {location?.locationcats.map((category, index) => {
+                                                                    const locationcat = locationcats
+                                                                        .filter((cat) => {
+                                                                            return cat.id === category;
+                                                                        })
+                                                                        ?.at(0);
+                                                                    return (
+                                                                        <div
+                                                                            className={cn(
+                                                                                'px-3 text-tiny text-white h-6 flex items-center rounded-full',
+                                                                                category === 11 && 'bg-baederwelt',
+                                                                                category === 9 && 'bg-energiesparwelt',
+                                                                                category === 10 && 'bg-fliesenwelt',
+                                                                                category === 12 && 'bg-partner'
+                                                                            )}
+                                                                            key={index}
+                                                                        >
+                                                                            {locationcat?.name}
+                                                                        </div>
+                                                                    );
+                                                                })}
                                                             </div>
-                                                        )}
-                                                        <div className="flex items-center gap-1 mb-2">
-                                                            {location?.locationcats.map((category, index) => {
-                                                                const locationcat = locationcats
-                                                                    .filter((cat) => {
-                                                                        return cat.id === category;
-                                                                    })
-                                                                    ?.at(0);
-                                                                return (
-                                                                    <div
-                                                                        className={cn(
-                                                                            'px-3 text-tiny text-white h-6 flex items-center rounded-full',
-                                                                            category === 11 && 'bg-baederwelt',
-                                                                            category === 9 && 'bg-energiesparwelt',
-                                                                            category === 10 && 'bg-fliesenwelt',
-                                                                            category === 12 && 'bg-partner'
-                                                                        )}
-                                                                        key={index}
-                                                                    >
-                                                                        {locationcat?.name}
-                                                                    </div>
-                                                                );
-                                                            })}
+                                                            <div className="text-large font-headline mb-3">{parse(location.title?.rendered)}</div>
+                                                            <address className="not-italic text-gray">
+                                                                {location?.acf?.street} {location?.acf?.number}
+                                                                <br />
+                                                                {location?.acf?.zip} {location?.acf?.city}
+                                                            </address>
+                                                            <Link href={location?.link} className="flex items-center gap-2 text-blue mt-5">
+                                                                Weitere Details
+                                                                <svg
+                                                                    xmlns="http://www.w3.org/2000/svg"
+                                                                    fill="none"
+                                                                    viewBox="0 0 24 24"
+                                                                    strokeWidth={1.5}
+                                                                    stroke="currentColor"
+                                                                    className="size-4"
+                                                                >
+                                                                    <path
+                                                                        strokeLinecap="round"
+                                                                        strokeLinejoin="round"
+                                                                        d="m8.25 4.5 7.5 7.5-7.5 7.5"
+                                                                    />
+                                                                </svg>
+                                                            </Link>
                                                         </div>
-                                                        <div className="text-large font-headline mb-3">{parse(location.title?.rendered)}</div>
-                                                        <address className="not-italic text-gray">
-                                                            {location?.acf?.street} {location?.acf?.number}
-                                                            <br />
-                                                            {location?.acf?.zip} {location?.acf?.city}
-                                                        </address>
-                                                        <Link href={location?.link} className="flex items-center gap-2 text-blue mt-5">
-                                                            Weitere Details
-                                                            <svg
-                                                                xmlns="http://www.w3.org/2000/svg"
-                                                                fill="none"
-                                                                viewBox="0 0 24 24"
-                                                                strokeWidth={1.5}
-                                                                stroke="currentColor"
-                                                                className="size-4"
-                                                            >
-                                                                <path strokeLinecap="round" strokeLinejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
-                                                            </svg>
-                                                        </Link>
                                                     </div>
-                                                </div>
-                                            );
-                                        })}
-                                    </div>
+                                                );
+                                            })}
+                                        </div>
+                                    </>
                                 )}
                             </div>
                         </div>

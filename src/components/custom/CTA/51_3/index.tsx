@@ -12,7 +12,7 @@ export type Content = {
 export default function CTA_51_3({ content, locationData }: { content: Content; locationData: Location }) {
     return (
         <>
-            <Section dataComponent="CTA_51_3" settings={content?.setting}>
+            <Section dataComponent="CTA_51_3" id="termin" settings={content?.setting}>
                 <div className="mb-14">
                     <div className="container">
                         <div className="max-w-2xl mx-auto text-center">
