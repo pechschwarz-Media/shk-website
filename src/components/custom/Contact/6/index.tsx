@@ -9,6 +9,9 @@ import { Form } from '@/components/static/Form';
 type Content = {
     topline: string;
     headline: string;
+    email: string;
+    phone: string;
+    address: string;
     form: string;
     settings: Settings;
 };
@@ -27,7 +30,7 @@ export default async function Contact_6({ content }: { content: Content }) {
                         <div>
                             <ul className="space-y-3">
                                 <li>
-                                    <Link href={`mailto:${options?.generalEmail}`} className="inline-flex gap-4">
+                                    <Link href={`mailto:${content?.email}`} className="inline-flex gap-4">
                                         <svg
                                             className="relative top-[2px]"
                                             width="20"
@@ -41,11 +44,11 @@ export default async function Contact_6({ content }: { content: Content }) {
                                                 fill="#0B2D44"
                                             />
                                         </svg>
-                                        {options?.generalEmail}
+                                        {content?.email}
                                     </Link>
                                 </li>
                                 <li>
-                                    <Link href={`tel:${options?.generalPhone}`} className="inline-flex gap-4">
+                                    <Link href={`tel:${content?.phone}`} className="inline-flex gap-4">
                                         <svg
                                             className="relative top-[2px]"
                                             width="19"
@@ -59,7 +62,7 @@ export default async function Contact_6({ content }: { content: Content }) {
                                                 fill="#0B2D44"
                                             />
                                         </svg>
-                                        {options?.generalPhone}
+                                        {content?.phone}
                                     </Link>
                                 </li>
                                 <li>
@@ -81,7 +84,7 @@ export default async function Contact_6({ content }: { content: Content }) {
                                                 fill="#0B2D44"
                                             />
                                         </svg>
-                                        {parse(options?.generalAddress)}
+                                        {parse(content?.address)}
                                     </div>
                                 </li>
                             </ul>
