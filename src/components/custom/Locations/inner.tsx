@@ -326,7 +326,7 @@ export default function Locations_Inner({
                                                 setCategory(12);
                                             }}
                                         >
-                                            Abholung
+                                            SHK | SHOP
                                         </button>
                                     )}
                                     <button
