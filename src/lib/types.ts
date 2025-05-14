@@ -23,6 +23,7 @@ export type Page = {
     title: {
         rendered: string;
     };
+    link: string;
     template: string;
     acf: {
         channel: string;

@@ -65,7 +65,7 @@ export default async function Page({ params }: { params: Promise<{ uri: string[]
         default:
             return (
                 <main className={cn(page?.acf?.channel === 'customer' && 'bg-customer-bg', page?.acf?.channel === 'partner' && 'bg-partner-bg')}>
-                    <Header channel={page?.acf?.channel} />
+                    <Header channel={page?.acf?.channel} link={page?.link} />
                     <ComponentRenderer content={page?.acf?.content} channel={page?.acf?.channel} />
                 </main>
             );

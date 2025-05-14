@@ -15,10 +15,12 @@ export default function HeaderInner({
     channel,
     menu,
     links,
+    link,
 }: {
     channel: string;
     menu: CustomerMenu;
     links: { locations: AcfLink; appointment: AcfLink; shop: AcfLink; locations2: AcfLink };
+    link?: string;
 }) {
     const [currentMenuItem, setCurrentMenuItem] = useState(-1);
     const [toggle, setToggle] = useState(false);
@@ -43,6 +45,23 @@ export default function HeaderInner({
     }, [menuOpen]);
 
     const router = useRouter();
+
+    const isActive = (url: string | undefined, menuItem: any) => {
+        if (url) {
+            if (url === menuItem?.link?.url) {
+                return true;
+            } else {
+                if (menuItem?.submenu) {
+                    for (const submenu of menuItem?.submenu) {
+                        if (link === submenu?.link?.url) {
+                            return true;
+                        }
+                    }
+                }
+            }
+        }
+        return false;
+    };
 
     return (
         <>
@@ -72,7 +91,7 @@ export default function HeaderInner({
                                                     <li key={index}>
                                                         <Link
                                                             href={menuItem?.link?.url}
-                                                            className="flex items-center gap-1"
+                                                            className={cn('flex items-center gap-1', isActive(link, menuItem) && 'font-bold')}
                                                             onClick={(e) => {
                                                                 if (menuItem?.submenu?.length > 0) {
                                                                     e.preventDefault();

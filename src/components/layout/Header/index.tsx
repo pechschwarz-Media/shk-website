@@ -1,7 +1,7 @@
 import getOptions from '@/lib/queries/options/getOptions';
 import HeaderInner from './inner';
 
-export default async function Header({ channel }: { channel: string }) {
+export default async function Header({ channel, link }: { channel: string; link?: string }) {
     const options = await getOptions();
 
     let menu = options?.customer;
@@ -33,6 +33,7 @@ export default async function Header({ channel }: { channel: string }) {
                 shop: options?.headerShopLink,
                 locations2: options?.headerLocations2Link,
             }}
+            link={link}
             menu={menu}
         />
     );
