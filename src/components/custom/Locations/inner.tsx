@@ -314,7 +314,7 @@ export default function Locations_Inner({
                                             setCategory('all');
                                         }}
                                     >
-                                        Alle Welten
+                                        Alle
                                     </button>
                                     {content?.type === 'partner' && (
                                         <button
