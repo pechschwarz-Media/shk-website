@@ -50,7 +50,7 @@ export default function Layout_421({ content }: { content: Content }) {
                     className="sticky top-[20%] z-20 mx-auto flex min-h-0 items-center justify-center md:min-h-[auto]"
                     style={containerMotion}
                 >
-                    <div className="container flex flex-col items-center text-center w-1/2">
+                    <div className="container flex flex-col items-center text-center lg:w-1/2">
                         <div className="mb-4">{content?.topline}</div>
                         <h2 className="text-h2 leading-tight font-headline mb-8 text-blue">{content?.headline}</h2>
                         <Text className="prose-p:text-gray text-center">{parse(content?.text)}</Text>
@@ -65,7 +65,7 @@ export default function Layout_421({ content }: { content: Content }) {
                         {content?.images?.map((image, index) => (
                             <motion.div
                                 key={index}
-                                className={cn('absolute size-[500px] rounded-normal overflow-hidden', imageTransforms[index])}
+                                className={cn('absolute size-[280px] lg:size-[500px] rounded-normal overflow-hidden', imageTransforms[index])}
                                 style={imageTransforms[index]}
                             >
                                 <Image

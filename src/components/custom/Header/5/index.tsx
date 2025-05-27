@@ -21,7 +21,7 @@ type Content = {
 export default function Header_5({ content }: { content: Content }) {
     return (
         <Section dataComponent="Header_5" settings={{ padding: { top: 'off', bottom: 'off' }, preventAnimation: true }}>
-            <div className="-mt-20">
+            <div className="lg:-mt-20">
                 <div className={cn('h-[70vh] sm:h-screen w-full relative flex items-center', content?.small && 'sm:h-[60vh]')}>
                     <div className="absolute inset-0 bg-black z-10 opacity-0" style={{ opacity: `${content.opacity}%` }}></div>
                     <div className="absolute size-full top-0 left-0">

@@ -338,7 +338,7 @@ export default function HeaderInner({
                     </div>
                 </div>
             </header>
-            <div className="mobile-menu -translate-y-full bg-gray-light overflow-auto max-h-screen border-b border-b-gray/30 pt-[80px] z-10 fixed top-0 left-0 w-full">
+            <div className="mobile-menu -translate-y-full bg-gray-light overflow-auto max-h-screen border-b border-b-gray/30 pt-[80px] z-40 fixed top-0 left-0 w-full">
                 <nav className="container">
                     <ul className="flex flex-col divide-y divide-gray/30">
                         {menu?.length > 0 && (
@@ -415,7 +415,7 @@ export default function HeaderInner({
                     <div className="mt-4 py-4 border-t border-dashed border-t-gray/30">
                         <div className="font-bold text-small mb-2">Kanal auswählen</div>
                         <button
-                            className="hidden lg:flex items-center gap-2 ml-4"
+                            className="flex items-center gap-2"
                             onClick={() => {
                                 setChangeChannel(true);
 
