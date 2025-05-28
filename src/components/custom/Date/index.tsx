@@ -32,7 +32,7 @@ export default function Date({ content }: { content: Content }) {
                             license="1mjb12zhxy1-1ov9n7qh0ct-263od7bccj7"
                             id="calenso-booking-widget1"
                             className="w-full"
-                            src="https://smartwidget.calenso.com/?partner_uuid=0d6d25e4-aa2d-49e2-9a59-f42bab72afc9&widget_uuid=d7446074-507c-4806-abed-6ae5e5082925&refresh=1"
+                            src="https://book.calenso.com/shk-deutschland"
                         />
                     </div>
                 </div>
