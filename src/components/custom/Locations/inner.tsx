@@ -214,7 +214,7 @@ export default function Locations_Inner({
                                             </svg>
                                         </button>
                                     </div>
-                                    <APIProvider apiKey="AIzaSyDNiSq4ZMaNsv9DnJ5yrmAYBwXCdUh8gd0">
+                                    <APIProvider apiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY || ''}>
                                         <Map
                                             style={{ width: '100%', height: '100%' }}
                                             center={center}
