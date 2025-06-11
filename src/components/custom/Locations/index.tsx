@@ -8,23 +8,38 @@ export type Content = {
     text: string;
     hint: string;
     type: string;
+    category: number | null;
 };
 
 export default async function Locations({ content, channel }: { content: Content; channel: string }) {
     const locations = await getLocations();
     const locationcats = await getLocationcats();
 
-    const filteredLocations = locations.filter((location) => {
-        if (content.type === 'customers') {
-            return location.locationcats.includes(9) || location.locationcats.includes(10) || location.locationcats.includes(11);
-        }
+    const filteredLocations = locations
+        .filter((location) => {
+            if (content.type === 'customers') {
+                return location.locationcats.includes(9) || location.locationcats.includes(10) || location.locationcats.includes(11);
+            }
 
-        return true;
-    });
+            return true;
+        })
+        .filter((location) => {
+            if (content?.category) {
+                return location.locationcats.includes(content?.category);
+            }
+
+            return true;
+        });
 
     return (
         <Suspense>
-            <Locations_Inner content={content} channel={channel} locations={filteredLocations} locationcats={locationcats} />
+            <Locations_Inner
+                content={content}
+                channel={channel}
+                locations={filteredLocations}
+                locationcats={locationcats}
+                defaultCategory={content?.category}
+            />
         </Suspense>
     );
 }

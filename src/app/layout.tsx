@@ -40,7 +40,6 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <html lang="de" className="scroll-smooth bg-background-gray">
             <body className={cn(hongkong.variable, panton.variable, 'text-base text-dark font-body pt-20')}>
                 {children}
-                <Footer />
                 {isEnabled && (
                     <div className="bg-blue fixed bottom-0 left-0 z-[100] text-small px-8 py-2 rounded-tr-lg text-white">
                         Du befindest dich im Draft-Mode!

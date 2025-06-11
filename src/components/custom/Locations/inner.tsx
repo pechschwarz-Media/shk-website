@@ -17,11 +17,13 @@ export default function Locations_Inner({
     locations,
     locationcats,
     channel,
+    defaultCategory,
 }: {
     content: Content;
     locations: Location[];
     locationcats: Locationcat[];
     channel: string;
+    defaultCategory: number | null;
 }) {
     const [zoom, setZoom] = useState(7);
     const [coordinates, setCoordinates] = useState<null | { lat: number; lng: number }>(null);
@@ -114,6 +116,12 @@ export default function Locations_Inner({
             setCategory(parseInt(cat));
         }
     }, [cat]);
+
+    useEffect(() => {
+        if (defaultCategory) {
+            setCategory(defaultCategory);
+        }
+    }, [defaultCategory]);
 
     const [bg, setBg] = useState('#0B2D44');
     const [border, setBorder] = useState('#09283d');
@@ -303,67 +311,69 @@ export default function Locations_Inner({
                                     </Button>
                                 </div>
                             </div>
-                            <div className="mt-5">
-                                <div className="flex flex-wrap items-center gap-2">
-                                    <button
-                                        className={cn(
-                                            'bg-customer-bg text-blue hover:bg-blue hover:text-white h-9 rounded-full !text-small px-3',
-                                            category === 'all' && 'bg-blue text-white'
-                                        )}
-                                        onClick={() => {
-                                            setCategory('all');
-                                        }}
-                                    >
-                                        Alle
-                                    </button>
-                                    {content?.type === 'partner' && (
+                            {!defaultCategory && (
+                                <div className="mt-5">
+                                    <div className="flex flex-wrap items-center gap-2">
                                         <button
                                             className={cn(
-                                                'bg-customer-bg text-blue hover:bg-partner hover:text-white h-9 rounded-full !text-small px-3',
-                                                category === 12 && 'bg-partner text-white'
+                                                'bg-customer-bg text-blue hover:bg-blue hover:text-white h-9 rounded-full !text-small px-3',
+                                                category === 'all' && 'bg-blue text-white'
                                             )}
                                             onClick={() => {
-                                                setCategory(12);
+                                                setCategory('all');
                                             }}
                                         >
-                                            SHK | SHOP
+                                            Alle
                                         </button>
-                                    )}
-                                    <button
-                                        className={cn(
-                                            'bg-customer-bg text-blue hover:bg-baederwelt hover:text-white h-9 rounded-full !text-small px-3',
-                                            category === 11 && 'bg-baederwelt text-white'
+                                        {content?.type === 'partner' && (
+                                            <button
+                                                className={cn(
+                                                    'bg-customer-bg text-blue hover:bg-partner hover:text-white h-9 rounded-full !text-small px-3',
+                                                    category === 12 && 'bg-partner text-white'
+                                                )}
+                                                onClick={() => {
+                                                    setCategory(12);
+                                                }}
+                                            >
+                                                SHK | SHOP
+                                            </button>
                                         )}
-                                        onClick={() => {
-                                            setCategory(11);
-                                        }}
-                                    >
-                                        Bäderwelten
-                                    </button>
-                                    <button
-                                        className={cn(
-                                            'bg-customer-bg text-blue hover:bg-fliesenwelt hover:text-white h-9 rounded-full !text-small px-3',
-                                            category === 10 && 'bg-fliesenwelt text-white'
-                                        )}
-                                        onClick={() => {
-                                            setCategory(10);
-                                        }}
-                                    >
-                                        Fliesenwelten
-                                    </button>
-                                    <button
-                                        className={cn(
-                                            'bg-customer-bg text-blue hover:bg-energiesparwelt hover:text-white h-9 rounded-full !text-small px-3',
-                                            category === 9 && 'bg-energiesparwelt text-white'
-                                        )}
-                                        onClick={() => {
-                                            setCategory(9);
-                                        }}
-                                    >
-                                        Energiesparwelten
-                                    </button>
+                                        <button
+                                            className={cn(
+                                                'bg-customer-bg text-blue hover:bg-baederwelt hover:text-white h-9 rounded-full !text-small px-3',
+                                                category === 11 && 'bg-baederwelt text-white'
+                                            )}
+                                            onClick={() => {
+                                                setCategory(11);
+                                            }}
+                                        >
+                                            Bäderwelten
+                                        </button>
+                                        <button
+                                            className={cn(
+                                                'bg-customer-bg text-blue hover:bg-fliesenwelt hover:text-white h-9 rounded-full !text-small px-3',
+                                                category === 10 && 'bg-fliesenwelt text-white'
+                                            )}
+                                            onClick={() => {
+                                                setCategory(10);
+                                            }}
+                                        >
+                                            Fliesenwelten
+                                        </button>
+                                        <button
+                                            className={cn(
+                                                'bg-customer-bg text-blue hover:bg-energiesparwelt hover:text-white h-9 rounded-full !text-small px-3',
+                                                category === 9 && 'bg-energiesparwelt text-white'
+                                            )}
+                                            onClick={() => {
+                                                setCategory(9);
+                                            }}
+                                        >
+                                            Energiesparwelten
+                                        </button>
+                                    </div>
                                 </div>
-                            </div>
+                            )}
                             <div className="mt-10">
                                 {status === 'ZERO_RESULTS' ||
                                     (filteredLocations.length === 0 && (

@@ -192,6 +192,7 @@ export type Options = {
     customer: CustomerMenu;
     partner: PartnerMenu;
     footer: FooterMenu[];
+    footerPartner: FooterMenu[];
     headerLocationsLink: AcfLink;
     headerAppointmentLink: AcfLink;
     headerShopLink: AcfLink;

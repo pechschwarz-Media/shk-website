@@ -7,6 +7,7 @@ import PostHero from '@/components/custom/Post/Hero';
 import Header from '@/components/layout/Header';
 import { cn } from '@/lib/utils';
 import PostContent from '@/components/custom/Post/Content';
+import Footer from '@/components/layout/Footer';
 
 export const dynamic = 'force-static';
 export const revalidate = 3600;
@@ -57,6 +58,7 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
             <Header channel="customer" />
             <PostHero post={post} slug={slug} />
             <PostContent post={post} />
+            <Footer channel="customer" />
         </main>
     );
 }

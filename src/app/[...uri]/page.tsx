@@ -7,6 +7,7 @@ import getPage from '@/lib/queries/pages/getPage';
 import Header from '@/components/layout/Header';
 import { cn } from '@/lib/utils';
 import Legal from '@/components/custom/Legal';
+import Footer from '@/components/layout/Footer';
 
 export const dynamic = 'force-static';
 export const revalidate = 3600;
@@ -60,6 +61,7 @@ export default async function Page({ params }: { params: Promise<{ uri: string[]
                 <main className={cn(page?.acf?.channel === 'customer' && 'bg-customer-bg', page?.acf?.channel === 'partner' && 'bg-partner-bg')}>
                     <Header channel={page?.acf?.channel} />
                     <Legal text={page?.acf?.text || ''} />
+                    <Footer channel={page?.acf?.channel} />
                 </main>
             );
         default:
@@ -67,6 +69,7 @@ export default async function Page({ params }: { params: Promise<{ uri: string[]
                 <main className={cn(page?.acf?.channel === 'customer' && 'bg-customer-bg', page?.acf?.channel === 'partner' && 'bg-partner-bg')}>
                     <Header channel={page?.acf?.channel} link={page?.link} />
                     <ComponentRenderer content={page?.acf?.content} channel={page?.acf?.channel} />
+                    <Footer channel={page?.acf?.channel} />
                 </main>
             );
     }

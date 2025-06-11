@@ -3,6 +3,7 @@ import Header from '@/components/layout/Header';
 import getLocationsSlugs from '@/lib/queries/locations/getLocationsSlugs';
 import getLocationData from '@/lib/queries/locations/getLocationData';
 import getLocationMeta from '@/lib/queries/locations/getLocationMeta';
+import Footer from '@/components/layout/Footer';
 
 export const dynamic = 'force-static';
 export const revalidate = 3600;
@@ -48,6 +49,7 @@ export default async function Location({ params }: { params: Promise<{ slug: str
         <main>
             <Header channel="fliesenwelten" />
             <ComponentRenderer content={location?.acf?.content} channel="fliesenwelten" locationData={location} />
+            <Footer channel="fliesenwelten" />
         </main>
     );
 }
