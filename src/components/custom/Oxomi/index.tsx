@@ -4,6 +4,7 @@
 
 import Section from '@/components/static/Section';
 import { Settings } from '@/lib/types';
+import { useSearchParams } from 'next/navigation';
 import Script from 'next/script';
 import { useEffect } from 'react';
 
@@ -26,6 +27,9 @@ export default function Oxomi({ content }: { content: Content }) {
         }, 0);
     }, []);
 
+    const params = useSearchParams();
+    const query = params.get('query') || '';
+
     return (
         <Section dataComponent="Oxomi" settings={content?.settings}>
             <Script id="oxomi-ready" strategy="afterInteractive">
@@ -41,7 +45,8 @@ export default function Oxomi({ content }: { content: Content }) {
                             topBrands: true,
                             topBrandsLabel: 'Top Marken',
                             brandsLabel: 'Marken',
-                            showDetails: true
+                            showDetails: true,
+                            query: "${query}"
                         });
                     }
 
