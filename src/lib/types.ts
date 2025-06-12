@@ -188,6 +188,11 @@ export type FooterMenu = {
     }[];
 };
 
+export type ImageSettings = {
+    height: string;
+    position: 'top' | 'center' | 'bottom';
+};
+
 export type Options = {
     customer: CustomerMenu;
     partner: PartnerMenu;
@@ -202,7 +207,7 @@ export type Options = {
     generalAddress: string;
 };
 
-export type Background = 'transparent' | 'gray' | null;
+export type Background = 'transparent' | 'gray' | 'blue' | 'yellow' | 'sand' | 'pink' | null;
 
 export type Settings = {
     background?: Background;

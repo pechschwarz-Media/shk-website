@@ -1,7 +1,7 @@
 import RoundCheck from '@/components/icons/roundCheck';
 import Section from '@/components/static/Section';
 import Text from '@/components/static/Text';
-import { Media, Settings } from '@/lib/types';
+import { ImageSettings, Media, Settings } from '@/lib/types';
 import Image from 'next/image';
 import parse from 'html-react-parser';
 import { cn } from '@/lib/utils';
@@ -10,6 +10,7 @@ type Content = {
     media: Media;
     text: string;
     list: { text: string; subText: string }[];
+    imageSettings: ImageSettings;
     settings: Settings;
 };
 
@@ -19,14 +20,21 @@ export default async function Layout_223({ content, channel }: { content: Conten
             <div className="container">
                 <div className="grid md:grid-cols-12 gap-8 items-center">
                     <div className="md:col-span-6 xl:col-span-5">
-                        <div className="w-full aspect-square rounded-normal overflow-hidden">
+                        <div className="w-full">
                             {content?.media?.type === 'image' && (
                                 <Image
                                     src={content?.media?.url}
                                     alt={content?.media?.alt}
                                     width={content?.media?.width}
                                     height={content?.media?.height}
-                                    className="object-cover size-full"
+                                    style={{ maxHeight: content?.imageSettings?.height ? `${content?.imageSettings?.height}px` : 'auto' }}
+                                    className={cn(
+                                        'rounded-normal object-cover size-full',
+                                        content?.imageSettings?.height && 'aspect-auto',
+                                        content?.imageSettings?.position === 'top' && 'object-top',
+                                        content?.imageSettings?.position === 'center' && 'object-center',
+                                        content?.imageSettings?.position === 'bottom' && 'object-bottom'
+                                    )}
                                 />
                             )}
                             {content?.media?.type === 'video' && (

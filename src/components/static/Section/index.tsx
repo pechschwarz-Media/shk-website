@@ -28,7 +28,11 @@ export const sectionVariants = cva('', {
         },
         background: {
             transparent: 'bg-transparant',
-            gray: 'bg-background-gray',
+            gray: 'bg-[#D9D8D7]',
+            blue: 'bg-[#E5F5F7]',
+            yellow: 'bg-[#f6f9e9]',
+            sand: 'bg-[#cbc5a7]',
+            pink: 'bg-[#fdf1ea]',
         },
     },
     defaultVariants: {
@@ -45,9 +49,6 @@ export default function Section({ dataComponent, className, settings, children, 
     if (settings?.hide) {
         return null;
     }
-
-    console.log(dataComponent);
-    console.log(settings);
 
     return (
         <section

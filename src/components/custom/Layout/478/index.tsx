@@ -1,6 +1,6 @@
 import Section from '@/components/static/Section';
 import Text from '@/components/static/Text';
-import { AcfLink, Media, Settings } from '@/lib/types';
+import { AcfLink, ImageSettings, Media, Settings } from '@/lib/types';
 import parse from 'html-react-parser';
 import Button from '@/components/static/Button';
 import Image from 'next/image';
@@ -12,6 +12,7 @@ type Content = {
     text: string;
     image: Media;
     button: AcfLink;
+    imageSettings: ImageSettings;
     invert: boolean;
     settings: Settings;
 };
@@ -29,7 +30,14 @@ export default function Layout_478({ content }: { content: Content }) {
                                     alt={content?.image?.alt}
                                     width={content?.image?.width}
                                     height={content?.image?.height}
-                                    className="rounded-2xl aspect-square object-cover"
+                                    style={{ maxHeight: content?.imageSettings?.height ? `${content?.imageSettings?.height}px` : 'auto' }}
+                                    className={cn(
+                                        'rounded-2xl object-cover',
+                                        content?.imageSettings?.height && 'aspect-auto',
+                                        content?.imageSettings?.position === 'top' && 'object-top',
+                                        content?.imageSettings?.position === 'center' && 'object-center',
+                                        content?.imageSettings?.position === 'bottom' && 'object-bottom'
+                                    )}
                                 />
                             </div>
                             <div className="order-1 lg:order-2 lg:col-span-6 lg:col-start-7">
@@ -61,7 +69,14 @@ export default function Layout_478({ content }: { content: Content }) {
                                     alt={content?.image?.alt}
                                     width={content?.image?.width}
                                     height={content?.image?.height}
-                                    className="rounded-2xl"
+                                    style={{ maxHeight: content?.imageSettings?.height ? `${content?.imageSettings?.height}px` : 'auto' }}
+                                    className={cn(
+                                        'rounded-2xl object-cover',
+                                        content?.imageSettings?.height && 'aspect-auto',
+                                        content?.imageSettings?.position === 'top' && 'object-top',
+                                        content?.imageSettings?.position === 'center' && 'object-center',
+                                        content?.imageSettings?.position === 'bottom' && 'object-bottom'
+                                    )}
                                 />
                             </div>
                         </>

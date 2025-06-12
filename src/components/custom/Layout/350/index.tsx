@@ -2,7 +2,7 @@
 
 import Section from '@/components/static/Section';
 import Text from '@/components/static/Text';
-import { AcfLink, Media, Settings } from '@/lib/types';
+import { AcfLink, ImageSettings, Media, Settings } from '@/lib/types';
 import { cn } from '@/lib/utils';
 import Image from 'next/image';
 import { useState } from 'react';
@@ -23,6 +23,7 @@ type Content = {
         button: AcfLink;
         button2: AcfLink;
         image: Media;
+        imageSettings: ImageSettings;
     }[];
     settings: Settings;
 };
@@ -181,7 +182,14 @@ export default function Layout_350({ content, channel }: { content: Content; cha
                                                 alt={section?.image?.alt}
                                                 width={section?.image?.width}
                                                 height={section?.image?.height}
-                                                className="rounded-2xl"
+                                                style={{ maxHeight: section?.imageSettings?.height ? `${section?.imageSettings?.height}px` : 'auto' }}
+                                                className={cn(
+                                                    'rounded-2xl object-cover',
+                                                    section?.imageSettings?.height && 'aspect-auto',
+                                                    section?.imageSettings?.position === 'top' && 'object-top',
+                                                    section?.imageSettings?.position === 'center' && 'object-center',
+                                                    section?.imageSettings?.position === 'bottom' && 'object-bottom'
+                                                )}
                                             />
                                         </div>
                                         <div>
