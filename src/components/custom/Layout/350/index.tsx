@@ -13,6 +13,7 @@ import Button from '@/components/static/Button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 
 type Content = {
+    text: string;
     button: AcfLink;
     sections: {
         anchor: string;
@@ -31,6 +32,13 @@ export default function Layout_350({ content, channel }: { content: Content; cha
 
     return (
         <Section dataComponent="Layout_350" settings={{ ...content?.settings, preventAnimation: true }}>
+            {content?.text && (
+                <div>
+                    <div className="container">
+                        <Text>{parse(content.text)}</Text>
+                    </div>
+                </div>
+            )}
             <div className={cn('sticky top-0 pt-24 pb-5 bottom-0 bg-white', channel === 'partner' && 'bg-partner-bg')}>
                 <div className="container">
                     <div className="flex justify-between items-center">

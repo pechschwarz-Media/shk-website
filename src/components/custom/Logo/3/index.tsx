@@ -28,7 +28,7 @@ export default async function Logo_3({ content }: { content: Content }) {
                                     alt={logo?.acf?.logo?.alt ?? ''}
                                     width={logo?.acf?.logo?.width || 500}
                                     height={logo?.acf?.logo?.height || 500}
-                                    className="mx-12 h-10 lg:h-14 w-auto shrink-0 md:mx-14 md:max-h-14"
+                                    className="mx-12 h-24 lg:h-32 w-auto shrink-0 md:mx-14 md:max-h-32"
                                 />
                             );
                         })}

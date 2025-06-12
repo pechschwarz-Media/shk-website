@@ -169,7 +169,10 @@ export default function Locations_Inner({
     }
 
     return (
-        <Section dataComponent="Locations" settings={{ padding: { top: 'medium', bottom: 'medium' }, preventAnimation: true }}>
+        <Section
+            dataComponent="Locations"
+            settings={{ background: content?.background, padding: { top: 'medium', bottom: 'medium' }, preventAnimation: true }}
+        >
             <div className="pt-20">
                 <div className="container">
                     <div className="grid lg:grid-cols-2 gap-6">

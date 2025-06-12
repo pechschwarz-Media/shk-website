@@ -2,11 +2,13 @@ import getLocations from '@/lib/queries/locations/getLocations';
 import Locations_Inner from './inner';
 import getLocationcats from '@/lib/queries/taxonomies/getLocationscats';
 import { Suspense } from 'react';
+import { Background } from '@/lib/types';
 
 export type Content = {
     headline: string;
     text: string;
     hint: string;
+    background: Background;
     type: string;
     category: number | null;
 };

@@ -202,7 +202,10 @@ export type Options = {
     generalAddress: string;
 };
 
+export type Background = 'transparent' | 'gray' | null;
+
 export type Settings = {
+    background?: Background;
     hide?: boolean;
     preventAnimation?: boolean;
     padding: {

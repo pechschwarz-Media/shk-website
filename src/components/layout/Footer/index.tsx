@@ -27,8 +27,6 @@ export default async function Footer({ channel }: { channel: string }) {
             break;
     }
 
-    console.log(menu);
-
     return (
         <footer
             className={cn(

@@ -26,10 +26,15 @@ export const sectionVariants = cva('', {
             medium: 'pb-16 md:pb-20 lg:pb-28',
             large: 'pb-20 md:pb-28 lg:pb-36',
         },
+        background: {
+            transparent: 'bg-transparant',
+            gray: 'bg-background-gray',
+        },
     },
     defaultVariants: {
         paddingTop: 'medium',
         paddingBottom: 'medium',
+        background: 'transparent',
     },
 });
 
@@ -41,6 +46,9 @@ export default function Section({ dataComponent, className, settings, children, 
         return null;
     }
 
+    console.log(dataComponent);
+    console.log(settings);
+
     return (
         <section
             data-component={dataComponent}
@@ -48,6 +56,7 @@ export default function Section({ dataComponent, className, settings, children, 
                 sectionVariants({
                     paddingTop: settings?.padding?.top,
                     paddingBottom: settings?.padding?.bottom,
+                    background: settings?.background,
                 }),
                 className
             )}
