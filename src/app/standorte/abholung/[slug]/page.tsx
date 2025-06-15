@@ -5,6 +5,7 @@ import getLocationData from '@/lib/queries/locations/getLocationData';
 import getLocationMeta from '@/lib/queries/locations/getLocationMeta';
 import Footer from '@/components/layout/Footer';
 import getBreadcrumb from '@/lib/queries/breadcrumb/getBreadcrumb';
+import { Breadcrumb } from '@/components/static/Breadcrumb/Breadcrumb';
 
 export const dynamic = 'force-static';
 export const revalidate = 3600;
@@ -45,10 +46,11 @@ export default async function Location({ params }: { params: Promise<{ slug: str
     const slug = (await params).slug;
 
     const location = await getLocationData({ slug });
-    const breadcrumb = await getBreadcrumb({ id });
+    const breadcrumb = await getBreadcrumb({ id: location.id });
 
     return (
         <main className="bg-partner-bg">
+            <Breadcrumb breadcrumb={breadcrumb} />
             <Header channel="partner" />
             <ComponentRenderer content={location?.acf?.content} channel="partner" locationData={location} />
             <Footer channel="partner" />

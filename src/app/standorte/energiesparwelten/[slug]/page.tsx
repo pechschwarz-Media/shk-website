@@ -5,6 +5,7 @@ import getLocationData from '@/lib/queries/locations/getLocationData';
 import getLocationMeta from '@/lib/queries/locations/getLocationMeta';
 import Footer from '@/components/layout/Footer';
 import getBreadcrumb from '@/lib/queries/breadcrumb/getBreadcrumb';
+import { Breadcrumb } from '@/components/static/Breadcrumb/Breadcrumb';
 
 export const dynamic = 'force-static';
 export const revalidate = 3600;
@@ -49,6 +50,7 @@ export default async function Location({ params }: { params: Promise<{ slug: str
 
     return (
         <main>
+            <Breadcrumb breadcrumb={breadcrumb} />
             <Header channel="energiesparwelten" />
             <ComponentRenderer content={location?.acf?.content} channel="energiesparwelten" locationData={location} />
             <Footer channel="energiesparwelten" />
