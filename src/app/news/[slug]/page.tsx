@@ -8,6 +8,8 @@ import Header from '@/components/layout/Header';
 import { cn } from '@/lib/utils';
 import PostContent from '@/components/custom/Post/Content';
 import Footer from '@/components/layout/Footer';
+import getBreadcrumb from '@/lib/queries/breadcrumb/getBreadcrumb';
+import { Breadcrumb } from '@/components/static/Breadcrumb/Breadcrumb';
 
 export const dynamic = 'force-static';
 export const revalidate = 3600;
@@ -52,9 +54,11 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
     }
 
     const post = await getPost({ id });
+    const breadcrumb = await getBreadcrumb({ id });
 
     return (
         <main className={cn('bg-customer-bg')}>
+            <Breadcrumb breadcrumb={breadcrumb} />
             <Header channel="customer" />
             <PostHero post={post} slug={slug} />
             <PostContent post={post} />
