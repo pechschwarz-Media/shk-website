@@ -11,7 +11,7 @@ export const dynamic = 'force-static';
 export const revalidate = 3600;
 
 export async function generateStaticParams() {
-    const pages = await getLocationsSlugs();
+    const pages = await getLocationsSlugs({ cat: 12 });
 
     const params = pages
         .filter((p) => p.slug.at(0))
