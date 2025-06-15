@@ -33,6 +33,7 @@ export type Page = {
 };
 
 export type LocationData = {
+    id: number;
     title: {
         rendered: string;
     };

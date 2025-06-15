@@ -4,6 +4,7 @@ import getLocationsSlugs from '@/lib/queries/locations/getLocationsSlugs';
 import getLocationData from '@/lib/queries/locations/getLocationData';
 import getLocationMeta from '@/lib/queries/locations/getLocationMeta';
 import Footer from '@/components/layout/Footer';
+import getBreadcrumb from '@/lib/queries/breadcrumb/getBreadcrumb';
 
 export const dynamic = 'force-static';
 export const revalidate = 3600;
@@ -44,6 +45,7 @@ export default async function Location({ params }: { params: Promise<{ slug: str
     const slug = (await params).slug;
 
     const location = await getLocationData({ slug });
+    const breadcrumb = await getBreadcrumb({ id });
 
     return (
         <main className="bg-partner-bg">

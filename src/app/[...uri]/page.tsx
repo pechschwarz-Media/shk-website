@@ -58,8 +58,6 @@ export default async function Page({ params }: { params: Promise<{ uri: string[]
     const page = await getPage({ id });
     const breadcrumb = await getBreadcrumb({ id });
 
-    console.log(breadcrumb);
-
     switch (page?.template) {
         case 'page-legal.php':
             return (

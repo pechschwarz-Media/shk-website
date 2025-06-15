@@ -1,9 +1,9 @@
 import IconChevronRight from '@/components/icons/IconChevronRight';
-import { Breadcrumb } from '@/lib/types';
+import { Breadcrumb as BreadcrumbType } from '@/lib/types';
 import { cn } from '@/lib/utils';
 import Link from 'next/link';
 
-export function Breadcrumb({ breadcrumb }: { breadcrumb: Breadcrumb }) {
+export function Breadcrumb({ breadcrumb }: { breadcrumb: BreadcrumbType }) {
     return (
         <div className="block fixed bottom-0 left-0 z-[100] bg-gray-medium px-4 py-3 sm:px-8 sm:py-4 text-small shadow rounded-tr-lg">
             <ul className="flex items-center gap-x-2 sm:gap-x-4">
