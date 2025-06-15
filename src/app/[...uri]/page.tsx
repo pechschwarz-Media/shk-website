@@ -8,6 +8,8 @@ import Header from '@/components/layout/Header';
 import { cn } from '@/lib/utils';
 import Legal from '@/components/custom/Legal';
 import Footer from '@/components/layout/Footer';
+import getBreadcrumb from '@/lib/queries/breadcrumb/getBreadcrumb';
+import { Breadcrumb } from '@/components/static/Breadcrumb/Breadcrumb';
 
 export const dynamic = 'force-static';
 export const revalidate = 3600;
@@ -54,11 +56,15 @@ export default async function Page({ params }: { params: Promise<{ uri: string[]
     }
 
     const page = await getPage({ id });
+    const breadcrumb = await getBreadcrumb({ id });
+
+    console.log(breadcrumb);
 
     switch (page?.template) {
         case 'page-legal.php':
             return (
                 <main className={cn(page?.acf?.channel === 'customer' && 'bg-customer-bg', page?.acf?.channel === 'partner' && 'bg-partner-bg')}>
+                    <Breadcrumb breadcrumb={breadcrumb} />
                     <Header channel={page?.acf?.channel} />
                     <Legal text={page?.acf?.text || ''} />
                     <Footer channel={page?.acf?.channel} />
@@ -67,6 +73,7 @@ export default async function Page({ params }: { params: Promise<{ uri: string[]
         default:
             return (
                 <main className={cn(page?.acf?.channel === 'customer' && 'bg-customer-bg', page?.acf?.channel === 'partner' && 'bg-partner-bg')}>
+                    <Breadcrumb breadcrumb={breadcrumb} />
                     <Header channel={page?.acf?.channel} link={page?.link} />
                     <ComponentRenderer content={page?.acf?.content} channel={page?.acf?.channel} />
                     <Footer channel={page?.acf?.channel} />

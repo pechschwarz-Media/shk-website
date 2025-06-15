@@ -289,3 +289,8 @@ export type Glossar = {
         description: string;
     };
 };
+
+export type Breadcrumb = {
+    title: string;
+    link: string;
+}[];
