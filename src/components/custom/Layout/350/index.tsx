@@ -182,7 +182,7 @@ export default function Layout_350({ content, channel }: { content: Content; cha
                                                 alt={section?.image?.alt}
                                                 width={section?.image?.width}
                                                 height={section?.image?.height}
-                                                style={{ maxHeight: section?.imageSettings?.height ? `${section?.imageSettings?.height}px` : 'auto' }}
+                                                style={{ height: section?.imageSettings?.height ? `${section?.imageSettings?.height}px` : 'auto' }}
                                                 className={cn(
                                                     'rounded-2xl object-cover',
                                                     section?.imageSettings?.height && 'aspect-auto',

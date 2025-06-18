@@ -30,7 +30,7 @@ export default function Layout_478({ content }: { content: Content }) {
                                     alt={content?.image?.alt}
                                     width={content?.image?.width}
                                     height={content?.image?.height}
-                                    style={{ maxHeight: content?.imageSettings?.height ? `${content?.imageSettings?.height}px` : 'auto' }}
+                                    style={{ height: content?.imageSettings?.height ? `${content?.imageSettings?.height}px` : 'auto' }}
                                     className={cn(
                                         'rounded-2xl object-cover',
                                         content?.imageSettings?.height && 'aspect-auto',
@@ -75,7 +75,7 @@ export default function Layout_478({ content }: { content: Content }) {
                                     alt={content?.image?.alt}
                                     width={content?.image?.width}
                                     height={content?.image?.height}
-                                    style={{ maxHeight: content?.imageSettings?.height ? `${content?.imageSettings?.height}px` : 'auto' }}
+                                    style={{ height: content?.imageSettings?.height ? `${content?.imageSettings?.height}px` : 'auto' }}
                                     className={cn(
                                         'rounded-2xl object-cover',
                                         content?.imageSettings?.height && 'aspect-auto',

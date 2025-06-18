@@ -79,7 +79,7 @@ export default function Layout_478({ content }: { content: Content }) {
                                                 height={step?.image?.height || 1200}
                                                 width={step?.image?.width || 800}
                                                 style={{
-                                                    maxHeight: step?.imageSettings?.height ? `${step?.imageSettings?.height}px` : 'auto',
+                                                    height: step?.imageSettings?.height ? `${step?.imageSettings?.height}px` : 'auto',
                                                 }}
                                                 className={cn(
                                                     'w-full object-cover',

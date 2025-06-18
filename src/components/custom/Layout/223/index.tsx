@@ -27,7 +27,7 @@ export default async function Layout_223({ content, channel }: { content: Conten
                                     alt={content?.media?.alt}
                                     width={content?.media?.width}
                                     height={content?.media?.height}
-                                    style={{ maxHeight: content?.imageSettings?.height ? `${content?.imageSettings?.height}px` : 'auto' }}
+                                    style={{ height: content?.imageSettings?.height ? `${content?.imageSettings?.height}px` : 'auto' }}
                                     className={cn(
                                         'rounded-normal object-cover size-full',
                                         content?.imageSettings?.height && 'aspect-auto',

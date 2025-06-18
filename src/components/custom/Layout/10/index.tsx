@@ -46,7 +46,7 @@ export default function Layout_10({ content }: { content: Content }) {
                                                 alt={box?.icon?.alt}
                                                 width={box?.icon?.width}
                                                 height={box?.icon?.height}
-                                                style={{ maxHeight: box?.imageSettings?.height ? `${box?.imageSettings?.height}px` : 'auto' }}
+                                                style={{ height: box?.imageSettings?.height ? `${box?.imageSettings?.height}px` : 'auto' }}
                                                 className="size-full object-cover"
                                             />
                                         </div>
@@ -58,7 +58,7 @@ export default function Layout_10({ content }: { content: Content }) {
                                         alt={box?.image?.alt}
                                         height={box?.image?.height}
                                         width={box?.image?.width}
-                                        style={{ maxHeight: box?.imageSettings?.height ? `${box?.imageSettings?.height}px` : 'auto' }}
+                                        style={{ height: box?.imageSettings?.height ? `${box?.imageSettings?.height}px` : 'auto' }}
                                         className={cn(
                                             'object-cover size-full lg:hidden rounded-normal overflow-hidden -mt-4',
                                             box?.imageSettings?.height && 'aspect-auto',
@@ -87,7 +87,7 @@ export default function Layout_10({ content }: { content: Content }) {
                                         alt={box?.image?.alt}
                                         height={box?.image?.height}
                                         width={box?.image?.width}
-                                        style={{ maxHeight: box?.imageSettings?.height ? `${box?.imageSettings?.height}px` : 'auto' }}
+                                        style={{ height: box?.imageSettings?.height ? `${box?.imageSettings?.height}px` : 'auto' }}
                                         className={cn(
                                             'object-cover size-full',
                                             box?.imageSettings?.height && 'aspect-auto',
