@@ -11,6 +11,7 @@ type Content = {
 };
 
 export default function TextBlock({ content }: { content: Content }) {
+    console.log(content);
     return (
         <Section dataComponent="TextBlock" settings={content?.settings}>
             <div className="container">

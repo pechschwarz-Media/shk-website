@@ -33,6 +33,11 @@ export const sectionVariants = cva('', {
             yellow: 'bg-[#f6f9e9]',
             sand: 'bg-[#cbc5a7]',
             pink: 'bg-[#fdf1ea]',
+            shk: 'bg-[#f3f4f5]',
+            baederwelten: 'bg-[#f5fbfc]',
+            energiesparwelten: 'bg-[#fafcf4]',
+            fliesenwelten: 'bg-[#faf9f6]',
+            shop: 'bg-[#fef8f5]',
         },
     },
     defaultVariants: {

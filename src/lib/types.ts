@@ -191,7 +191,7 @@ export type FooterMenu = {
 
 export type ImageSettings = {
     height: string;
-    position: 'top' | 'center' | 'bottom';
+    position: 'top' | 'center' | 'bottom' | 'topLeft' | 'topRight' | 'centerLeft' | 'centerRight' | 'bottomLeft' | 'bottomRight';
 };
 
 export type Options = {

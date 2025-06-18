@@ -2,7 +2,7 @@
 
 import Section from '@/components/static/Section';
 import Text from '@/components/static/Text';
-import { Media, Settings } from '@/lib/types';
+import { ImageSettings, Media, Settings } from '@/lib/types';
 import { cn } from '@/lib/utils';
 import parse from 'html-react-parser';
 import Image from 'next/image';
@@ -12,7 +12,7 @@ type Content = {
     topline: string;
     headline: string;
     text: string;
-    boxes: { icon: Media; headline: string; text: string; image: Media }[];
+    boxes: { icon: Media; headline: string; text: string; image: Media; imageSettings: ImageSettings }[];
     settings: Settings;
 };
 
@@ -46,6 +46,7 @@ export default function Layout_10({ content }: { content: Content }) {
                                                 alt={box?.icon?.alt}
                                                 width={box?.icon?.width}
                                                 height={box?.icon?.height}
+                                                style={{ maxHeight: box?.imageSettings?.height ? `${box?.imageSettings?.height}px` : 'auto' }}
                                                 className="size-full object-cover"
                                             />
                                         </div>
@@ -57,7 +58,20 @@ export default function Layout_10({ content }: { content: Content }) {
                                         alt={box?.image?.alt}
                                         height={box?.image?.height}
                                         width={box?.image?.width}
-                                        className="object-cover size-full lg:hidden rounded-normal overflow-hidden -mt-4"
+                                        style={{ maxHeight: box?.imageSettings?.height ? `${box?.imageSettings?.height}px` : 'auto' }}
+                                        className={cn(
+                                            'object-cover size-full lg:hidden rounded-normal overflow-hidden -mt-4',
+                                            box?.imageSettings?.height && 'aspect-auto',
+                                            box?.imageSettings?.position === 'top' && 'object-top',
+                                            box?.imageSettings?.position === 'center' && 'object-center',
+                                            box?.imageSettings?.position === 'bottom' && 'object-bottom',
+                                            box?.imageSettings?.position === 'topLeft' && 'object-left-top',
+                                            box?.imageSettings?.position === 'topRight' && 'object-right-top',
+                                            box?.imageSettings?.position === 'centerLeft' && 'object-right',
+                                            box?.imageSettings?.position === 'centerRight' && 'object-left',
+                                            box?.imageSettings?.position === 'bottomLeft' && 'object-left-bottom',
+                                            box?.imageSettings?.position === 'bottomRight' && 'object-right-bottom'
+                                        )}
                                         key={index}
                                     />
                                 </>
@@ -73,7 +87,20 @@ export default function Layout_10({ content }: { content: Content }) {
                                         alt={box?.image?.alt}
                                         height={box?.image?.height}
                                         width={box?.image?.width}
-                                        className="object-cover size-full"
+                                        style={{ maxHeight: box?.imageSettings?.height ? `${box?.imageSettings?.height}px` : 'auto' }}
+                                        className={cn(
+                                            'object-cover size-full',
+                                            box?.imageSettings?.height && 'aspect-auto',
+                                            box?.imageSettings?.position === 'top' && 'object-top',
+                                            box?.imageSettings?.position === 'center' && 'object-center',
+                                            box?.imageSettings?.position === 'bottom' && 'object-bottom',
+                                            box?.imageSettings?.position === 'topLeft' && 'object-left-top',
+                                            box?.imageSettings?.position === 'topRight' && 'object-right-top',
+                                            box?.imageSettings?.position === 'centerLeft' && 'object-right',
+                                            box?.imageSettings?.position === 'centerRight' && 'object-left',
+                                            box?.imageSettings?.position === 'bottomLeft' && 'object-left-bottom',
+                                            box?.imageSettings?.position === 'bottomRight' && 'object-right-bottom'
+                                        )}
                                         key={index}
                                     />
                                 );

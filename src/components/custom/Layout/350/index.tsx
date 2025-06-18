@@ -188,7 +188,13 @@ export default function Layout_350({ content, channel }: { content: Content; cha
                                                     section?.imageSettings?.height && 'aspect-auto',
                                                     section?.imageSettings?.position === 'top' && 'object-top',
                                                     section?.imageSettings?.position === 'center' && 'object-center',
-                                                    section?.imageSettings?.position === 'bottom' && 'object-bottom'
+                                                    section?.imageSettings?.position === 'bottom' && 'object-bottom',
+                                                    section?.imageSettings?.position === 'topLeft' && 'object-left-top',
+                                                    section?.imageSettings?.position === 'topRight' && 'object-right-top',
+                                                    section?.imageSettings?.position === 'centerLeft' && 'object-right',
+                                                    section?.imageSettings?.position === 'centerRight' && 'object-left',
+                                                    section?.imageSettings?.position === 'bottomLeft' && 'object-left-bottom',
+                                                    section?.imageSettings?.position === 'bottomRight' && 'object-right-bottom'
                                                 )}
                                             />
                                         </div>

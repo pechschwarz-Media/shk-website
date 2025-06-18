@@ -33,7 +33,13 @@ export default async function Layout_223({ content, channel }: { content: Conten
                                         content?.imageSettings?.height && 'aspect-auto',
                                         content?.imageSettings?.position === 'top' && 'object-top',
                                         content?.imageSettings?.position === 'center' && 'object-center',
-                                        content?.imageSettings?.position === 'bottom' && 'object-bottom'
+                                        content?.imageSettings?.position === 'bottom' && 'object-bottom',
+                                        content?.imageSettings?.position === 'topLeft' && 'object-left-top',
+                                        content?.imageSettings?.position === 'topRight' && 'object-right-top',
+                                        content?.imageSettings?.position === 'centerLeft' && 'object-right',
+                                        content?.imageSettings?.position === 'centerRight' && 'object-left',
+                                        content?.imageSettings?.position === 'bottomLeft' && 'object-left-bottom',
+                                        content?.imageSettings?.position === 'bottomRight' && 'object-right-bottom'
                                     )}
                                 />
                             )}

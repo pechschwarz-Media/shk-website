@@ -55,7 +55,7 @@ const config: Config = {
                 baederwelt: '#2B94A6',
                 fliesenwelt: '#CBC5A7',
                 energiesparwelt: '#A2C62C',
-                'customer-bg': '#F4F3EF',
+                'customer-bg': '#F7F7F7',
                 partner: '#F47630',
                 'partner-bg': '#F7F7F7',
                 'background-gray': '#F4F5F0',
