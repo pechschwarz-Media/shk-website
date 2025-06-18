@@ -46,7 +46,6 @@ export default function Layout_10({ content }: { content: Content }) {
                                                 alt={box?.icon?.alt}
                                                 width={box?.icon?.width}
                                                 height={box?.icon?.height}
-                                                style={{ height: box?.imageSettings?.height ? `${box?.imageSettings?.height}px` : 'auto' }}
                                                 className="size-full object-cover"
                                             />
                                         </div>
