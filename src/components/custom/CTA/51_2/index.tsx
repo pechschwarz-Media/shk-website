@@ -94,7 +94,7 @@ export default function CTA_51_2({
                         </APIProvider>
                     </div>
                     <div>
-                        <h3 className="text-h3 font-headline font-light leading-tight mb-4">{parse(locationData?.title?.rendered)}</h3>
+                        <h3 className="text-h3 font-headline leading-tight mb-4">{parse(locationData?.title?.rendered)}</h3>
                         <p>
                             {locationData?.acf?.street} {locationData?.acf?.number}
                         </p>
@@ -113,7 +113,7 @@ export default function CTA_51_2({
                             {locationData?.acf?.phone}
                         </Button>
                         <div>
-                            <h4 className="text-h4 font-headline font-light leading-tight">Öffnungszeiten</h4>
+                            <h4 className="text-h4 font-headline leading-tight">Öffnungszeiten</h4>
                         </div>
                         <div className="mt-4">
                             <table className="w-full">

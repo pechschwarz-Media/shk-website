@@ -92,7 +92,7 @@ export default function PostListInner({
                                     })}
                                 <div>{featuredPost?.at(0)?.acf?.readingTime} Min. Lesezeit</div>
                             </div>
-                            <div className="text-h5 text-blue leading-tight font-headline font-light">{featuredPost?.at(0)?.title?.rendered}</div>
+                            <div className="text-h5 text-blue leading-tight font-headline">{featuredPost?.at(0)?.title?.rendered}</div>
                             {featuredPost?.at(0)?.excerpt?.rendered && (
                                 <div className="text-gray mt-8">{parse(featuredPost?.at(0)?.excerpt?.rendered || '')}</div>
                             )}
@@ -165,7 +165,7 @@ export default function PostListInner({
                                                 })}
                                             <div>{post?.acf?.readingTime} Min. Lesezeit</div>
                                         </div>
-                                        <div className="text-h5 text-blue leading-tight font-headline font-light">{post?.title?.rendered}</div>
+                                        <div className="text-h5 text-blue leading-tight font-headline">{post?.title?.rendered}</div>
                                         {post?.excerpt?.rendered && <div className="text-gray mt-2">{parse(post?.excerpt?.rendered || '')}</div>}
                                         <button className="mt-4 text-blue flex items-center gap-2">
                                             Beitrag ansehen

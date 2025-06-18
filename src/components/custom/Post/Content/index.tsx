@@ -23,7 +23,7 @@ export default function PostContent({ post }: Content) {
                 <div className="grid lg:grid-cols-12 gap-6">
                     <div className="lg:col-span-3">
                         <div className="sticky top-20">
-                            <div className="text-h5 font-headline text-blue leading-tight mb-4 font-light">Inhalt</div>
+                            <div className="text-h5 font-headline text-blue leading-tight mb-4">Inhalt</div>
                             <nav>
                                 <ul>
                                     {post?.acf?.content?.map((content, index) => {

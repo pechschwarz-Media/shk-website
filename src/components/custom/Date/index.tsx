@@ -20,7 +20,7 @@ export default function Date({ content }: { content: Content }) {
                 <div className="container">
                     <div className="max-w-2xl">
                         <div className="mb-4 text-blue">{content?.topline}</div>
-                        <h1 className="text-h2 font-headline leading-tight text-blue font-light mb-4">{content?.headline}</h1>
+                        <h1 className="text-h2 font-headline leading-tight text-blue mb-4">{content?.headline}</h1>
                         <Text className="prose-p:text-gray">{parse(content?.text)}</Text>
                     </div>
                 </div>

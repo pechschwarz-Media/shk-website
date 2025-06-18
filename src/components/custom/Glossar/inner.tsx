@@ -82,7 +82,7 @@ export default function GlossarInner({ glossar, content }: { glossar: GlossarTyp
                                         }}
                                     >
                                         <div className="flex flex-col md:flex-row">
-                                            <div className="md:w-80 text-blue font-headline leading-none text-h1 mb-8 md:mb-0">
+                                            <div className="md:w-80 text-blue font-headline leading-none text-h1 font-light mb-8 md:mb-0">
                                                 <span className="uppercase">{entry}</span>
                                                 <span className="lowercase">{entry}</span>
                                             </div>
@@ -90,7 +90,7 @@ export default function GlossarInner({ glossar, content }: { glossar: GlossarTyp
                                                 {entries[entry].map((entry, index) => {
                                                     return (
                                                         <div key={index}>
-                                                            <div className="text-h3 text-blue font-headline font-light leading-tight mb-4">
+                                                            <div className="text-h3 text-blue font-headline leading-tight mb-4">
                                                                 {entry?.title?.rendered}
                                                             </div>
                                                             <Text className="prose-p:text-gray">{parse(entry?.acf?.description)}</Text>

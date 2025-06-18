@@ -16,7 +16,7 @@ export default function CTA_51_3({ content, locationData }: { content: Content; 
                 <div className="mb-14">
                     <div className="container">
                         <div className="max-w-2xl mx-auto text-center">
-                            <h2 className="text-h2 font-headline leading-tight text-blue font-light">{content?.headline}</h2>
+                            <h2 className="text-h2 font-headline leading-tight text-blue">{content?.headline}</h2>
                         </div>
                     </div>
                 </div>
