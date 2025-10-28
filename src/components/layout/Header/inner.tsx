@@ -1,27 +1,17 @@
 'use client';
 
 import Button from '@/components/static/Button';
+import Logo from '@/components/static/Logo';
+import { AcfLink, CustomerMenu } from '@/lib/types';
 import { cn } from '@/lib/utils';
+import { setCookie } from 'cookies-next/client';
+import { animate, AnimatePresence, motion, stagger } from 'motion/react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
-import { animate, AnimatePresence, motion, stagger } from 'motion/react';
-import { AcfLink, CustomerMenu } from '@/lib/types';
-import Logo from '@/components/static/Logo';
-import { setCookie } from 'cookies-next/client';
 import { useRouter } from 'next/navigation';
+import { useEffect, useState } from 'react';
 
-export default function HeaderInner({
-    channel,
-    menu,
-    links,
-    link,
-}: {
-    channel: string;
-    menu: CustomerMenu;
-    links: { locations: AcfLink; appointment: AcfLink; shop: AcfLink; locations2: AcfLink };
-    link?: string;
-}) {
+export default function HeaderInner({ channel, menu, links, link }: { channel: string; menu: CustomerMenu; links: { locations: AcfLink; appointment: AcfLink; shop: AcfLink; locations2: AcfLink }; link?: string }) {
     const [currentMenuItem, setCurrentMenuItem] = useState(-1);
     const [toggle, setToggle] = useState(false);
     const [menuOpen, setMenuOpen] = useState(false);
@@ -102,19 +92,8 @@ export default function HeaderInner({
                                                             {menuItem?.link?.title}
                                                             {menuItem?.submenu?.length > 0 && (
                                                                 <div className={cn('transition-all', currentMenuItem === 0 && 'rotate-180')}>
-                                                                    <svg
-                                                                        xmlns="http://www.w3.org/2000/svg"
-                                                                        fill="none"
-                                                                        viewBox="0 0 24 24"
-                                                                        strokeWidth={1.5}
-                                                                        stroke="currentColor"
-                                                                        className="size-4"
-                                                                    >
-                                                                        <path
-                                                                            strokeLinecap="round"
-                                                                            strokeLinejoin="round"
-                                                                            d="m19.5 8.25-7.5 7.5-7.5-7.5"
-                                                                        />
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-4">
+                                                                        <path strokeLinecap="round" strokeLinejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
                                                                     </svg>
                                                                 </div>
                                                             )}
@@ -132,23 +111,19 @@ export default function HeaderInner({
                                                                         <div className="flex flex-row w-full gap-8">
                                                                             {menuItem?.submenu?.map((subMenuItem, index) => {
                                                                                 return (
-                                                                                    <Link
-                                                                                        href={subMenuItem?.link?.url}
-                                                                                        className="lg:w-56 flex-1 group"
-                                                                                        key={index}
-                                                                                    >
+                                                                                    <Link href={subMenuItem?.link?.url} className="lg:w-56 flex-1 group" key={index}>
                                                                                         <div className="aspect-[4/3] relative rounded-xl overflow-hidden mb-5">
                                                                                             <Image
                                                                                                 src={subMenuItem?.image?.url}
                                                                                                 fill
                                                                                                 priority
+                                                                                                fetchPriority="high"
+                                                                                                sizes="224px"
                                                                                                 alt={subMenuItem?.image?.alt}
                                                                                                 className="group-hover:scale-110 transition-all"
                                                                                             />
                                                                                         </div>
-                                                                                        <div className="font-headline leading-tight text-large text-blue mb-1">
-                                                                                            {subMenuItem?.link?.title}
-                                                                                        </div>
+                                                                                        <div className="font-headline leading-tight text-large text-blue mb-1">{subMenuItem?.link?.title}</div>
                                                                                         <div className="text-blue text-small hyphens-auto ">
                                                                                             <p>{subMenuItem?.description}</p>
                                                                                         </div>
@@ -177,41 +152,17 @@ export default function HeaderInner({
                                 }}
                             >
                                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col gap-y-1">
-                                    <span
-                                        className={cn(
-                                            'w-5 h-[2px] bg-dark block relative transition-all',
-                                            menuOpen && 'rotate-[225deg] -bottom-[3px]'
-                                        )}
-                                    ></span>
+                                    <span className={cn('w-5 h-[2px] bg-dark block relative transition-all', menuOpen && 'rotate-[225deg] -bottom-[3px]')}></span>
                                     <span className={cn('w-5 h-[2px] bg-dark block relative', menuOpen && 'hidden')}></span>
-                                    <span
-                                        className={cn('w-5 h-[2px] bg-dark block relative transition-all', menuOpen && 'rotate-[135deg] -top-[3px]')}
-                                    ></span>
+                                    <span className={cn('w-5 h-[2px] bg-dark block relative transition-all', menuOpen && 'rotate-[135deg] -top-[3px]')}></span>
                                 </div>
                             </button>
-                            {(channel === 'customer' ||
-                                channel === 'energiesparwelten' ||
-                                channel === 'fliesenwelten' ||
-                                channel === 'baederwelten') && (
+                            {(channel === 'customer' || channel === 'energiesparwelten' || channel === 'fliesenwelten' || channel === 'baederwelten') && (
                                 <>
-                                    <Link
-                                        href={links?.locations?.url}
-                                        className="size-12 rounded-full border border-blue bg-gray-light flex items-center justify-center hover:bg-blue hover:text-white transition-all"
-                                    >
-                                        <svg
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            fill="none"
-                                            viewBox="0 0 24 24"
-                                            strokeWidth={1.5}
-                                            stroke="currentColor"
-                                            className="size-6"
-                                        >
+                                    <Link href={links?.locations?.url} className="size-12 rounded-full border border-blue bg-gray-light flex items-center justify-center hover:bg-blue hover:text-white transition-all">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
                                             <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
-                                            <path
-                                                strokeLinecap="round"
-                                                strokeLinejoin="round"
-                                                d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z"
-                                            />
+                                            <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" />
                                         </svg>
                                     </Link>
                                     <Button as="link" link={links?.appointment} variant="blueFilled">
@@ -221,10 +172,7 @@ export default function HeaderInner({
                             )}
                             {channel === 'partner' && (
                                 <>
-                                    <Link
-                                        href={links?.shop?.url}
-                                        className="size-12 rounded-full border border-blue bg-gray-light flex items-center justify-center hover:bg-blue hover:text-white transition-all"
-                                    >
+                                    <Link href={links?.shop?.url} className="size-12 rounded-full border border-blue bg-gray-light flex items-center justify-center hover:bg-blue hover:text-white transition-all">
                                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <g clipPath="url(#clip0_8386_22116)">
                                                 <path
@@ -241,20 +189,8 @@ export default function HeaderInner({
                                                     strokeLinecap="round"
                                                     strokeLinejoin="round"
                                                 />
-                                                <path
-                                                    d="M17 17H6V3H4"
-                                                    stroke="currentColor"
-                                                    strokeWidth="1.5"
-                                                    strokeLinecap="round"
-                                                    strokeLinejoin="round"
-                                                />
-                                                <path
-                                                    d="M6 5L20 6L19 13H6"
-                                                    stroke="currentColor"
-                                                    strokeWidth="1.5"
-                                                    strokeLinecap="round"
-                                                    strokeLinejoin="round"
-                                                />
+                                                <path d="M17 17H6V3H4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                                                <path d="M6 5L20 6L19 13H6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                                             </g>
                                             <defs>
                                                 <clipPath id="clip0_8386_22116">
@@ -359,14 +295,7 @@ export default function HeaderInner({
                                                 {menuItem?.link?.title}
                                                 {menuItem?.submenu?.length > 0 && (
                                                     <div className={cn('transition-all', currentMenuItem === 0 && 'rotate-180')}>
-                                                        <svg
-                                                            xmlns="http://www.w3.org/2000/svg"
-                                                            fill="none"
-                                                            viewBox="0 0 24 24"
-                                                            strokeWidth={1.5}
-                                                            stroke="currentColor"
-                                                            className="size-4"
-                                                        >
+                                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-4">
                                                             <path strokeLinecap="round" strokeLinejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
                                                         </svg>
                                                     </div>
@@ -375,25 +304,13 @@ export default function HeaderInner({
                                             {menuItem?.submenu?.length > 0 && (
                                                 <AnimatePresence>
                                                     {currentMenuItem === 0 && (
-                                                        <motion.div
-                                                            initial={{ height: 0 }}
-                                                            animate={{ height: 'auto' }}
-                                                            exit={{ height: 0 }}
-                                                            className="overflow-hidden"
-                                                        >
-                                                            <motion.div
-                                                                initial={{ opacity: 0 }}
-                                                                animate={{ opacity: 1 }}
-                                                                exit={{ opacity: 0 }}
-                                                                className="max-w-full bg-light/80 lg:backdrop-blur p-6 rounded-xl mb-5"
-                                                            >
+                                                        <motion.div initial={{ height: 0 }} animate={{ height: 'auto' }} exit={{ height: 0 }} className="overflow-hidden">
+                                                            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="max-w-full bg-light/80 lg:backdrop-blur p-6 rounded-xl mb-5">
                                                                 <div className="flex flex-col lg:flex-row gap-6">
                                                                     {menuItem?.submenu?.map((subMenuItem, index) => {
                                                                         return (
                                                                             <Link href={subMenuItem?.link?.url} key={index}>
-                                                                                <div className="font-headline leading-tight text-large text-blue mb-1">
-                                                                                    {subMenuItem?.link?.title}
-                                                                                </div>
+                                                                                <div className="font-headline leading-tight text-large text-blue mb-1">{subMenuItem?.link?.title}</div>
                                                                                 <div className="text-blue text-small">
                                                                                     <p>{subMenuItem?.description}</p>
                                                                                 </div>

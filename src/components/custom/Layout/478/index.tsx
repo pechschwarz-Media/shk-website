@@ -1,10 +1,10 @@
+import Button from '@/components/static/Button';
 import Section from '@/components/static/Section';
 import Text from '@/components/static/Text';
 import { AcfLink, ImageSettings, Media, Settings } from '@/lib/types';
-import parse from 'html-react-parser';
-import Button from '@/components/static/Button';
-import Image from 'next/image';
 import { cn } from '@/lib/utils';
+import parse from 'html-react-parser';
+import Image from 'next/image';
 
 type Content = {
     topline: string;
@@ -30,9 +30,14 @@ export default function Layout_478({ content }: { content: Content }) {
                                     alt={content?.image?.alt}
                                     width={content?.image?.width}
                                     height={content?.image?.height}
-                                    style={{ height: content?.imageSettings?.height ? `${content?.imageSettings?.height}px` : 'auto' }}
+                                    style={
+                                        {
+                                            '--image-height': content?.imageSettings?.height ? `${content?.imageSettings?.height}px` : 'auto',
+                                            '--image-height-mobile': content?.imageSettings?.height_mobile ? `${content?.imageSettings?.height_mobile}px` : 'auto',
+                                        } as React.CSSProperties
+                                    }
                                     className={cn(
-                                        'rounded-2xl object-cover',
+                                        'dynamic-image rounded-2xl object-cover',
                                         content?.imageSettings?.height && 'aspect-auto',
                                         content?.imageSettings?.position === 'top' && 'object-top',
                                         content?.imageSettings?.position === 'center' && 'object-center',
@@ -75,9 +80,14 @@ export default function Layout_478({ content }: { content: Content }) {
                                     alt={content?.image?.alt}
                                     width={content?.image?.width}
                                     height={content?.image?.height}
-                                    style={{ height: content?.imageSettings?.height ? `${content?.imageSettings?.height}px` : 'auto' }}
+                                    style={
+                                        {
+                                            '--image-height': content?.imageSettings?.height ? `${content?.imageSettings?.height}px` : 'auto',
+                                            '--image-height-mobile': content?.imageSettings?.height_mobile ? `${content?.imageSettings?.height_mobile}px` : 'auto',
+                                        } as React.CSSProperties
+                                    }
                                     className={cn(
-                                        'rounded-2xl object-cover',
+                                        'dynamic-image rounded-2xl object-cover',
                                         content?.imageSettings?.height && 'aspect-auto',
                                         content?.imageSettings?.position === 'top' && 'object-top',
                                         content?.imageSettings?.position === 'center' && 'object-center',

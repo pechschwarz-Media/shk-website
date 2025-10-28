@@ -2,9 +2,9 @@ import RoundCheck from '@/components/icons/roundCheck';
 import Section from '@/components/static/Section';
 import Text from '@/components/static/Text';
 import { ImageSettings, Media, Settings } from '@/lib/types';
-import Image from 'next/image';
-import parse from 'html-react-parser';
 import { cn } from '@/lib/utils';
+import parse from 'html-react-parser';
+import Image from 'next/image';
 
 type Content = {
     media: Media;
@@ -27,9 +27,14 @@ export default async function Layout_223({ content, channel }: { content: Conten
                                     alt={content?.media?.alt}
                                     width={content?.media?.width}
                                     height={content?.media?.height}
-                                    style={{ height: content?.imageSettings?.height ? `${content?.imageSettings?.height}px` : 'auto' }}
+                                    style={
+                                        {
+                                            '--image-height': content?.imageSettings?.height ? `${content?.imageSettings?.height}px` : 'auto',
+                                            '--image-height-mobile': content?.imageSettings?.height_mobile ? `${content?.imageSettings?.height_mobile}px` : 'auto',
+                                        } as React.CSSProperties
+                                    }
                                     className={cn(
-                                        'rounded-normal object-cover size-full',
+                                        'dynamic-image rounded-normal object-cover size-full',
                                         content?.imageSettings?.height && 'aspect-auto',
                                         content?.imageSettings?.position === 'top' && 'object-top',
                                         content?.imageSettings?.position === 'center' && 'object-center',

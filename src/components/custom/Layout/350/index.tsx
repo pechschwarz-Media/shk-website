@@ -1,16 +1,16 @@
 'use client';
 
+import Button from '@/components/static/Button';
 import Section from '@/components/static/Section';
 import Text from '@/components/static/Text';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { AcfLink, ImageSettings, Media, Settings } from '@/lib/types';
 import { cn } from '@/lib/utils';
+import parse from 'html-react-parser';
 import Image from 'next/image';
 import { useState } from 'react';
-import { Link, Element, scroller } from 'react-scroll';
-import parse from 'html-react-parser';
 import { InView } from 'react-intersection-observer';
-import Button from '@/components/static/Button';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Element, Link, scroller } from 'react-scroll';
 
 type Content = {
     text: string;
@@ -86,9 +86,7 @@ export default function Layout_350({ content, channel }: { content: Content; cha
                                                             'flex items-center h-10 justify-center rounded-lg px-5  cursor-pointer text-black',
                                                             index === currentIndex && channel === 'customer' && 'bg-customer text-white',
                                                             index === currentIndex && channel === 'partner' && 'bg-partner text-white',
-                                                            index === currentIndex &&
-                                                                channel === 'energiesparwelten' &&
-                                                                'bg-energiesparwelt text-white',
+                                                            index === currentIndex && channel === 'energiesparwelten' && 'bg-energiesparwelt text-white',
                                                             index === currentIndex && channel === 'fliesenwelten' && 'bg-fliesenwelt text-white',
                                                             index === currentIndex && channel === 'baederwelten' && 'bg-baederwelt text-white'
                                                         )}
@@ -182,9 +180,14 @@ export default function Layout_350({ content, channel }: { content: Content; cha
                                                 alt={section?.image?.alt}
                                                 width={section?.image?.width}
                                                 height={section?.image?.height}
-                                                style={{ height: section?.imageSettings?.height ? `${section?.imageSettings?.height}px` : 'auto' }}
+                                                style={
+                                                    {
+                                                        '--image-height': section?.imageSettings?.height ? `${section?.imageSettings?.height}px` : 'auto',
+                                                        '--image-height-mobile': section?.imageSettings?.height_mobile ? `${section?.imageSettings?.height_mobile}px` : 'auto',
+                                                    } as React.CSSProperties
+                                                }
                                                 className={cn(
-                                                    'rounded-2xl object-cover',
+                                                    'dynamic-image rounded-2xl object-cover',
                                                     section?.imageSettings?.height && 'aspect-auto',
                                                     section?.imageSettings?.position === 'top' && 'object-top',
                                                     section?.imageSettings?.position === 'center' && 'object-center',

@@ -3,11 +3,11 @@
 import Section from '@/components/static/Section';
 import Text from '@/components/static/Text';
 import { ImageSettings, Media, Settings } from '@/lib/types';
-import parse from 'html-react-parser';
-import Image from 'next/image';
 import { cn } from '@/lib/utils';
-import { useEffect, useRef, useState } from 'react';
+import parse from 'html-react-parser';
 import { motion, useScroll, useTransform } from 'motion/react';
+import Image from 'next/image';
+import { useEffect, useRef, useState } from 'react';
 
 type Content = {
     headline: string;
@@ -78,11 +78,14 @@ export default function Layout_478({ content }: { content: Content }) {
                                                 alt={step?.image?.alt || ''}
                                                 height={step?.image?.height || 1200}
                                                 width={step?.image?.width || 800}
-                                                style={{
-                                                    height: step?.imageSettings?.height ? `${step?.imageSettings?.height}px` : 'auto',
-                                                }}
+                                                style={
+                                                    {
+                                                        '--image-height': step?.imageSettings?.height ? `${step?.imageSettings?.height}px` : 'auto',
+                                                        '--image-height-mobile': step?.imageSettings?.height_mobile ? `${step?.imageSettings?.height_mobile}px` : 'auto',
+                                                    } as React.CSSProperties
+                                                }
                                                 className={cn(
-                                                    'w-full object-cover',
+                                                    'dynamic-image w-full object-cover',
                                                     step?.imageSettings?.height && 'aspect-auto',
                                                     step?.imageSettings?.position === 'top' && 'object-top',
                                                     step?.imageSettings?.position === 'center' && 'object-center',

@@ -31,23 +31,14 @@ export default function Layout_10({ content }: { content: Content }) {
                             {content?.boxes?.map((box, index) => (
                                 <>
                                     <button
-                                        className={cn(
-                                            'text-left text-inherit lg:border border-transparent hover:border-gray-medium rounded-normal lg:p-4',
-                                            index === currentIndex && 'border-gray-medium'
-                                        )}
+                                        className={cn('text-left text-inherit lg:border border-transparent hover:border-gray-medium rounded-normal lg:p-4', index === currentIndex && 'border-gray-medium')}
                                         onClick={() => {
                                             setCurrentIndex(index);
                                         }}
                                         key={index}
                                     >
                                         <div className="size-12 bg-gray-medium p-2 rounded-xl mb-4">
-                                            <Image
-                                                src={box?.icon?.url}
-                                                alt={box?.icon?.alt}
-                                                width={box?.icon?.width}
-                                                height={box?.icon?.height}
-                                                className="size-full object-cover"
-                                            />
+                                            <Image src={box?.icon?.url} alt={box?.icon?.alt} width={box?.icon?.width} height={box?.icon?.height} className="size-full object-cover" />
                                         </div>
                                         <h6 className="text-h6 font-headline leading-tight text-bold text-blue mb-4">{box?.headline}</h6>
                                         <Text className="prose-p:text-gray">{parse(box?.text)}</Text>
@@ -57,9 +48,14 @@ export default function Layout_10({ content }: { content: Content }) {
                                         alt={box?.image?.alt}
                                         height={box?.image?.height}
                                         width={box?.image?.width}
-                                        style={{ height: box?.imageSettings?.height ? `${box?.imageSettings?.height}px` : 'auto' }}
+                                        style={
+                                            {
+                                                '--image-height': box?.imageSettings?.height ? `${box?.imageSettings?.height}px` : 'auto',
+                                                '--image-height-mobile': box?.imageSettings?.height_mobile ? `${box?.imageSettings?.height_mobile}px` : 'auto',
+                                            } as React.CSSProperties
+                                        }
                                         className={cn(
-                                            'object-cover size-full lg:hidden rounded-normal overflow-hidden -mt-4',
+                                            'dynamic-image object-cover size-full lg:hidden rounded-normal overflow-hidden -mt-4',
                                             box?.imageSettings?.height && 'aspect-auto',
                                             box?.imageSettings?.position === 'top' && 'object-top',
                                             box?.imageSettings?.position === 'center' && 'object-center',
@@ -86,9 +82,14 @@ export default function Layout_10({ content }: { content: Content }) {
                                         alt={box?.image?.alt}
                                         height={box?.image?.height}
                                         width={box?.image?.width}
-                                        style={{ height: box?.imageSettings?.height ? `${box?.imageSettings?.height}px` : 'auto' }}
+                                        style={
+                                            {
+                                                '--image-height': box?.imageSettings?.height ? `${box?.imageSettings?.height}px` : 'auto',
+                                                '--image-height-mobile': box?.imageSettings?.height_mobile ? `${box?.imageSettings?.height_mobile}px` : 'auto',
+                                            } as React.CSSProperties
+                                        }
                                         className={cn(
-                                            'object-cover size-full',
+                                            'object-cover dynamic-image size-full',
                                             box?.imageSettings?.height && 'aspect-auto',
                                             box?.imageSettings?.position === 'top' && 'object-top',
                                             box?.imageSettings?.position === 'center' && 'object-center',

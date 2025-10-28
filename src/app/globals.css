@@ -67,6 +67,16 @@
     }
 }
 
+.dynamic-image {
+    height: var(--image-height);
+}
+
+@media screen and (max-width: 992px) {
+    .dynamic-image {
+        height: var(--image-height-mobile);
+    }
+}
+
 .oxomi-well {
     background: transparent;
 }
