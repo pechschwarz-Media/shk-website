@@ -1,11 +1,11 @@
 'use client';
 
 import Button from '@/components/static/Button';
+import Logo from '@/components/static/Logo';
 import { AcfLink, Media } from '@/lib/types';
+import { useSetCookie } from 'cookies-next/client';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useSetCookie } from 'cookies-next/client';
-import Logo from '@/components/static/Logo';
 
 export default function Channel({
     channels,
@@ -33,9 +33,7 @@ export default function Channel({
             >
                 <div className="absolute size-full top-0 left-0">
                     <div className="absolute bg-black opacity-30 inset-0 z-10"></div>
-                    {channels?.customer?.media?.type === 'image' && (
-                        <Image src={channels?.customer?.media?.url} alt={channels?.customer?.media?.alt} fill className="object-cover" />
-                    )}
+                    {channels?.customer?.media?.type === 'image' && <Image src={channels?.customer?.media?.url} sizes="50vw" alt={channels?.customer?.media?.alt} fill className="object-cover" />}
                     {channels?.customer?.media?.type === 'video' && (
                         <video autoPlay muted loop playsInline className="size-full object-cover block">
                             <source src={channels?.customer?.media?.url} />
@@ -64,9 +62,7 @@ export default function Channel({
             >
                 <div className="absolute size-full top-0 left-0">
                     <div className="absolute bg-black opacity-30 inset-0 z-10"></div>
-                    {channels?.partner?.media?.type === 'image' && (
-                        <Image src={channels?.partner?.media?.url} alt={channels?.partner?.media?.alt} fill className="object-cover" />
-                    )}
+                    {channels?.partner?.media?.type === 'image' && <Image src={channels?.partner?.media?.url} alt={channels?.partner?.media?.alt} sizes="50vw" fill className="object-cover" />}
                     {channels?.partner?.media?.type === 'video' && (
                         <video autoPlay muted loop playsInline className="size-full object-cover block">
                             <source src={channels?.partner?.media?.url} />
