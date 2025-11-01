@@ -5,7 +5,7 @@ import Logo from '@/components/static/Logo';
 import { AcfLink, CustomerMenu } from '@/lib/types';
 import { cn } from '@/lib/utils';
 import { setCookie } from 'cookies-next/client';
-import { animate, AnimatePresence, motion, stagger } from 'motion/react';
+import { AnimatePresence, animate, motion, stagger } from 'motion/react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
@@ -143,9 +143,9 @@ export default function HeaderInner({ channel, menu, links, link }: { channel: s
                                 </ul>
                             </nav>
                         </div>
-                        <div className="flex items-center gap-2">
+                        <div className="flex items-center gap-1 sm:gap-2">
                             <button
-                                className="lg:hidden size-12 rounded-full border border-blue bg-gray-light relative"
+                                className="lg:hidden size-10 sm:size-12 rounded-full border border-blue bg-gray-light relative"
                                 onClick={() => {
                                     setToggle(true);
                                     setMenuOpen(!menuOpen);
@@ -159,7 +159,10 @@ export default function HeaderInner({ channel, menu, links, link }: { channel: s
                             </button>
                             {(channel === 'customer' || channel === 'energiesparwelten' || channel === 'fliesenwelten' || channel === 'baederwelten') && (
                                 <>
-                                    <Link href={links?.locations?.url} className="size-12 rounded-full border border-blue bg-gray-light flex items-center justify-center hover:bg-blue hover:text-white transition-all">
+                                    <Link
+                                        href={links?.locations?.url}
+                                        className="size-10 sm:size-12 rounded-full border border-blue bg-gray-light flex items-center justify-center hover:bg-blue hover:text-white transition-all"
+                                    >
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
                                             <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
                                             <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" />
@@ -172,7 +175,10 @@ export default function HeaderInner({ channel, menu, links, link }: { channel: s
                             )}
                             {channel === 'partner' && (
                                 <>
-                                    <Link href={links?.shop?.url} className="size-12 rounded-full border border-blue bg-gray-light flex items-center justify-center hover:bg-blue hover:text-white transition-all">
+                                    <Link
+                                        href={links?.shop?.url}
+                                        className="size-10 sm:size-12 rounded-full border border-blue bg-gray-light flex items-center justify-center hover:bg-blue hover:text-white transition-all"
+                                    >
                                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <g clipPath="url(#clip0_8386_22116)">
                                                 <path

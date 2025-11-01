@@ -58,10 +58,10 @@ export default async function Layout_223({ content, channel }: { content: Conten
                     <div className="md:col-span-6 md:col-start-7 flex flex-col gap-4 lg:gap-10">
                         {content?.text && <Text className="prose-p:text-gray">{parse(content?.text)}</Text>}
                         {content?.list?.map((item, index) => (
-                            <div className="grid grid-cols-[2.25rem_auto] gap-x-6 gap-y-4" key={index}>
+                            <div className="grid grid-cols-[2.25rem_auto] gap-x-2 sm:gap-x-6 gap-y-4" key={index}>
                                 <RoundCheck
                                     className={cn(
-                                        'size-9',
+                                        'size-6 sm:size-9',
                                         channel === 'customer' && 'text-customer',
                                         channel === 'partner' && 'text-partner',
                                         channel === 'energiesparwelten' && 'text-energiesparwelt',
@@ -69,7 +69,7 @@ export default async function Layout_223({ content, channel }: { content: Conten
                                         channel === 'baederwelten' && 'text-baederwelt'
                                     )}
                                 />
-                                <h6 key={index} className="text-h6 font-headline leading-tight text-blue items-center self-center">
+                                <h6 key={index} className="text-large sm:text-h6 font-headline leading-tight text-blue items-center self-center">
                                     {item?.text}
                                 </h6>
                                 {item?.subText && <Text className="prose-p:text-gray w-full lg:w-1/2 col-start-2">{parse(item?.subText)}</Text>}

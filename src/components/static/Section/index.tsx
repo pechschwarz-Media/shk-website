@@ -1,10 +1,10 @@
 'use client';
 
-import { useRef } from 'react';
-import { motion } from 'motion/react';
-import { cn } from '@/lib/utils';
 import { Settings } from '@/lib/types';
+import { cn } from '@/lib/utils';
 import { cva } from 'class-variance-authority';
+import { motion } from 'motion/react';
+import { useRef } from 'react';
 
 type SectionProps = React.HTMLAttributes<HTMLElement> & {
     dataComponent: string;
@@ -74,7 +74,7 @@ export default function Section({ dataComponent, className, settings, children, 
                 initial={{ opacity: preventAnimation ? 1 : 0, y: preventAnimation ? 0 : 100 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5 }}
-                viewport={{ once: true, amount: 0.3 }}
+                viewport={{ once: true, amount: 0.1 }}
             >
                 {children}
             </motion.div>

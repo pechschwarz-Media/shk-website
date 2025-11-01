@@ -1,16 +1,16 @@
 'use client';
 
+import Button from '@/components/static/Button';
 import Section from '@/components/static/Section';
 import Text from '@/components/static/Text';
-import parse from 'html-react-parser';
-import { APIProvider, Map, AdvancedMarker, MapCameraChangedEvent, Pin } from '@vis.gl/react-google-maps';
-import { useEffect, useState } from 'react';
-import Button from '@/components/static/Button';
-import { cn } from '@/lib/utils';
 import { Location, Locationcat } from '@/lib/types';
-import { Content } from './index';
-import { useSearchParams } from 'next/navigation';
+import { cn } from '@/lib/utils';
+import { APIProvider, AdvancedMarker, Map, MapCameraChangedEvent, Pin } from '@vis.gl/react-google-maps';
+import parse from 'html-react-parser';
 import Link from 'next/link';
+import { useSearchParams } from 'next/navigation';
+import { useEffect, useState } from 'react';
+import { Content } from './index';
 
 export default function Locations_Inner({
     content,
@@ -169,10 +169,7 @@ export default function Locations_Inner({
     }
 
     return (
-        <Section
-            dataComponent="Locations"
-            settings={{ background: content?.background, padding: { top: 'medium', bottom: 'medium' }, preventAnimation: true }}
-        >
+        <Section dataComponent="Locations" settings={{ background: content?.background, padding: { top: 'medium', bottom: 'medium' }, preventAnimation: true }}>
             <div className="pt-20">
                 <div className="container">
                     <div className="grid lg:grid-cols-2 gap-6">
@@ -181,46 +178,26 @@ export default function Locations_Inner({
                                 <div className="relative h-full">
                                     <div className="absolute top-6 left-6 z-10 flex flex-col gap-1">
                                         <button
-                                            className={cn(
-                                                'bg-blue size-10 rounded-md text-white flex items-center justify-center',
-                                                zoom === 15 && 'opacity-50 pointer-events-none'
-                                            )}
+                                            className={cn('bg-blue size-10 rounded-md text-white flex items-center justify-center', zoom === 15 && 'opacity-50 pointer-events-none')}
                                             onClick={() => {
                                                 if (zoom < 15) {
                                                     setZoom(zoom + 1);
                                                 }
                                             }}
                                         >
-                                            <svg
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                fill="none"
-                                                viewBox="0 0 24 24"
-                                                strokeWidth={1.5}
-                                                stroke="currentColor"
-                                                className="size-6"
-                                            >
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
                                                 <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
                                             </svg>
                                         </button>
                                         <button
-                                            className={cn(
-                                                'bg-blue size-10 rounded-md text-white flex items-center justify-center',
-                                                zoom === 5 && 'opacity-50 pointer-events-none'
-                                            )}
+                                            className={cn('bg-blue size-10 rounded-md text-white flex items-center justify-center', zoom === 5 && 'opacity-50 pointer-events-none')}
                                             onClick={() => {
                                                 if (zoom > 5) {
                                                     setZoom(zoom - 1);
                                                 }
                                             }}
                                         >
-                                            <svg
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                fill="none"
-                                                viewBox="0 0 24 24"
-                                                strokeWidth={1.5}
-                                                stroke="currentColor"
-                                                className="size-6"
-                                            >
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
                                                 <path strokeLinecap="round" strokeLinejoin="round" d="M5 12h14" />
                                             </svg>
                                         </button>
@@ -263,7 +240,7 @@ export default function Locations_Inner({
                                 </div>
                             </div>
                         </div>
-                        <div className="bg-white rounded-xl p-6 md:p-8">
+                        <div className={cn('bg-white rounded-xl p-6 md:p-8', content?.background === 'transparent' && 'bg-gray-light')}>
                             <div className="mb-10">
                                 <h1 className="text-h3 leading-tight font-headline mb-6">{content?.headline}</h1>
                                 <Text>{parse(content?.text)}</Text>
@@ -273,19 +250,8 @@ export default function Locations_Inner({
                                 <div className="flex flex-col md:flex-row gap-2">
                                     <div className="relative flex-1">
                                         <div className="absolute left-3 top-1/2 -translate-y-1/2">
-                                            <svg
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                fill="none"
-                                                viewBox="0 0 24 24"
-                                                strokeWidth={1.5}
-                                                stroke="currentColor"
-                                                className="size-6"
-                                            >
-                                                <path
-                                                    strokeLinecap="round"
-                                                    strokeLinejoin="round"
-                                                    d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"
-                                                />
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
+                                                <path strokeLinecap="round" strokeLinejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
                                             </svg>
                                         </div>
                                         <input
@@ -318,10 +284,7 @@ export default function Locations_Inner({
                                 <div className="mt-5">
                                     <div className="flex flex-wrap items-center gap-2">
                                         <button
-                                            className={cn(
-                                                'bg-customer-bg text-blue hover:bg-blue hover:text-white h-9 rounded-full !text-small px-3',
-                                                category === 'all' && 'bg-blue text-white'
-                                            )}
+                                            className={cn('bg-customer-bg text-blue hover:bg-blue hover:text-white h-9 rounded-full !text-small px-3', category === 'all' && 'bg-blue text-white')}
                                             onClick={() => {
                                                 setCategory('all');
                                             }}
@@ -330,10 +293,7 @@ export default function Locations_Inner({
                                         </button>
                                         {content?.type === 'partner' && (
                                             <button
-                                                className={cn(
-                                                    'bg-customer-bg text-blue hover:bg-partner hover:text-white h-9 rounded-full !text-small px-3',
-                                                    category === 12 && 'bg-partner text-white'
-                                                )}
+                                                className={cn('bg-customer-bg text-blue hover:bg-partner hover:text-white h-9 rounded-full !text-small px-3', category === 12 && 'bg-partner text-white')}
                                                 onClick={() => {
                                                     setCategory(12);
                                                 }}
@@ -342,10 +302,7 @@ export default function Locations_Inner({
                                             </button>
                                         )}
                                         <button
-                                            className={cn(
-                                                'bg-customer-bg text-blue hover:bg-baederwelt hover:text-white h-9 rounded-full !text-small px-3',
-                                                category === 11 && 'bg-baederwelt text-white'
-                                            )}
+                                            className={cn('bg-customer-bg text-blue hover:bg-baederwelt hover:text-white h-9 rounded-full !text-small px-3', category === 11 && 'bg-baederwelt text-white')}
                                             onClick={() => {
                                                 setCategory(11);
                                             }}
@@ -353,10 +310,7 @@ export default function Locations_Inner({
                                             Bäderwelten
                                         </button>
                                         <button
-                                            className={cn(
-                                                'bg-customer-bg text-blue hover:bg-fliesenwelt hover:text-white h-9 rounded-full !text-small px-3',
-                                                category === 10 && 'bg-fliesenwelt text-white'
-                                            )}
+                                            className={cn('bg-customer-bg text-blue hover:bg-fliesenwelt hover:text-white h-9 rounded-full !text-small px-3', category === 10 && 'bg-fliesenwelt text-white')}
                                             onClick={() => {
                                                 setCategory(10);
                                             }}
@@ -364,10 +318,7 @@ export default function Locations_Inner({
                                             Fliesenwelten
                                         </button>
                                         <button
-                                            className={cn(
-                                                'bg-customer-bg text-blue hover:bg-energiesparwelt hover:text-white h-9 rounded-full !text-small px-3',
-                                                category === 9 && 'bg-energiesparwelt text-white'
-                                            )}
+                                            className={cn('bg-customer-bg text-blue hover:bg-energiesparwelt hover:text-white h-9 rounded-full !text-small px-3', category === 9 && 'bg-energiesparwelt text-white')}
                                             onClick={() => {
                                                 setCategory(9);
                                             }}
@@ -382,19 +333,8 @@ export default function Locations_Inner({
                                     (filteredLocations.length === 0 && (
                                         <div className="flex items-center gap-2">
                                             <div>
-                                                <svg
-                                                    xmlns="http://www.w3.org/2000/svg"
-                                                    fill="none"
-                                                    viewBox="0 0 24 24"
-                                                    strokeWidth={1.5}
-                                                    stroke="currentColor"
-                                                    className="size-8"
-                                                >
-                                                    <path
-                                                        strokeLinecap="round"
-                                                        strokeLinejoin="round"
-                                                        d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 3.75h.008v.008H12v-.008Z"
-                                                    />
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-8">
+                                                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 3.75h.008v.008H12v-.008Z" />
                                                 </svg>
                                             </div>
                                             <div>Kein Standort gefunden. Bitte ändern Sie Ihre Eingabe.</div>
@@ -417,11 +357,7 @@ export default function Locations_Inner({
                                                 return (
                                                     <div className="border border-blue rounded-lg overflow-hidden" key={index}>
                                                         <div className="p-4">
-                                                            {typeof location?.distance !== 'undefined' && (
-                                                                <div className="text-gray text-small mb-3">
-                                                                    {Math.floor(location.distance)}km entfernt
-                                                                </div>
-                                                            )}
+                                                            {typeof location?.distance !== 'undefined' && <div className="text-gray text-small mb-3">{Math.floor(location.distance)}km entfernt</div>}
                                                             <div className="flex items-center gap-1 mb-2">
                                                                 {location?.locationcats.map((category, index) => {
                                                                     const locationcat = locationcats
@@ -453,19 +389,8 @@ export default function Locations_Inner({
                                                             </address>
                                                             <Link href={location?.link} className="flex items-center gap-2 text-blue mt-5">
                                                                 Weitere Details
-                                                                <svg
-                                                                    xmlns="http://www.w3.org/2000/svg"
-                                                                    fill="none"
-                                                                    viewBox="0 0 24 24"
-                                                                    strokeWidth={1.5}
-                                                                    stroke="currentColor"
-                                                                    className="size-4"
-                                                                >
-                                                                    <path
-                                                                        strokeLinecap="round"
-                                                                        strokeLinejoin="round"
-                                                                        d="m8.25 4.5 7.5 7.5-7.5 7.5"
-                                                                    />
+                                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-4">
+                                                                    <path strokeLinecap="round" strokeLinejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
                                                                 </svg>
                                                             </Link>
                                                         </div>
