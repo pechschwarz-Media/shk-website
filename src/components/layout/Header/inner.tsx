@@ -9,7 +9,7 @@ import { AnimatePresence, animate, motion, stagger } from 'motion/react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 export default function HeaderInner({ channel, menu, links, link }: { channel: string; menu: CustomerMenu; links: { locations: AcfLink; appointment: AcfLink; shop: AcfLink; locations2: AcfLink }; link?: string }) {
     const [currentMenuItem, setCurrentMenuItem] = useState(-1);
@@ -53,9 +53,25 @@ export default function HeaderInner({ channel, menu, links, link }: { channel: s
         return false;
     };
 
+    const ref = useRef<HTMLHeadElement>(null);
+
+    useEffect(() => {
+        function handleClickOutside(event: MouseEvent) {
+            if (ref.current && !ref.current.contains(event.target as Node)) {
+                setCurrentMenuItem(-1);
+            }
+        }
+
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, []);
+
     return (
         <>
             <header
+                ref={ref}
                 className={cn(
                     'fixed top-0 left-0 w-full z-50 bg-light/80 h-20 border-t-8 border-b border-b-gray/30 lg:border-b-0',
                     channel === 'customer' && 'border-t-customer',

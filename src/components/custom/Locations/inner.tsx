@@ -170,10 +170,10 @@ export default function Locations_Inner({
 
     return (
         <Section dataComponent="Locations" settings={{ background: content?.background, padding: { top: 'medium', bottom: 'medium' }, preventAnimation: true }}>
-            <div className="pt-20">
+            <div>
                 <div className="container">
                     <div className="grid lg:grid-cols-2 gap-6">
-                        <div className="relative lg:order-2">
+                        <div className="relative order-2">
                             <div className="h-[300px] md:h-[500px] lg:h-[800px] sticky top-24 rounded-xl overflow-hidden">
                                 <div className="relative h-full">
                                     <div className="absolute top-6 left-6 z-10 flex flex-col gap-1">
@@ -240,7 +240,7 @@ export default function Locations_Inner({
                                 </div>
                             </div>
                         </div>
-                        <div className={cn('bg-white rounded-xl p-6 md:p-8', content?.background === 'transparent' && 'bg-gray-light')}>
+                        <div className={cn('bg-white rounded-xl p-6 md:p-8', content?.background === 'transparent' && 'bg-gray-medium')}>
                             <div className="mb-10">
                                 <h1 className="text-h3 leading-tight font-headline mb-6">{content?.headline}</h1>
                                 <Text>{parse(content?.text)}</Text>
