@@ -28,7 +28,7 @@ type Content = {
     settings: Settings;
 };
 
-export default function Layout_350({ content, channel }: { content: Content; channel: string }) {
+export default function Layout_350({ content, channel, sectionIndex }: { content: Content; channel: string; sectionIndex: number }) {
     const [currentIndex, setCurrentIndex] = useState(0);
 
     return (
@@ -69,7 +69,7 @@ export default function Layout_350({ content, channel }: { content: Content; cha
                                     >
                                         {content?.sections?.map((section, index) => {
                                             return (
-                                                <option key={index} value={`layout350-${index}`} className="text-dark">
+                                                <option key={index} value={`layout350-${index}-${sectionIndex}`} className="text-dark">
                                                     {section?.title}
                                                 </option>
                                             );
@@ -80,7 +80,7 @@ export default function Layout_350({ content, channel }: { content: Content; cha
                                             return (
                                                 <li key={index}>
                                                     <Link
-                                                        to={`layout350-${index}`}
+                                                        to={`layout350-${index}-${sectionIndex}`}
                                                         offset={-180}
                                                         className={cn(
                                                             'flex items-center h-10 justify-center rounded-lg px-5  cursor-pointer text-black',
@@ -112,7 +112,7 @@ export default function Layout_350({ content, channel }: { content: Content; cha
                                     >
                                         {content?.sections?.map((section, index) => {
                                             return (
-                                                <option key={index} value={`layout350-${index}`} className="text-dark">
+                                                <option key={index} value={`layout350-${index}-${sectionIndex}`} className="text-dark">
                                                     {section?.title}
                                                 </option>
                                             );
@@ -141,7 +141,7 @@ export default function Layout_350({ content, channel }: { content: Content; cha
                                         >
                                             {content?.sections?.map((section, index) => {
                                                 return (
-                                                    <SelectItem value={`layout350-${index}`} key={index}>
+                                                    <SelectItem value={`layout350-${index}-${sectionIndex}`} key={index}>
                                                         {section?.title}
                                                     </SelectItem>
                                                 );
@@ -162,7 +162,7 @@ export default function Layout_350({ content, channel }: { content: Content; cha
                     return (
                         <InView
                             as="section"
-                            id={section?.anchor ? section?.anchor : `anchor-${index}`}
+                            id={section?.anchor ? section?.anchor : `anchor-${index}-${sectionIndex}`}
                             key={index}
                             threshold={0.6}
                             onChange={(inView) => {
@@ -171,7 +171,7 @@ export default function Layout_350({ content, channel }: { content: Content; cha
                                 }
                             }}
                         >
-                            <Element name={`layout350-${index}`}>
+                            <Element name={`layout350-${index}-${sectionIndex}`}>
                                 <div className="container">
                                     <div className="grid md:grid-cols-2 items-center gap-8 md:gap-16">
                                         <div className={cn(index % 2 && 'md:order-2')}>

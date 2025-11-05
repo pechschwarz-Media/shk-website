@@ -35,7 +35,7 @@ export default function ComponentRenderer({ content, locationData, channel }: { 
     if (content) {
         return content?.map((component, index) => {
             const Component = Components[component?.acf_fc_layout];
-            return <Component content={component} key={index} locationData={locationData} channel={channel} />;
+            return <Component content={component} key={index} sectionIndex={index} locationData={locationData} channel={channel} />;
         });
     }
 }
