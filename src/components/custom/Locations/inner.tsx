@@ -242,7 +242,7 @@ export default function Locations_Inner({
                         </div>
                         <div className={cn('bg-white rounded-xl p-6 md:p-8', content?.background === 'transparent' && 'bg-gray-medium')}>
                             <div className="mb-10">
-                                <h1 className="text-h3 leading-tight font-headline mb-6">{content?.headline}</h1>
+                                <h1 className="text-h3 leading-tight font-headline text-blue mb-6">{content?.headline}</h1>
                                 <Text>{parse(content?.text)}</Text>
                             </div>
                             <div>
@@ -381,7 +381,7 @@ export default function Locations_Inner({
                                                                     );
                                                                 })}
                                                             </div>
-                                                            <div className="text-large font-headline mb-3">{parse(location.title?.rendered)}</div>
+                                                            <div className="text-large font-headline text-blue mb-3">{parse(location.title?.rendered)}</div>
                                                             <address className="not-italic text-gray">
                                                                 {location?.acf?.street} {location?.acf?.number}
                                                                 <br />

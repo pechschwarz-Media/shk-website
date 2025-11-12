@@ -18,17 +18,14 @@ export default function Oxomi({ content }: { content: Content }) {
         setTimeout(function () {
             var script = document.createElement('script');
             script.type = 'text/javascript';
-            script.src =
-                (window.location.protocol == 'https:' ? 'https:' : 'http:') +
-                '//' +
-                (typeof oxomi_server == 'undefined' ? 'oxomi.com' : oxomi_server) +
-                '/assets/frontend/oxomi.js';
+            script.src = (window.location.protocol == 'https:' ? 'https:' : 'http:') + '//' + (typeof oxomi_server == 'undefined' ? 'oxomi.com' : oxomi_server) + '/assets/frontend/oxomi.js';
             document.getElementsByTagName('head')[0].appendChild(script);
         }, 0);
     }, []);
 
     const params = useSearchParams();
     const query = params.get('query') || '';
+    const supplierNumber = params.get('supplierNumber') || '';
 
     return (
         <Section dataComponent="Oxomi" settings={content?.settings}>
@@ -46,7 +43,8 @@ export default function Oxomi({ content }: { content: Content }) {
                             topBrandsLabel: 'Top Marken',
                             brandsLabel: 'Marken',
                             showDetails: true,
-                            query: "${query}"
+                            query: "${query}",
+                            supplierNumber: "${supplierNumber}"
                         });
                     }
 
@@ -57,9 +55,10 @@ export default function Oxomi({ content }: { content: Content }) {
                     }
                 `}
             </Script>
+            {supplierNumber}
             <div className="pt-[80px] mb-14">
                 <div className="container">
-                    <h1 className="text-h1 leading-tight font-headline font-light">{content?.headline}</h1>
+                    <h1 className="text-h1 leading-tight font-headline text-blue font-light">{content?.headline}</h1>
                 </div>
             </div>
             <div>

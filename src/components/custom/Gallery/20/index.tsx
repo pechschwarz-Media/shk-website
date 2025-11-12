@@ -1,17 +1,17 @@
 'use client';
 
-import { Swiper, SwiperRef, SwiperSlide } from 'swiper/react';
-import { Navigation, Pagination } from 'swiper/modules';
+import ArrowRight from '@/components/icons/arrow-right';
+import Dot from '@/components/icons/dot';
+import Section from '@/components/static/Section';
+import { Media, Settings } from '@/lib/types';
+import { cn } from '@/lib/utils';
+import Image from 'next/image';
+import { useRef, useState } from 'react';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
-import { Media, Settings } from '@/lib/types';
-import Image from 'next/image';
-import Section from '@/components/static/Section';
-import { useRef, useState } from 'react';
-import { cn } from '@/lib/utils';
-import ArrowRight from '@/components/icons/arrow-right';
-import Dot from '@/components/icons/dot';
+import { Navigation, Pagination } from 'swiper/modules';
+import { Swiper, SwiperRef, SwiperSlide } from 'swiper/react';
 
 type Content = {
     headline: string;
@@ -26,7 +26,7 @@ export default function Gallery_20({ content }: { content: Content }) {
     return (
         <Section dataComponent="Gallery_20" settings={content?.settings}>
             <div className="container relative">
-                <h2 className="text-h2 font-headline leading-tight mb-10 lg:mb-20">{content?.headline}</h2>
+                <h2 className="text-h2 font-headline text-blue leading-tight mb-10 lg:mb-20">{content?.headline}</h2>
                 <Swiper
                     modules={[Navigation, Pagination]}
                     spaceBetween={10}
@@ -39,15 +39,7 @@ export default function Gallery_20({ content }: { content: Content }) {
                 >
                     {content?.gallery?.map((item, index) => (
                         <SwiperSlide key={index} className="w-1/2 rounded-normal overflow-hidden h-full relative">
-                            <Image
-                                src={item?.image?.url}
-                                alt={item?.image?.alt}
-                                width={item?.image?.width}
-                                height={item?.image?.height}
-                                sizes="100vw"
-                                quality={100}
-                                className="size-full object-cover"
-                            />
+                            <Image src={item?.image?.url} alt={item?.image?.alt} width={item?.image?.width} height={item?.image?.height} sizes="100vw" quality={100} className="size-full object-cover" />
                             {item?.text && <div className="absolute bottom-0 left-0 z-10 bg-white/60 w-full px-5 py-1">{item?.text}</div>}
                         </SwiperSlide>
                     ))}
@@ -85,10 +77,7 @@ export default function Gallery_20({ content }: { content: Content }) {
                                     swiperRef?.current?.swiper?.slideNext();
                                 }
                             }}
-                            className={cn(
-                                'rounded-full border border-black p-1 lg:p-3',
-                                currentIndex === content?.gallery?.length - 1 && 'opacity-50'
-                            )}
+                            className={cn('rounded-full border border-black p-1 lg:p-3', currentIndex === content?.gallery?.length - 1 && 'opacity-50')}
                         >
                             <ArrowRight />
                         </button>

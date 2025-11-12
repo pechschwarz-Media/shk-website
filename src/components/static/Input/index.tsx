@@ -1,7 +1,7 @@
+import IconCheck from '@/components/icons/IconCheck';
 import { FormField } from '@/lib/types';
 import { UseFormReturn } from 'react-hook-form';
 import { Inputs } from '../Form';
-import IconCheck from '@/components/icons/IconCheck';
 
 type InputProps = React.InputHTMLAttributes<HTMLInputElement>;
 type FormInputProps = InputProps & {
@@ -24,24 +24,11 @@ type FormSelectProps = SelectProps & {
 };
 
 export function Input({ ...props }: InputProps) {
-    return (
-        <input
-            type={props?.type}
-            placeholder={props?.placeholder}
-            {...props}
-            className="h-12 rounded-full bg-gray-medium/70 outline-none px-5 border border-blue w-full"
-        />
-    );
+    return <input type={props?.type} placeholder={props?.placeholder} {...props} className="h-12 rounded-full bg-gray-medium/70 outline-none px-5 border border-blue w-full" />;
 }
 
 export function Textarea({ ...props }: TextareaProps) {
-    return (
-        <textarea
-            placeholder={props?.placeholder}
-            {...props}
-            className="p-5 rounded-lg bg-gray-medium/70 outline-none border border-blue w-full"
-        ></textarea>
-    );
+    return <textarea placeholder={props?.placeholder} {...props} className="p-5 rounded-lg bg-gray-medium/70 outline-none border border-blue w-full"></textarea>;
 }
 
 export function Select({ children, ...props }: SelectProps) {
@@ -53,7 +40,7 @@ export function Select({ children, ...props }: SelectProps) {
 }
 
 export function Radio({ ...props }: InputProps) {
-    return <input type="radio" placeholder={props?.placeholder} {...props} />;
+    return <input type="radio" placeholder={props?.placeholder} className="size-4 accent-blue" {...props} />;
 }
 
 export function Checkbox({ ...props }: InputProps) {
@@ -103,30 +90,25 @@ export function FormSelect({ field, hookForm, ...props }: FormSelectProps) {
 
 export function FormRadio({ field, hookForm, ...props }: FormInputProps) {
     return (
-        <>
+        <div>
             {field?.choices?.map((choice, index) => {
                 if (choice?.isSelected) {
                     return (
-                        <label key={index}>
-                            <Radio
-                                {...hookForm.register('input_' + field?.id, { required: field?.isRequired })}
-                                value={choice?.value}
-                                defaultChecked
-                                {...props}
-                            />
-                            {choice?.text}
+                        <label key={index} className="flex items-center gap-2">
+                            <Radio {...hookForm.register('input_' + field?.id, { required: field?.isRequired })} value={choice?.value} defaultChecked {...props} />
+                            <div className="flex-1">{choice?.text}</div>
                         </label>
                     );
                 } else {
                     return (
-                        <label key={index}>
+                        <label key={index} className="flex items-center gap-2">
                             <Radio {...hookForm.register('input_' + field?.id, { required: field?.isRequired })} value={choice?.value} {...props} />
-                            {choice?.text}
+                            <div className="flex-1">{choice?.text}</div>
                         </label>
                     );
                 }
             })}
-        </>
+        </div>
     );
 }
 
@@ -137,23 +119,14 @@ export function FormCheckbox({ field, hookForm, ...props }: FormInputProps) {
                 if (choice?.isSelected) {
                     return (
                         <label key={index}>
-                            <Checkbox
-                                {...hookForm.register('input_' + field?.id + '_' + (index + 1), { required: field?.isRequired })}
-                                value={choice?.value}
-                                {...props}
-                                defaultChecked
-                            />
+                            <Checkbox {...hookForm.register('input_' + field?.id + '_' + (index + 1), { required: field?.isRequired })} value={choice?.value} {...props} defaultChecked />
                             {choice?.text}
                         </label>
                     );
                 } else {
                     return (
                         <label key={index}>
-                            <Checkbox
-                                {...hookForm.register('input_' + field?.id + '_' + (index + 1), { required: field?.isRequired })}
-                                value={choice?.value}
-                                {...props}
-                            />
+                            <Checkbox {...hookForm.register('input_' + field?.id + '_' + (index + 1), { required: field?.isRequired })} value={choice?.value} {...props} />
                             {choice?.text}
                         </label>
                     );

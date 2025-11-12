@@ -72,7 +72,7 @@ export default function Channel({
                 <div className="relative text-center z-20">
                     <div className="font-headline leading-tight mb-8 max-w-2xl">
                         <div className="text-h6 mb-2">{channels?.partner?.topline}</div>
-                        <div className="text-h2 md:text-h3 font-headline leading-tight">{channels?.partner?.headline}</div>
+                        <div className="text-h2 md:text-h3 font-headlineleading-tight">{channels?.partner?.headline}</div>
                         {channels?.partner?.text && <div className="mt-4">{channels?.partner?.text}</div>}
                     </div>
                     <Button variant="blueFilled" as="button">

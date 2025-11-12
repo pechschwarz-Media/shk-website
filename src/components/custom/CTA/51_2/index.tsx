@@ -3,9 +3,7 @@
 import Button from '@/components/static/Button';
 import Section from '@/components/static/Section';
 import { Settings } from '@/lib/types';
-import { cn } from '@/lib/utils';
-import { APIProvider, Map, AdvancedMarker, Pin } from '@vis.gl/react-google-maps';
-import { useEffect, useState } from 'react';
+import { AdvancedMarker, APIProvider, Map, Pin } from '@vis.gl/react-google-maps';
 import parse from 'html-react-parser';
 
 type Content = {
@@ -94,7 +92,7 @@ export default function CTA_51_2({
                         </APIProvider>
                     </div>
                     <div>
-                        <h3 className="text-h3 font-headline leading-tight mb-4">{parse(locationData?.title?.rendered)}</h3>
+                        <h3 className="text-h3 font-headline text-blue leading-tight mb-4">{parse(locationData?.title?.rendered)}</h3>
                         <p>
                             {locationData?.acf?.street} {locationData?.acf?.number}
                         </p>
@@ -113,129 +111,45 @@ export default function CTA_51_2({
                             {locationData?.acf?.phone}
                         </Button>
                         <div>
-                            <h4 className="text-h4 font-headline leading-tight">Öffnungszeiten</h4>
+                            <h4 className="text-h4 font-headline text-blue leading-tight">Öffnungszeiten</h4>
                         </div>
                         <div className="mt-4">
                             <table className="w-full">
                                 <tbody className="border border-tabelle-border">
                                     <tr>
                                         <td className="p-2 font-bold">Montag</td>
-                                        <td className="p-2">
-                                            {formatTime(
-                                                (locationData.acf[`${cat}_open` as keyof typeof locationData.acf] as Record<string, any>)?.[
-                                                    `${cat}_open_mo_start`
-                                                ]
-                                            )}
-                                        </td>
-                                        <td className="p-2">
-                                            {formatTime(
-                                                (locationData.acf[`${cat}_open` as keyof typeof locationData.acf] as Record<string, any>)?.[
-                                                    `${cat}_open_mo_end`
-                                                ]
-                                            )}
-                                        </td>
+                                        <td className="p-2">{formatTime((locationData.acf[`${cat}_open` as keyof typeof locationData.acf] as Record<string, any>)?.[`${cat}_open_mo_start`])}</td>
+                                        <td className="p-2">{formatTime((locationData.acf[`${cat}_open` as keyof typeof locationData.acf] as Record<string, any>)?.[`${cat}_open_mo_end`])}</td>
                                     </tr>
                                     <tr className="bg-tabelle-border">
                                         <td className="p-2 font-bold">Dienstag</td>
-                                        <td className="p-2">
-                                            {formatTime(
-                                                (locationData.acf[`${cat}_open` as keyof typeof locationData.acf] as Record<string, any>)?.[
-                                                    `${cat}_open_di_start`
-                                                ]
-                                            )}
-                                        </td>
-                                        <td className="p-2">
-                                            {formatTime(
-                                                (locationData.acf[`${cat}_open` as keyof typeof locationData.acf] as Record<string, any>)?.[
-                                                    `${cat}_open_di_end`
-                                                ]
-                                            )}
-                                        </td>
+                                        <td className="p-2">{formatTime((locationData.acf[`${cat}_open` as keyof typeof locationData.acf] as Record<string, any>)?.[`${cat}_open_di_start`])}</td>
+                                        <td className="p-2">{formatTime((locationData.acf[`${cat}_open` as keyof typeof locationData.acf] as Record<string, any>)?.[`${cat}_open_di_end`])}</td>
                                     </tr>
                                     <tr>
                                         <td className="p-2 font-bold">Mittwoch</td>
-                                        <td className="p-2">
-                                            {formatTime(
-                                                (locationData.acf[`${cat}_open` as keyof typeof locationData.acf] as Record<string, any>)?.[
-                                                    `${cat}_open_mi_start`
-                                                ]
-                                            )}
-                                        </td>
-                                        <td className="p-2">
-                                            {formatTime(
-                                                (locationData.acf[`${cat}_open` as keyof typeof locationData.acf] as Record<string, any>)?.[
-                                                    `${cat}_open_mi_end`
-                                                ]
-                                            )}
-                                        </td>
+                                        <td className="p-2">{formatTime((locationData.acf[`${cat}_open` as keyof typeof locationData.acf] as Record<string, any>)?.[`${cat}_open_mi_start`])}</td>
+                                        <td className="p-2">{formatTime((locationData.acf[`${cat}_open` as keyof typeof locationData.acf] as Record<string, any>)?.[`${cat}_open_mi_end`])}</td>
                                     </tr>
                                     <tr className="bg-tabelle-border">
                                         <td className="p-2 font-bold">Donnerstag</td>
-                                        <td className="p-2">
-                                            {formatTime(
-                                                (locationData.acf[`${cat}_open` as keyof typeof locationData.acf] as Record<string, any>)?.[
-                                                    `${cat}_open_do_start`
-                                                ]
-                                            )}
-                                        </td>
-                                        <td className="p-2">
-                                            {formatTime(
-                                                (locationData.acf[`${cat}_open` as keyof typeof locationData.acf] as Record<string, any>)?.[
-                                                    `${cat}_open_do_end`
-                                                ]
-                                            )}
-                                        </td>
+                                        <td className="p-2">{formatTime((locationData.acf[`${cat}_open` as keyof typeof locationData.acf] as Record<string, any>)?.[`${cat}_open_do_start`])}</td>
+                                        <td className="p-2">{formatTime((locationData.acf[`${cat}_open` as keyof typeof locationData.acf] as Record<string, any>)?.[`${cat}_open_do_end`])}</td>
                                     </tr>
                                     <tr>
                                         <td className="p-2 font-bold">Freitag</td>
-                                        <td className="p-2">
-                                            {formatTime(
-                                                (locationData.acf[`${cat}_open` as keyof typeof locationData.acf] as Record<string, any>)?.[
-                                                    `${cat}_open_fr_start`
-                                                ]
-                                            )}
-                                        </td>
-                                        <td className="p-2">
-                                            {formatTime(
-                                                (locationData.acf[`${cat}_open` as keyof typeof locationData.acf] as Record<string, any>)?.[
-                                                    `${cat}_open_fr_end`
-                                                ]
-                                            )}
-                                        </td>
+                                        <td className="p-2">{formatTime((locationData.acf[`${cat}_open` as keyof typeof locationData.acf] as Record<string, any>)?.[`${cat}_open_fr_start`])}</td>
+                                        <td className="p-2">{formatTime((locationData.acf[`${cat}_open` as keyof typeof locationData.acf] as Record<string, any>)?.[`${cat}_open_fr_end`])}</td>
                                     </tr>
                                     <tr className="bg-tabelle-border">
                                         <td className="p-2 font-bold">Samstag</td>
-                                        <td className="p-2">
-                                            {formatTime(
-                                                (locationData.acf[`${cat}_open` as keyof typeof locationData.acf] as Record<string, any>)?.[
-                                                    `${cat}_open_sa_start`
-                                                ]
-                                            )}
-                                        </td>
-                                        <td className="p-2">
-                                            {formatTime(
-                                                (locationData.acf[`${cat}_open` as keyof typeof locationData.acf] as Record<string, any>)?.[
-                                                    `${cat}_open_sa_end`
-                                                ]
-                                            )}
-                                        </td>
+                                        <td className="p-2">{formatTime((locationData.acf[`${cat}_open` as keyof typeof locationData.acf] as Record<string, any>)?.[`${cat}_open_sa_start`])}</td>
+                                        <td className="p-2">{formatTime((locationData.acf[`${cat}_open` as keyof typeof locationData.acf] as Record<string, any>)?.[`${cat}_open_sa_end`])}</td>
                                     </tr>
                                     <tr>
                                         <td className="p-2 font-bold">Sonntag</td>
-                                        <td className="p-2">
-                                            {formatTime(
-                                                (locationData.acf[`${cat}_open` as keyof typeof locationData.acf] as Record<string, any>)?.[
-                                                    `${cat}_open_so_start`
-                                                ]
-                                            )}
-                                        </td>
-                                        <td className="p-2">
-                                            {formatTime(
-                                                (locationData.acf[`${cat}_open` as keyof typeof locationData.acf] as Record<string, any>)?.[
-                                                    `${cat}_open_so_end`
-                                                ]
-                                            )}
-                                        </td>
+                                        <td className="p-2">{formatTime((locationData.acf[`${cat}_open` as keyof typeof locationData.acf] as Record<string, any>)?.[`${cat}_open_so_start`])}</td>
+                                        <td className="p-2">{formatTime((locationData.acf[`${cat}_open` as keyof typeof locationData.acf] as Record<string, any>)?.[`${cat}_open_so_end`])}</td>
                                     </tr>
                                 </tbody>
                             </table>
