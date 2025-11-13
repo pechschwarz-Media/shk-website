@@ -185,7 +185,7 @@ export default function HeaderInner({ channel, menu, links, link }: { channel: s
                                         </svg>
                                     </Link>
                                     <Button as="link" link={links?.appointment} variant="blueFilled">
-                                        Besichtigung
+                                        Beratung
                                     </Button>
                                 </>
                             )}

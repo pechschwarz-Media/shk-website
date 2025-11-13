@@ -40,7 +40,17 @@ export default function Layout_350({ content, channel, sectionIndex }: { content
                     </div>
                 </div>
             )}
-            <div className={cn('sticky top-0 pt-24 pb-5 bottom-0 bg-white', channel === 'partner' && 'bg-partner-bg')}>
+            <div
+                className={cn(
+                    'sticky top-0 pt-24 pb-5 bottom-0 bg-white',
+                    channel === 'customer' && 'bg-customer-bg',
+                    content?.settings?.background === 'gray' && 'bg-[#D9D8D7]',
+                    content?.settings?.background === 'blue' && 'bg-[#E5F5F7]',
+                    content?.settings?.background === 'yellow' && 'bg-[#f6f9e9]',
+                    content?.settings?.background === 'sand' && 'bg-[#cbc5a7]',
+                    content?.settings?.background === 'pink' && 'bg-[#fdf1ea]'
+                )}
+            >
                 <div className="container">
                     <div className="flex justify-between items-center">
                         <nav
