@@ -56,7 +56,7 @@ export default function Gallery_1({ content }: { content: Content }) {
                                             className={cn('object-cover group-hover:scale-110 transition-all', content?.partner && '!w-2/3 !h-auto !top-auto !left-auto !bottom-0 !right-0 group-hover:scale-100')}
                                         />
                                         <div className="relative z-10 flex flex-col h-full justify-between">
-                                            <div className="text-h3 leading-tight font-headline text-blue">{tile?.link?.title}</div>
+                                            <div className={cn('!text-h3 leading-tight font-headline', content?.partner && 'text-blue')}>{tile?.link?.title}</div>
                                             <button className="flex items-center gap-2">
                                                 Jetzt entdecken
                                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-4">
