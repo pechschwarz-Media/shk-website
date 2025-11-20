@@ -27,7 +27,7 @@ export default function CTA_51_3({ content, locationData }: { content: Content; 
                             license="1mjb12zhxy1-1ov9n7qh0ct-263od7bccj7"
                             id="calenso-booking-widget1"
                             className="w-full"
-                            src={`https://widget.calenso.com/?partner=shk-deutschland&type=appointment&isFrame=true&lang=de_CH&store_zip=${locationData?.acf?.zip}&service=${content?.service}`}
+                            src={`https://widget.calenso.com/?partner=shk-deutschland&type=appointment&isFrame=true&lang=de_CH&store_zip=${locationData?.acf?.zip}&category[]=${content?.service}`}
                         />
                     </div>
                 </div>
