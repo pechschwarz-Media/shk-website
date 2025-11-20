@@ -2,11 +2,13 @@
 
 import Button from '@/components/static/Button';
 import Section from '@/components/static/Section';
+import Text from '@/components/static/Text';
 import { Settings } from '@/lib/types';
 import { AdvancedMarker, APIProvider, Map, Pin } from '@vis.gl/react-google-maps';
 import parse from 'html-react-parser';
 
 type Content = {
+    text: string;
     settings: Settings;
 };
 
@@ -154,6 +156,11 @@ export default function CTA_51_2({
                                 </tbody>
                             </table>
                         </div>
+                        {content?.text && (
+                            <div className="mt-4">
+                                <Text>{parse(content?.text)}</Text>
+                            </div>
+                        )}
                     </div>
                 </div>
             </div>
