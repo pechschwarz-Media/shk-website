@@ -10,6 +10,7 @@
     },
     "dependencies": {
         "@iframe-resizer/react": "^5.3.3",
+        "@marker.io/browser": "^0.20.2",
         "@radix-ui/react-select": "^2.1.6",
         "@relume_io/relume-tailwind": "^1.0.0",
         "@relume_io/relume-ui": "^1.0.1",

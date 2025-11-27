@@ -11,6 +11,9 @@ importers:
       '@iframe-resizer/react':
         specifier: ^5.3.3
         version: 5.3.3(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
+      '@marker.io/browser':
+        specifier: ^0.20.2
+        version: 0.20.2
       '@radix-ui/react-select':
         specifier: ^2.1.6
         version: 2.1.6(@types/react-dom@19.0.2(@types/react@19.0.3))(@types/react@19.0.3)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
@@ -356,6 +359,9 @@ packages:
 
   '@jridgewell/trace-mapping@0.3.25':
     resolution: {integrity: sha512-vNk6aEwybGtawWmy/PzwnGDOjCkLWSD2wqvjGGAgOAwCGWySYXfYoxt00IJkTF+8Lb57DwOb3Aa0o9CApepiYQ==}
+
+  '@marker.io/browser@0.20.2':
+    resolution: {integrity: sha512-rayC9s9ERzKMyjMkfvqKBCSqSVKPQad9F4NvZraGK6yd+mJZfY3C3cPFe89s4Uu9TUvfNm1cR7YfSgdvc/dyvg==}
 
   '@next/env@15.1.4':
     resolution: {integrity: sha512-2fZ5YZjedi5AGaeoaC0B20zGntEHRhi2SdWcu61i48BllODcAmmtj8n7YarSPt4DaTsJaBFdxQAVEVzgmx2Zpw==}
@@ -3189,6 +3195,8 @@ snapshots:
     dependencies:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.5.0
+
+  '@marker.io/browser@0.20.2': {}
 
   '@next/env@15.1.4': {}
 
