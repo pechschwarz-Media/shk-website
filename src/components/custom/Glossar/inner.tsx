@@ -6,8 +6,8 @@ import { Glossar as GlossarType, Settings } from '@/lib/types';
 import { cn } from '@/lib/utils';
 import parse from 'html-react-parser';
 import { useState } from 'react';
-import { Link, Element } from 'react-scroll';
 import { InView } from 'react-intersection-observer';
+import { Element, Link } from 'react-scroll';
 
 type Content = {
     headline: string;
@@ -50,10 +50,7 @@ export default function GlossarInner({ glossar, content }: { glossar: GlossarTyp
                                         <Link
                                             to={`scroll-${entry}`}
                                             offset={-180}
-                                            className={cn(
-                                                'flex items-center justify-center rounded-lg size-10 cursor-pointer',
-                                                index === currentIndex && 'bg-blue text-white'
-                                            )}
+                                            className={cn('flex items-center justify-center rounded-lg size-8 md:size-10 cursor-pointer', index === currentIndex && 'bg-blue text-white')}
                                         >
                                             {entry}
                                         </Link>
@@ -90,9 +87,7 @@ export default function GlossarInner({ glossar, content }: { glossar: GlossarTyp
                                                 {entries[entry].map((entry, index) => {
                                                     return (
                                                         <div key={index}>
-                                                            <div className="text-h3 text-blue font-headline leading-tight mb-4">
-                                                                {entry?.title?.rendered}
-                                                            </div>
+                                                            <div className="text-h3 text-blue font-headline leading-tight mb-4">{entry?.title?.rendered}</div>
                                                             <Text className="prose-p:text-gray">{parse(entry?.acf?.description)}</Text>
                                                         </div>
                                                     );
