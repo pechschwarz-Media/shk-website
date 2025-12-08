@@ -19,10 +19,11 @@ type Content = {
 };
 
 export default function Header_5({ content }: { content: Content }) {
+    console.log(content);
     return (
         <Section dataComponent="Header_5" settings={{ padding: { top: 'off', bottom: 'off' }, preventAnimation: true }}>
             <div className="lg:-mt-20">
-                <div className={cn('md:h-[70vh] sm:h-screen w-full max-md:pb-20 pt-20 relative flex items-center', content?.small && 'sm:h-[60vh]')}>
+                <div className={cn('md:min-h-[70vh] sm:min-h-screen w-full max-md:pb-20 pt-20 relative flex items-center', content?.small && 'sm:min-h-[60vh]')}>
                     <div className="absolute inset-0 bg-black z-10 opacity-0" style={{ opacity: `${content.opacity}%` }}></div>
                     <div className="absolute size-full top-0 left-0">
                         {content?.media?.type === 'image' && <Image src={content?.media?.url} alt={content?.media?.alt} fill sizes="100vw" priority className="object-cover" />}
@@ -32,7 +33,7 @@ export default function Header_5({ content }: { content: Content }) {
                             </video>
                         )}
                     </div>
-                    <div className="relative text-white w-full z-20">
+                    <div className="relative text-white w-full z-20 py-24">
                         <div className="container">
                             <div className="max-w-xl">
                                 <h1 className="text-h1 font-headline leading-tight font-light mb-8">{content?.headline}</h1>
