@@ -32,8 +32,10 @@ const Components = {
 };
 
 export default function ComponentRenderer({ content, locationData, channel }: { content?: any; locationData?: LocationData; channel: string }) {
-    if (content) {
-        return content?.map((component, index) => {
+    const data = Array.isArray(content) ? content : Object.values(content);
+
+    if (data) {
+        return (data || [])?.map((component, index) => {
             const Component = Components[component?.acf_fc_layout];
             return <Component content={component} key={index} sectionIndex={index} locationData={locationData} channel={channel} />;
         });
