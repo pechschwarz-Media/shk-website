@@ -27,7 +27,7 @@ export default function Layout_10({ content }: { content: Content }) {
                         <div className="mb-4 text-blue">{content?.topline}</div>
                         <h2 className="text-h2 leading-tight font-headline mb-6 text-blue">{content?.headline}</h2>
                         <Text className="prose-p:text-gray text-large">{parse(content?.text)}</Text>
-                        <div className="grid grid-cols-1 lg:grid-cols-2 auto-rows-auto gap-6 mt-6 lg:mt-14 lg:-mx-4">
+                        <div className="grid grid-cols-1 lg:grid-cols-2 auto-rows-auto gap-12 lg:gap-6 mt-6 lg:mt-14 lg:-mx-4">
                             {content?.boxes?.map((box, index) => (
                                 <>
                                     <button

@@ -6,7 +6,7 @@ export default function Legal({ text }: { text: string }) {
     return (
         <Section dataComponent="Legal" settings={{ padding: { top: 'medium', bottom: 'medium' }, preventAnimation: true }}>
             <div className="container pt-20">
-                <div className="max-w-4xl mx-center">
+                <div className="max-w-4xl mx-center overflow-hidden hyphens-auto">
                     <Text>{parse(text)}</Text>
                 </div>
             </div>

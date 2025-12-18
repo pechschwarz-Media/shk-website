@@ -1,8 +1,8 @@
 import Logo from '@/components/static/Logo';
 import getOptions from '@/lib/queries/options/getOptions';
+import { cn } from '@/lib/utils';
 import Link from 'next/link';
 import Copyright from './copyright';
-import { cn } from '@/lib/utils';
 
 export default async function Footer({ channel }: { channel: string }) {
     const menus = await getOptions();
@@ -34,7 +34,7 @@ export default async function Footer({ channel }: { channel: string }) {
                 channel === 'customer' && 'bg-customer',
                 channel === 'partner' && 'bg-partner',
                 channel === 'energiesparwelten' && 'bg-energiesparwelt',
-                channel === 'fliesenwelten' && 'bg-fliesenwelt',
+                channel === 'fliesenwelten' && 'bg-fliesenwelt text-dark',
                 channel === 'baederwelten' && 'bg-baederwelt'
             )}
         >
