@@ -1,6 +1,6 @@
 import Section from '@/components/static/Section';
 import Text from '@/components/static/Text';
-import { Media, Settings } from '@/lib/types';
+import { Settings } from '@/lib/types';
 import { cn } from '@/lib/utils';
 import parse from 'html-react-parser';
 
@@ -11,7 +11,6 @@ type Content = {
 };
 
 export default function TextBlock({ content }: { content: Content }) {
-    console.log(content);
     return (
         <Section dataComponent="TextBlock" settings={content?.settings}>
             <div className="container">

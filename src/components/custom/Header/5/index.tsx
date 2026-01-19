@@ -19,7 +19,6 @@ type Content = {
 };
 
 export default function Header_5({ content }: { content: Content }) {
-    console.log(content);
     return (
         <Section dataComponent="Header_5" settings={{ padding: { top: 'off', bottom: 'off' }, preventAnimation: true }}>
             <div className="lg:-mt-20">
