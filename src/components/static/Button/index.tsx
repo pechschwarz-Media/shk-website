@@ -6,10 +6,10 @@ import Link from 'next/link';
 const buttonVariants = cva('group inline-flex justify-center items-center gap-x-3 disabled:opacity-50 focus-visible:outline-2 focus-visible:outline-offset-2', {
     variants: {
         variant: {
-            blueFilled: 'bg-blue text-white h-10 sm:h-12 rounded-full px-5',
-            whiteFilled: 'bg-white text-blue h-10 sm:h-12 rounded-full px-5',
-            whiteOutline: 'bg-transparent border border-white text-white h-10 sm:h-12 rounded-full px-5 backdrop-blur-md',
-            blueOutline: 'bg-transparent border border-customer text-customer h-10 sm:h-12 rounded-full px-5 backdrop-blur-md',
+            blueFilled: 'bg-blue hover:bg-[#234256] text-white h-10 sm:h-12 rounded-full px-5',
+            whiteFilled: 'bg-white hover:bg-[#e5e5e5] text-blue h-10 sm:h-12 rounded-full px-5',
+            whiteOutline: 'bg-transparent hover:bg-white hover:text-black border border-white text-white h-10 sm:h-12 rounded-full px-5 backdrop-blur-md',
+            blueOutline: 'bg-transparent hover:bg-customer hover:text-white border border-customer text-customer h-10 sm:h-12 rounded-full px-5 backdrop-blur-md',
         },
     },
     defaultVariants: {

@@ -43,7 +43,7 @@ export default function GlossarInner({ glossar, content }: { glossar: GlossarTyp
             <div className="mb-14 sticky top-24">
                 <div className="container">
                     <nav className="inline-block bg-gray-medium p-2 rounded-xl">
-                        <ul className="flex gap-x-1">
+                        <ul className="flex flex-wrap gap-x-1">
                             {Object.keys(entries)?.map((entry, index) => {
                                 return (
                                     <li key={index} className="">
@@ -79,11 +79,11 @@ export default function GlossarInner({ glossar, content }: { glossar: GlossarTyp
                                         }}
                                     >
                                         <div className="flex flex-col md:flex-row">
-                                            <div className="md:w-80 text-blue font-headline leading-none text-h1 font-light mb-8 md:mb-0">
+                                            <div className="md:w-80 text-blue font-headline leading-none text-h1 font-light mb-8 md:mb-0 flex-shrink">
                                                 <span className="uppercase">{entry}</span>
                                                 <span className="lowercase">{entry}</span>
                                             </div>
-                                            <div className="space-y-10">
+                                            <div className="space-y-10 flex-1">
                                                 {entries[entry].map((entry, index) => {
                                                     return (
                                                         <div key={index}>

@@ -55,6 +55,7 @@ export default function Gallery_1({ content }: { content: Content }) {
                                             alt={tile?.image?.alt}
                                             className={cn('object-cover group-hover:scale-110 transition-all', content?.partner && '!w-2/3 !h-auto !top-auto !left-auto !bottom-0 !right-0 group-hover:scale-100')}
                                         />
+                                        <div className="absolute inset-0 bg-black opacity-30 hidden" />
                                         <div className="relative z-10 flex flex-col h-full justify-between">
                                             <div className={cn('!text-h3 leading-tight font-headline', content?.partner && 'text-blue')}>{tile?.link?.title}</div>
                                             <button className="flex items-center gap-2">

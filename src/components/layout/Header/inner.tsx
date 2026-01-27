@@ -73,7 +73,7 @@ export default function HeaderInner({ channel, menu, links, link }: { channel: s
             <header
                 ref={ref}
                 className={cn(
-                    'fixed top-0 left-0 w-full z-50 bg-light/80 h-20 border-t-8 border-b border-b-gray/30 lg:border-b-0',
+                    'fixed top-0 left-0 w-full z-50 bg-light/80 h-20 border-t-8',
                     channel === 'customer' && 'border-t-customer',
                     channel === 'partner' && 'border-t-partner',
                     channel === 'energiesparwelten' && 'border-energiesparwelt',

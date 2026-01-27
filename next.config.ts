@@ -10,6 +10,11 @@ const nextConfig: NextConfig = {
                 hostname: 'shk-backend.pechschwarz.dev',
                 port: '',
             },
+            {
+                protocol: 'https',
+                hostname: 'backend.shk-deutschland.de',
+                port: '',
+            },
         ],
         deviceSizes: [576, 768, 992, 1200, 1440, 1920],
     },
