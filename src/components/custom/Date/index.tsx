@@ -10,6 +10,7 @@ type Content = {
     topline: string;
     headline: string;
     text: string;
+    iframe: string;
     setting: Settings;
 };
 
@@ -28,12 +29,7 @@ export default function Date({ content }: { content: Content }) {
             <div>
                 <div className="container">
                     <div className="bg-white rounded-2xl p-8">
-                        <IframeResizer
-                            license="1mjb12zhxy1-1ov9n7qh0ct-263od7bccj7"
-                            id="calenso-booking-widget1"
-                            className="w-full"
-                            src="https://book.calenso.com/shk-deutschland"
-                        />
+                        <IframeResizer license="1mjb12zhxy1-1ov9n7qh0ct-263od7bccj7" id="calenso-booking-widget1" className="w-full" src={content?.iframe ? content?.iframe : 'https://book.calenso.com/shk-deutschland'} />
                     </div>
                 </div>
             </div>

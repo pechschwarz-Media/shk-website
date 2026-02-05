@@ -18,6 +18,7 @@ export default async function sitemap() {
         });
 
     const locations = await getLocationsSitemap();
+
     const locationsSitemap = locations
         .filter((page) => {
             return page?.yoast_head_json?.robots?.index === 'index';
