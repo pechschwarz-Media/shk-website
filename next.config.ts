@@ -72,8 +72,6 @@ const nextConfig: NextConfig = {
                 destination: '/',
                 permanent: true,
             },
-            // Redirects aus redirects.json
-            ...jsonRedirects,
         ];
     },
 };
