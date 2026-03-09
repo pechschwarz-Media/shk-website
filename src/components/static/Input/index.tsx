@@ -1,5 +1,6 @@
 import IconCheck from '@/components/icons/IconCheck';
 import { FormField } from '@/lib/types';
+import parse from 'html-react-parser';
 import { UseFormReturn } from 'react-hook-form';
 import { Inputs } from '../Form';
 
@@ -140,7 +141,7 @@ export function FormConsent({ field, hookForm, ...props }: FormTextareaProps) {
     return (
         <label className="flex items-center gap-2">
             <Checkbox {...hookForm.register('input_' + field?.id + '_1', { required: true })} value="1" />
-            {field?.checkboxLabel}
+            {parse(field?.checkboxLabel)}
         </label>
     );
 }
