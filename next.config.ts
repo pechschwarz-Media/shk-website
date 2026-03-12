@@ -1,6 +1,4 @@
 import type { NextConfig } from 'next';
-import fs from 'fs';
-import path from 'path';
 
 interface RedirectEntry {
     old: string;
@@ -12,11 +10,6 @@ const nextConfig: NextConfig = {
     trailingSlash: true,
     images: {
         remotePatterns: [
-            {
-                protocol: 'https',
-                hostname: 'shk-backend.pechschwarz.dev',
-                port: '',
-            },
             {
                 protocol: 'https',
                 hostname: 'backend.shk-deutschland.de',
