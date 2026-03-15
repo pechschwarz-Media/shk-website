@@ -18,6 +18,10 @@ const nextConfig: NextConfig = {
         ],
         deviceSizes: [576, 768, 992, 1200, 1440, 1920],
     },
+    experimental: {
+        inlineCss: true,
+        cssChunking: true,
+    },
     async redirects() {
         return [
             {
