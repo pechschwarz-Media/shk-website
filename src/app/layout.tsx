@@ -54,12 +54,27 @@ export default async function RootLayout({ children }: { children: React.ReactNo
                             `,
                     }}
                 />
+                <Script
+                    id="Cookiebot"
+                    src="https://consent.cookiebot.com/uc.js"
+                    data-cbid="6fa2209f-3255-469c-ac2d-25e094246554"
+                    data-blockingmode="auto"
+                    strategy="beforeInteractive"
+                />
             </head>
             <body className={cn(hongkong.variable, panton.variable, 'text-base text-dark font-body pt-20')}>
-                <Script src="https://cloud.ccm19.de/app.js?apiKey=1fa07ed09355d056614058f87d142228edbba2d785876b9f&amp;domain=6978af6f882a491ec4012962" strategy="beforeInteractive" referrerPolicy="origin" />
                 {children}
+                <Script
+                    id="CookieDeclaration"
+                    src="https://consent.cookiebot.com/6fa2209f-3255-469c-ac2d-25e094246554/cd.js"
+                    strategy="afterInteractive"
+                />
                 <Script id="hubspot" strategy="afterInteractive" src="https://js-eu1.hs-scripts.com/144284637.js" />
-                {isEnabled && <div className="bg-blue fixed bottom-0 left-0 z-[100] text-small px-8 py-2 rounded-tr-lg text-white">Du befindest dich im Draft-Mode!</div>}
+                {isEnabled && (
+                    <div className="bg-blue fixed bottom-0 left-0 z-[100] text-small px-8 py-2 rounded-tr-lg text-white">
+                        Du befindest dich im Draft-Mode!
+                    </div>
+                )}
             </body>
         </html>
     );
