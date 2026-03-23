@@ -2,6 +2,7 @@
 
 import Section from '@/components/static/Section';
 import Text from '@/components/static/Text';
+import useCalensoTracking from '@/lib/useCalensoTracking';
 import { Settings } from '@/lib/types';
 import IframeResizer from '@iframe-resizer/react';
 import parse from 'html-react-parser';
@@ -15,6 +16,8 @@ type Content = {
 };
 
 export default function Date({ content }: { content: Content }) {
+    useCalensoTracking();
+
     return (
         <Section dataComponent="Date" settings={content?.setting}>
             <div className="mb-14 pt-20">

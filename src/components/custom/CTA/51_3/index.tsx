@@ -1,6 +1,7 @@
 'use client';
 
 import Section from '@/components/static/Section';
+import useCalensoTracking from '@/lib/useCalensoTracking';
 import { Location, Settings } from '@/lib/types';
 import IframeResizer from '@iframe-resizer/react';
 
@@ -11,6 +12,8 @@ export type Content = {
 };
 
 export default function CTA_51_3({ content, locationData }: { content: Content; locationData: Location }) {
+    useCalensoTracking();
+
     return (
         <>
             <Section dataComponent="CTA_51_3" id="termin" settings={content?.setting}>
