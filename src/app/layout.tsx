@@ -38,25 +38,26 @@ export default async function RootLayout({ children }: { children: React.ReactNo
     const { isEnabled } = await draftMode();
     return (
         <html lang="de" className="scroll-smooth bg-background-gray">
-            <head>
-                <Script data-cookieconsent="ignore" id="cookie-consent-script">{`
-                        window.dataLayer = window.dataLayer || [];
-                        function gtag() {
-                            dataLayer.push(arguments);
-                        }
-                        gtag("consent", "default", {
-                            ad_personalization: "denied",
-                            ad_storage: "denied",
-                            ad_user_data: "denied",
-                            analytics_storage: "denied",
-                            functionality_storage: "denied",
-                            personalization_storage: "denied",
-                            security_storage: "granted",
-                            wait_for_update: 500,
-                        });
-                        gtag("set", "ads_data_redaction", true);
-                        gtag("set", "url_passthrough", true);
-                    `}</Script>
+            <head />
+            <body className={cn(hongkong.variable, panton.variable, 'text-base text-dark font-body pt-20')}>
+                <Script data-cookieconsent="ignore" id="cookie-consent-script" strategy="beforeInteractive">{`
+                    window.dataLayer = window.dataLayer || [];
+                    function gtag() {
+                        dataLayer.push(arguments);
+                    }
+                    gtag("consent", "default", {
+                        ad_personalization: "denied",
+                        ad_storage: "denied",
+                        ad_user_data: "denied",
+                        analytics_storage: "denied",
+                        functionality_storage: "denied",
+                        personalization_storage: "denied",
+                        security_storage: "granted",
+                        wait_for_update: 500,
+                    });
+                    gtag("set", "ads_data_redaction", true);
+                    gtag("set", "url_passthrough", true);
+                `}</Script>
                 <Script
                     id="Cookiebot"
                     src="https://consent.cookiebot.com/uc.js"
@@ -65,17 +66,13 @@ export default async function RootLayout({ children }: { children: React.ReactNo
                     type="text/javascript"
                     strategy="beforeInteractive"
                 />
-                <script
-                    dangerouslySetInnerHTML={{
-                        __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-MTCT9SRG');`,
-                    }}
-                />
-            </head>
-            <body className={cn(hongkong.variable, panton.variable, 'text-base text-dark font-body pt-20')}>
+                <Script id="gtm" strategy="afterInteractive">{`
+                    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+                    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+                    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+                    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+                    })(window,document,'script','dataLayer','GTM-MTCT9SRG');
+                `}</Script>
                 {children}
                 <Script id="hubspot" strategy="afterInteractive" src="https://js-eu1.hs-scripts.com/144284637.js" />
                 {isEnabled && (

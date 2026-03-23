@@ -8,7 +8,7 @@ import { useEffect, useState } from 'react';
 import ReCAPTCHA from 'react-google-recaptcha';
 import { useForm } from 'react-hook-form';
 import Button from '../Button';
-import { FormCheckbox, FormConsent, FormNumber, FormRadio, FormSelect, FormText, FormTextarea } from '../Input';
+import { FormCheckbox, FormConsent, FormEmail, FormNumber, FormRadio, FormSelect, FormText, FormTextarea } from '../Input';
 
 type FormProps = {
     form: Awaited<ReturnType<typeof getForm>>;
@@ -35,6 +35,7 @@ export function Form({ form }: FormProps) {
         if (!captchaStatus) {
             setValid(false);
             setLoading(false);
+
             return false;
         }
 
@@ -85,58 +86,103 @@ export function Form({ form }: FormProps) {
                         <div className={`col-span-12 lg:col-span-${field.layoutGridColumnSpan}`} key={index}>
                             {field?.type === 'text' && (
                                 <>
-                                    <label htmlFor={`input_${field?.id}`} className={cn('block mb-2', field?.labelPlacement === 'hidden_label' && 'sr-only')}>
+                                    <label
+                                        htmlFor={`input_${field?.id}`}
+                                        className={cn('block mb-2', field?.labelPlacement === 'hidden_label' && 'sr-only')}
+                                    >
                                         {field?.label}
                                     </label>
                                     <FormText field={field} id={`input_${field?.id}`} hookForm={hookForm} />
-                                    {hookForm?.formState?.errors[`input_${field?.id}`] && <div className="text-small text-red-800 mt-2">Feld ausfüllen!</div>}
+                                    {hookForm?.formState?.errors[`input_${field?.id}`] && (
+                                        <div className="text-small text-red-800 mt-2">Feld ausfüllen!</div>
+                                    )}
+                                </>
+                            )}
+                            {field?.type === 'email' && (
+                                <>
+                                    <label
+                                        htmlFor={`input_${field?.id}`}
+                                        className={cn('block mb-2', field?.labelPlacement === 'hidden_label' && 'sr-only')}
+                                    >
+                                        {field?.label}
+                                    </label>
+                                    <FormEmail field={field} id={`input_${field?.id}`} hookForm={hookForm} />
+                                    {hookForm?.formState?.errors[`input_${field?.id}`] && (
+                                        <div className="text-small text-red-800 mt-2">Feld ausfüllen!</div>
+                                    )}
                                 </>
                             )}
                             {field?.type === 'number' && (
                                 <>
-                                    <label htmlFor={`input_${field?.id}`} className={cn('block mb-2', field?.labelPlacement === 'hidden_label' && 'sr-only')}>
+                                    <label
+                                        htmlFor={`input_${field?.id}`}
+                                        className={cn('block mb-2', field?.labelPlacement === 'hidden_label' && 'sr-only')}
+                                    >
                                         {field?.label}
                                     </label>
                                     <FormNumber field={field} id={`input_${field?.id}`} hookForm={hookForm} />
-                                    {hookForm?.formState?.errors[`input_${field?.id}`] && <div className="text-small text-red-800 mt-2">Feld ausfüllen!</div>}
+                                    {hookForm?.formState?.errors[`input_${field?.id}`] && (
+                                        <div className="text-small text-red-800 mt-2">Feld ausfüllen!</div>
+                                    )}
                                 </>
                             )}
                             {field?.type === 'textarea' && (
                                 <>
-                                    <label htmlFor={`input_${field?.id}`} className={cn('block mb-2', field?.labelPlacement === 'hidden_label' && 'sr-only')}>
+                                    <label
+                                        htmlFor={`input_${field?.id}`}
+                                        className={cn('block mb-2', field?.labelPlacement === 'hidden_label' && 'sr-only')}
+                                    >
                                         {field?.label}
                                     </label>
                                     <FormTextarea field={field} id={`input_${field?.id}`} hookForm={hookForm} rows={6} />
-                                    {hookForm?.formState?.errors[`input_${field?.id}`] && <div className="text-small text-red-800 mt-2">Feld ausfüllen!</div>}
+                                    {hookForm?.formState?.errors[`input_${field?.id}`] && (
+                                        <div className="text-small text-red-800 mt-2">Feld ausfüllen!</div>
+                                    )}
                                 </>
                             )}
                             {field?.type === 'select' && (
                                 <>
-                                    <label htmlFor={`input_${field?.id}`} className={cn('block mb-2', field?.labelPlacement === 'hidden_label' && 'sr-only')}>
+                                    <label
+                                        htmlFor={`input_${field?.id}`}
+                                        className={cn('block mb-2', field?.labelPlacement === 'hidden_label' && 'sr-only')}
+                                    >
                                         {field?.label}
                                     </label>
                                     <FormSelect field={field} id={`input_${field?.id}`} hookForm={hookForm} />
-                                    {hookForm?.formState?.errors[`input_${field?.id}`] && <div className="text-small text-red-800 mt-2">Feld ausfüllen!</div>}
+                                    {hookForm?.formState?.errors[`input_${field?.id}`] && (
+                                        <div className="text-small text-red-800 mt-2">Feld ausfüllen!</div>
+                                    )}
                                 </>
                             )}
                             {field?.type === 'radio' && (
                                 <div>
                                     <div className={cn(field?.labelPlacement === 'hidden_label' && 'sr-only')}>{field?.label}</div>
                                     <FormRadio field={field} hookForm={hookForm} />
-                                    {hookForm?.formState?.errors[`input_${field?.id}`] && <div className="text-small text-red-800 mt-2">Feld ausfüllen!</div>}
+                                    {hookForm?.formState?.errors[`input_${field?.id}`] && (
+                                        <div className="text-small text-red-800 mt-2">Feld ausfüllen!</div>
+                                    )}
                                 </div>
                             )}
                             {field?.type === 'checkbox' && (
                                 <div>
                                     <div className={cn(field?.labelPlacement === 'hidden_label' && 'sr-only')}>{field?.label}</div>
                                     <FormCheckbox field={field} hookForm={hookForm} />
-                                    {hookForm?.formState?.errors[`input_${field?.id}`] && <div className="text-small text-red-800 mt-2">Feld ausfüllen!</div>}
+                                    {hookForm?.formState?.errors[`input_${field?.id}`] && (
+                                        <div className="text-small text-red-800 mt-2">Feld ausfüllen!</div>
+                                    )}
+                                </div>
+                            )}
+                            {field?.type === 'section' && (
+                                <div className="col-span-12 mt-10">
+                                    <div className="font-bold text-large">{field?.label}</div>
                                 </div>
                             )}
                             {field?.type === 'consent' && (
                                 <>
                                     <FormConsent field={field} id={`input_${field?.id}`} hookForm={hookForm} />
-                                    {hookForm?.formState?.errors[`input_${field?.id}_1`] && <div className="text-small text-red-800 mt-2">Feld ausfüllen!</div>}
+                                    {hookForm?.formState?.errors[`input_${field?.id}_1`] && (
+                                        <div className="text-small text-red-800 mt-2">Feld ausfüllen!</div>
+                                    )}
                                 </>
                             )}
                         </div>
@@ -155,7 +201,11 @@ export function Form({ form }: FormProps) {
                 {loading && <div>Formular wird gesendet...</div>}
                 {message && valid && <div className="bg-green-200 text-green-800 p-5 rounded-lg mt-6">{message}</div>}
                 {valid === false && message && <div className="bg-red-200 text-red-800 p-5 rounded-lg mt-6">{message}</div>}
-                {valid === false && !message && <div className="bg-red-200 text-red-800 p-5 rounded-lg mt-6">Formular konnte nicht gesendet werden. Bitte probieren Sie es erneut.</div>}
+                {valid === false && !message && (
+                    <div className="bg-red-200 text-red-800 p-5 rounded-lg mt-6">
+                        Formular konnte nicht gesendet werden. Bitte probieren Sie es erneut.
+                    </div>
+                )}
             </div>
         </form>
     );

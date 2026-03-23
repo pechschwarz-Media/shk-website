@@ -1,10 +1,9 @@
-import { Form } from '@/components/static/Form';
 import Section from '@/components/static/Section';
 import getForm from '@/lib/queries/forms/getForm';
-import getOptions from '@/lib/queries/options/getOptions';
 import { Settings } from '@/lib/types';
 import parse from 'html-react-parser';
 import Link from 'next/link';
+import { Contact6Client } from './client';
 
 type Content = {
     topline: string;
@@ -17,10 +16,7 @@ type Content = {
 };
 
 export default async function Contact_6({ content }: { content: Content }) {
-    const options = await getOptions();
     const form = await getForm({ id: parseInt(content?.form) });
-
-    console.log(content);
 
     return (
         <Section dataComponent="Contact_6" settings={content.settings}>
@@ -99,7 +95,7 @@ export default async function Contact_6({ content }: { content: Content }) {
                         </div>
                     </div>
                     <div className="md:col-span-6 md:col-start-7">
-                        <Form form={form} />
+                        <Contact6Client form={form} />
                     </div>
                 </div>
             </div>
