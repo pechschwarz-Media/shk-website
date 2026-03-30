@@ -91,13 +91,13 @@ export function FormSelect({ field, hookForm, ...props }: FormSelectProps) {
                 if (choice?.isSelected) {
                     return (
                         <option value={choice.value} selected key={index}>
-                            {choice?.text}
+                            {parse(choice?.text)}
                         </option>
                     );
                 } else {
                     return (
                         <option value={choice.value} key={index}>
-                            {choice?.text}
+                            {parse(choice?.text)}
                         </option>
                     );
                 }
